@@ -18,10 +18,8 @@ keep_aspect = 0
 transform = Transform( 0.753391, 0, -0.657573, 0, 1, 0, 0.657573, 0, 0.753391, 0, 0, -33.7398 )
 
 [node name="UI" type="Control" parent="."]
-margin_left = 3.01477
-margin_top = 1.50732
-margin_right = 1283.01
-margin_bottom = 721.507
+margin_right = 1280.0
+margin_bottom = 720.0
 script = ExtResource( 2 )
 __meta__ = {
 "_edit_use_anchors_": false

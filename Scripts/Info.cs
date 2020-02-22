@@ -1,7 +1,7 @@
 using System.Reflection;
 
 [assembly: AssemblyTitle("Lylat")]
-[assembly: AssemblyDescription("Star Fox PC Clone")]
+[assembly: AssemblyDescription("Lylat C# Module")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("")]
