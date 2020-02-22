@@ -2,7 +2,7 @@
 
 [ext_resource path="res://Fonts/OpenSans.tres" type="DynamicFont" id=1]
 [ext_resource path="res://Scripts/Menu/UIController.cs" type="Script" id=2]
-[ext_resource path="res://Models/Arwing/Arwing.dae" type="PackedScene" id=3]
+[ext_resource path="res://Models/Arwing/Arwing.tscn" type="PackedScene" id=3]
 
 [sub_resource type="Theme" id=1]
 default_font = ExtResource( 1 )
