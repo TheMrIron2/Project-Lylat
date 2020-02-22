@@ -40,4 +40,4 @@ __meta__ = {
 }
 
 [node name="BeginPlatform" parent="." instance=ExtResource( 4 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -10 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0936584, 7.62939e-06, -9.86268 )
