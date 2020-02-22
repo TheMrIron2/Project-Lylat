@@ -1,0 +1,45 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=4
+
+_global_script_classes=[  ]
+_global_script_class_icons={
+
+}
+
+[application]
+
+config/name="Lylat"
+config/description="A Star Fox clone for PC."
+run/main_scene="res://Scenes/Menu.tscn"
+config/icon="res://Textures/Icon.png"
+config/macos_native_icon="res://Textures/macOS.icns"
+config/windows_native_icon="res://Textures/Windows.ico"
+
+[debug]
+
+settings/crash_handler/message="Oh no, the game has crashed!"
+gdscript/warnings/enable=false
+
+[display]
+
+window/size/width=1280
+window/size/height=720
+window/size/resizable=false
+window/size/borderless=true
+window/size/always_on_top=true
+window/vsync/use_vsync=false
+window/stretch/mode="viewport"
+window/stretch/aspect="keep_width"
+
+[rendering]
+
+quality/driver/fallback_to_gles2=true
+threads/thread_model=2
+environment/default_environment="res://Environments/Menu.tres"
