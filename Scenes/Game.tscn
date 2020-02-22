@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Models/Arwing/Arwing.dae" type="PackedScene" id=1]
 [ext_resource path="res://Scripts/Game/ArwingController.cs" type="Script" id=2]
 [ext_resource path="res://Fonts/OpenSans.tres" type="DynamicFont" id=3]
+[ext_resource path="res://Models/BeginPlatform/BeginPlatform.dae" type="PackedScene" id=4]
 
 [sub_resource type="Theme" id=1]
 default_font = ExtResource( 3 )
@@ -12,7 +13,7 @@ default_font = ExtResource( 3 )
 [node name="Scene" type="Spatial" parent="."]
 
 [node name="Arwing" parent="Scene" instance=ExtResource( 1 )]
-transform = Transform( -1, 0, -3.25841e-07, 0, 1, 0, 3.25841e-07, 0, -1, 0, 0, 0 )
+transform = Transform( -1, 0, -3.25841e-07, 0, 1, 0, 3.25841e-07, 0, -1, 0, 4.34464, 0 )
 script = ExtResource( 2 )
 
 [node name="Camera" type="Camera" parent="Scene/Arwing"]
@@ -37,3 +38,6 @@ align = 2
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="BeginPlatform" parent="." instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -10 )

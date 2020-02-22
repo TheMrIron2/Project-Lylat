@@ -18,7 +18,7 @@ _global_script_class_icons={
 config/name="Lylat"
 config/description="A Star Fox clone for PC."
 run/main_scene="res://Scenes/Menu.tscn"
-config/icon="res://Textures/Icon.png"
+config/icon="res://Icons/Icon.png"
 config/macos_native_icon="res://Textures/macOS.icns"
 config/windows_native_icon="res://Textures/Windows.ico"
 
@@ -37,6 +37,61 @@ window/size/always_on_top=true
 window/vsync/use_vsync=false
 window/stretch/mode="viewport"
 window/stretch/aspect="keep_width"
+
+[input]
+
+ui_accept={
+"deadzone": 0.5,
+"events": [  ]
+}
+ui_select={
+"deadzone": 0.5,
+"events": [  ]
+}
+ui_cancel={
+"deadzone": 0.5,
+"events": [  ]
+}
+ui_focus_next={
+"deadzone": 0.5,
+"events": [  ]
+}
+ui_focus_prev={
+"deadzone": 0.5,
+"events": [  ]
+}
+ui_left={
+"deadzone": 0.5,
+"events": [  ]
+}
+ui_right={
+"deadzone": 0.5,
+"events": [  ]
+}
+ui_up={
+"deadzone": 0.5,
+"events": [  ]
+}
+ui_down={
+"deadzone": 0.5,
+"events": [  ]
+}
+ui_page_up={
+"deadzone": 0.5,
+"events": [  ]
+}
+ui_page_down={
+"deadzone": 0.5,
+"events": [  ]
+}
+ui_home={
+"deadzone": 0.5,
+"events": [  ]
+}
+ui_end={
+"deadzone": 0.5,
+"events": [  ]
+}
 
 [rendering]
 
