@@ -6,6 +6,14 @@ The short term goal is to create a playable proof of concept with all working lo
 
 The long term goal is subject to discussion as we progress.
 
+## Credits
+
+- TheMrIron2 - Project Management, Sound Design
+- Benjamin238 - Model Assistance
+- Apfel - Scripting
+- MotoLegacy - Planning and Scripting
+- MikeModder: Scripting
+
 ### Gameplay Details
 
 - Pressing the "Fire" button shoots 1 green laser beam.
@@ -34,3 +42,9 @@ The long term goal is subject to discussion as we progress.
 - If the player takes a lot of damage at once, there is a chance their ship will lose a wing.
 - This affects the control of the ship and reverts any laser power-ups that may have been picked up.
 - All wings will be repaired if a Repair or Laser power-up is picked up.
+
+# DISCLAIMER
+
+This is a non-commercial, free project with no intention of infringement on any Nintendo IPs or otherwise.
+
+Models and the Star Fox name are recognised properties of Nintendo. 
