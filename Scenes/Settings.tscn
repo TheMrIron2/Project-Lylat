@@ -10,7 +10,6 @@ default_font = ExtResource( 1 )
 default_font = ExtResource( 1 )
 
 [node name="Settings" type="PopupDialog"]
-visible = true
 anchor_left = -0.00722895
 anchor_top = -0.00153893
 anchor_right = 0.992771
@@ -85,11 +84,11 @@ __meta__ = {
 }
 
 [node name="Title" type="Label" parent="."]
-margin_left = -32.8845
-margin_top = 68.5053
-margin_right = 192.116
-margin_bottom = 118.505
-rect_rotation = -23.2
+margin_left = -45.0
+margin_top = 50.0
+margin_right = 180.0
+margin_bottom = 100.0
+rect_rotation = -20.0
 text = "Settings"
 align = 1
 valign = 1

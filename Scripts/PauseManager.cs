@@ -9,6 +9,7 @@ public class PauseManager : Node
 	private Button quitButton;
 	private ConfirmationDialog dialog;
 	private SettingsManager settings;
+	private AudioStreamPlayer audio;
 
 	public override void _Ready()
 	{
@@ -19,18 +20,28 @@ public class PauseManager : Node
 		quitButton = GetNode<Button>("./UI/Popup/Quit");
 		dialog = GetNode<ConfirmationDialog>("./UI/Popup/Confirmation");
 		settings = GetNode<SettingsManager>("./UI/Settings");
+		audio = GetNode<AudioStreamPlayer>("./Audio");
 	}
 
 	public override void _Input(InputEvent @event)
 	{
 		if (@event is InputEventKey eventKey && eventKey.Pressed && eventKey.Scancode == (int)KeyList.Escape)
 		{
-			GetTree().Paused = !GetTree().Paused;
+			if (settings.Visible)
+			{
+				settings.Visible = false;
+				return;
+			}
+
 			ammoLabel.Visible = !ammoLabel.Visible;
 			pauseScreen.Visible = !pauseScreen.Visible;
+			audio.StreamPaused = !audio.StreamPaused;
+			
 
 			if (pauseScreen.Visible) Input.SetMouseMode(Input.MouseMode.Visible);
 			else Input.SetMouseMode(Input.MouseMode.Captured);
+			
+			GetTree().Paused = !GetTree().Paused;
 		}
 	}
 
@@ -44,16 +55,14 @@ public class PauseManager : Node
 			Input.SetMouseMode(Input.MouseMode.Captured);
 		}
 
-		if (quitButton.Pressed)
-		{
-			dialog.Popup_();
-		}
-
+		if (quitButton.Pressed) dialog.Popup_();
 		if (settingsButton.Pressed) settings.Visible = true;
+		if (!audio.Playing && !audio.StreamPaused) audio.Play();
 	}
 
 	private void _on_Confirmation_confirmed()
 	{
+		audio.Stop();
 		GetTree().Paused = false;
 		GetTree().ChangeScene("res://Scenes/Menu.tscn");
 	}
