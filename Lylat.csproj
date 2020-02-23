@@ -57,6 +57,7 @@
     <PackageReference Include="Newtonsoft.Json" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Scripts\AnimationController.cs" />
     <Compile Include="Scripts\ArwingController.cs" />
     <Compile Include="Scripts\BeamController.cs" />
     <Compile Include="Scripts\Info.cs" />

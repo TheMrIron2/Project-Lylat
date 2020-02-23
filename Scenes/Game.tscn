@@ -4,7 +4,7 @@
 [ext_resource path="res://Scripts/ArwingController.cs" type="Script" id=2]
 [ext_resource path="res://Fonts/OpenSans.tres" type="DynamicFont" id=3]
 [ext_resource path="res://Models/BeginPlatform/BeginPlatform.tscn" type="PackedScene" id=4]
-[ext_resource path="res://Environments/Game.tres" type="Environment" id=5]
+[ext_resource path="res://Environments/Default.tres" type="Environment" id=5]
 [ext_resource path="res://Scripts/PauseManager.cs" type="Script" id=6]
 [ext_resource path="res://Models/Wolfen/Wolfen.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Scenes/Settings.tscn" type="PackedScene" id=8]
@@ -67,6 +67,7 @@ __meta__ = {
 }
 
 [node name="Popup" type="PopupDialog" parent="UI"]
+visible = true
 margin_left = 10.0
 margin_top = 10.0
 margin_right = 1270.0
@@ -113,6 +114,7 @@ margin_left = 142.0
 margin_top = 157.0
 margin_right = 1088.0
 margin_bottom = 512.0
+popup_exclusive = true
 window_title = ""
 dialog_text = "        You are about to quit back to the main menu.
 	
@@ -123,11 +125,12 @@ __meta__ = {
 }
 
 [node name="Label" type="Label" parent="UI/Popup"]
-margin_top = 40.8605
-margin_right = 123.0
-margin_bottom = 90.8605
-rect_rotation = -20.0
-text = "Paused"
+margin_left = 20.0
+margin_top = 10.0
+margin_right = 157.0
+margin_bottom = 60.0
+rect_scale = Vector2( 2, 2 )
+text = "PAUSED"
 __meta__ = {
 "_edit_use_anchors_": false
 }

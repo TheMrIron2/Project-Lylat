@@ -5,30 +5,21 @@ using System.IO;
 public class SettingsJSON
 {
 	[JsonProperty("msaa_level")]
-	public int MSAA { get; private set; }
+	public int MSAA { get; set; }
 
 	[JsonProperty("vsync")]
-	public bool VSync { get; private set; }
+	public bool VSync { get; set; }
 
 	[JsonProperty("resHori")]
-	public float ResolutionHorizontal { get; private set; }
+	public float ResolutionHorizontal { get; set; }
 
 	[JsonProperty("resVert")]
-	public float ResolutionVertical { get; private set; }
+	public float ResolutionVertical { get; set; }
 
 	[JsonProperty("wmode")]
-	public int WindowMode { get; private set; }
+	public int WindowMode { get; set; }
 
-	public SettingsJSON(int msaa, bool vsync, float hori, float vert, int wmod)
-	{
-		MSAA = msaa;
-		VSync = vsync;
-		ResolutionHorizontal = hori;
-		ResolutionVertical = vert;
-		WindowMode = wmod;
-	}
-
-	public SettingsJSON() => JsonConvert.DeserializeObject<SettingsJSON>(System.IO.File.ReadAllText("settings.json"));
+	public static SettingsJSON Load() => JsonConvert.DeserializeObject<SettingsJSON>(System.IO.File.ReadAllText("settings.json"));
 
 	public void Save()
 	{
@@ -49,17 +40,10 @@ public class SettingsManager : Control
 	private LineEdit resLevelVertical;
 	private OptionButton windowType;
 
-	public override void _Ready()
-	{
-		apply = GetNode<Button>("./Apply");
-		back = GetNode<Button>("./Back");
-		msaaSlider = GetNode<Slider>("./MSAA/Slider");
-		msaaLevel = GetNode<Label>("./MSAA/Level");
-		vsyncButton = GetNode<CheckButton>("./VSync");
-		resLevelHorizontal = GetNode<LineEdit>("./Resolution/Horizontal");
-		resLevelVertical = GetNode<LineEdit>("./Resolution/Vertical");
-		windowType = GetNode<OptionButton>("./Window");
+	private bool visible = false;
 
+	private void setupSelections()
+	{
 		switch (GetViewport().Msaa)
 		{
 		case Viewport.MSAA.Msaa2x:
@@ -83,24 +67,49 @@ public class SettingsManager : Control
 			break;
 		}
 
+		if (OS.WindowFullscreen) windowType.Selected = 0;
+		else if (OS.WindowBorderless) windowType.Selected = 1;
+		else windowType.Selected = 2;
+
 		if (OS.VsyncEnabled) vsyncButton.Pressed = true;
 
 		resLevelHorizontal.Text = OS.WindowSize.x.ToString();
 		resLevelVertical.Text = OS.WindowSize.y.ToString();
+	}
+
+	public override void _Ready()
+	{
+		apply = GetNode<Button>("./Apply");
+		back = GetNode<Button>("./Back");
+		msaaSlider = GetNode<Slider>("./MSAA/Slider");
+		msaaLevel = GetNode<Label>("./MSAA/Level");
+		vsyncButton = GetNode<CheckButton>("./VSync");
+		resLevelHorizontal = GetNode<LineEdit>("./Resolution/Horizontal");
+		resLevelVertical = GetNode<LineEdit>("./Resolution/Vertical");
+		windowType = GetNode<OptionButton>("./Window");
 
 		windowType.AddItem("Fullscreen");
 		windowType.AddItem("Borderless");
 		windowType.AddItem("Windowed");
 
-		if (OS.WindowFullscreen) windowType.Selected = 0;
-		else if (OS.WindowBorderless) windowType.Selected = 1;
-		else windowType.Selected = 2;
+		setupSelections();
 	}
 
 	public override void _Process(float delta)
 	{
 		if (!Visible) return;
-		if (back.Pressed) Visible = false;
+
+		if (!visible)
+		{
+			setupSelections();
+			visible = true;
+		}
+
+		if (back.Pressed)
+		{
+			Visible = false;
+			visible = false;
+		}
 
 		switch (windowType.Selected)
 		{
@@ -177,33 +186,38 @@ public class SettingsManager : Control
 			if (vsyncButton.Pressed) OS.VsyncEnabled = true;
 			else OS.VsyncEnabled = false;
 
-			OS.WindowSize = new Vector2(float.Parse(resLevelHorizontal.Text), float.Parse(resLevelVertical.Text));
-			OS.WindowPosition = new Vector2(0, 0);
+			float hori = float.Parse(resLevelHorizontal.Text);
+			float vert = float.Parse(resLevelVertical.Text);
+
+			OS.WindowSize = new Vector2(hori, vert);
+			OS.WindowPosition = new Vector2(OS.GetScreenSize().x - hori, OS.GetScreenSize().y - vert);
 
 			switch (windowType.Selected)
 			{
 			case 0:
 				OS.WindowBorderless = false;
 				OS.WindowFullscreen = true;
-				OS.WindowResizable = false;
 				break;
 			
 			case 1:
 				OS.WindowBorderless = true;
 				OS.WindowFullscreen = false;
-				OS.WindowResizable = false;
 				break;
 
 			case 2:
 				OS.WindowBorderless = false;
 				OS.WindowFullscreen = false;
-				OS.WindowResizable = true;
 				break;
 			}
-			
-			OS.WindowPosition = new Vector2(0, 0);
 
-			new SettingsJSON(msaa, vsyncButton.Pressed, float.Parse(resLevelHorizontal.Text), float.Parse(resLevelVertical.Text), windowType.Selected).Save();
+			new SettingsJSON
+			{
+				MSAA = msaa,
+				VSync = vsyncButton.Pressed,
+				ResolutionHorizontal = float.Parse(resLevelHorizontal.Text),
+				ResolutionVertical = float.Parse(resLevelVertical.Text),
+				WindowMode = windowType.Selected
+			}.Save();
 		}
 	}
 }

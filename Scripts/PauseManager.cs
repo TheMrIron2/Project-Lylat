@@ -37,7 +37,6 @@ public class PauseManager : Node
 			pauseScreen.Visible = !pauseScreen.Visible;
 			audio.StreamPaused = !audio.StreamPaused;
 			
-
 			if (pauseScreen.Visible) Input.SetMouseMode(Input.MouseMode.Visible);
 			else Input.SetMouseMode(Input.MouseMode.Captured);
 			
@@ -52,6 +51,7 @@ public class PauseManager : Node
 			GetTree().Paused = false;
 			ammoLabel.Visible = true;
 			pauseScreen.Visible = false;
+			if (dialog.Visible) dialog.Visible = false;
 			Input.SetMouseMode(Input.MouseMode.Captured);
 		}
 

@@ -23,6 +23,10 @@ config/icon="res://Icons/Icon.png"
 config/macos_native_icon="res://Icons/macOS.icns"
 config/windows_native_icon="res://Icons/Windows.ico"
 
+[audio]
+
+default_bus_layout="res://Music/AudioLayout.tres"
+
 [debug]
 
 settings/crash_handler/message="Oh no, the game has crashed!"
@@ -99,4 +103,4 @@ ui_end={
 quality/driver/fallback_to_gles2=true
 threads/thread_model=2
 environment/default_clear_color=Color( 0.301961, 0.301961, 0.301961, 1 )
-environment/default_environment="res://Environments/Game.tres"
+environment/default_environment="res://Environments/Default.tres"
