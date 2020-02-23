@@ -137,6 +137,8 @@ public class SettingsManager : Control
 				OS.WindowResizable = true;
 				break;
 			}
+			
+			OS.WindowPosition = new Vector2(0, 0);
 		}
 	}
 }
