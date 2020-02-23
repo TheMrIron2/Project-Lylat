@@ -12,7 +12,7 @@ The long term goal is subject to discussion as we progress.
 - Benjamin238 - Model Assistance
 - Apfel - Scripting
 - MotoLegacy - Planning and Scripting
-- MikeModder: Scripting
+- MikeModder - Scripting
 
 ### Gameplay Details
 
