@@ -61,7 +61,8 @@ public class SettingsManager : Control
 
 	public override void _Process(float delta)
 	{
-		if (back.Pressed) GetTree().ChangeScene("res://Scenes/Menu.tscn");
+		if (!Visible) return;
+		if (back.Pressed) Visible = false;
 
 		switch (msaaSlider.Value)
 		{

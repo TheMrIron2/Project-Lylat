@@ -1,5 +1,4 @@
 using Godot;
-using System;
 
 public class PauseManager : Node
 {
@@ -9,23 +8,26 @@ public class PauseManager : Node
 	private Button settingsButton;
 	private Button quitButton;
 	private ConfirmationDialog dialog;
+	private SettingsManager settings;
 
 	public override void _Ready()
 	{
 		ammoLabel = GetNode<Label>("./UI/LabelAmmoSpeed");
 		pauseScreen = GetNode<PopupDialog>("./UI/Popup");
 		resumeButton = GetNode<Button>("./UI/Popup/Resume");
+		settingsButton = GetNode<Button>("./UI/Popup/Settings");
 		quitButton = GetNode<Button>("./UI/Popup/Quit");
 		dialog = GetNode<ConfirmationDialog>("./UI/Popup/Confirmation");
+		settings = GetNode<SettingsManager>("./UI/Settings");
 	}
 
 	public override void _Input(InputEvent @event)
 	{
 		if (@event is InputEventKey eventKey && eventKey.Pressed && eventKey.Scancode == (int)KeyList.Escape)
 		{
-			GetTree().Paused = true;
-			ammoLabel.Visible = false;
-			pauseScreen.Visible = true;
+			GetTree().Paused = !GetTree().Paused;
+			ammoLabel.Visible = !ammoLabel.Visible;
+			pauseScreen.Visible = !pauseScreen.Visible;
 		}
 	}
 
@@ -42,6 +44,8 @@ public class PauseManager : Node
 		{
 			dialog.Popup_();
 		}
+
+		if (settingsButton.Pressed) settings.Visible = true;
 	}
 
 	private void _on_Confirmation_confirmed()

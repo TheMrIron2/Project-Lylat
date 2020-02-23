@@ -53,11 +53,11 @@
     <Reference Include="System" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Scripts\Game\PauseManager.cs" />
+    <Compile Include="Scripts\ArwingController.cs" />
     <Compile Include="Scripts\Info.cs" />
-    <Compile Include="Scripts\Game\ArwingController.cs" />
-    <Compile Include="Scripts\Menu\UIController.cs" />
-    <Compile Include="Scripts\Settings\SettingsManager.cs" />
+    <Compile Include="Scripts\MenuManager.cs" />
+    <Compile Include="Scripts\PauseManager.cs" />
+    <Compile Include="Scripts\SettingsManager.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>
