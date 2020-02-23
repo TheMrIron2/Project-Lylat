@@ -138,7 +138,5 @@ public class SettingsManager : Control
 				break;
 			}
 		}
-
-		System.Console.WriteLine(windowType.Selected);
 	}
 }
