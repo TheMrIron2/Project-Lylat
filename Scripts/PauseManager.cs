@@ -28,6 +28,9 @@ public class PauseManager : Node
 			GetTree().Paused = !GetTree().Paused;
 			ammoLabel.Visible = !ammoLabel.Visible;
 			pauseScreen.Visible = !pauseScreen.Visible;
+
+			if (pauseScreen.Visible) Input.SetMouseMode(Input.MouseMode.Visible);
+			else Input.SetMouseMode(Input.MouseMode.Captured);
 		}
 	}
 
@@ -38,6 +41,7 @@ public class PauseManager : Node
 			GetTree().Paused = false;
 			ammoLabel.Visible = true;
 			pauseScreen.Visible = false;
+			Input.SetMouseMode(Input.MouseMode.Captured);
 		}
 
 		if (quitButton.Pressed)

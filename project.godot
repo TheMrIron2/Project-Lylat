@@ -18,6 +18,7 @@ _global_script_class_icons={
 config/name="Lylat"
 config/description="A Star Fox clone for PC."
 run/main_scene="res://Scenes/Menu.tscn"
+boot_splash/image="res://Icons/Icon.png"
 config/icon="res://Icons/Icon.png"
 config/macos_native_icon="res://Icons/macOS.icns"
 config/windows_native_icon="res://Icons/Windows.ico"

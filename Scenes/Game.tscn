@@ -33,7 +33,7 @@ fov = 90.0
 far = 4096.0
 
 [node name="BeginPlatform" parent="Scene" instance=ExtResource( 4 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0936584, 7.62939e-06, -9.86268 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.74868, -4.22449, -11.9562 )
 
 [node name="Wolfen" parent="Scene" instance=ExtResource( 7 )]
 transform = Transform( -1, 0, -3.25841e-07, 0, 1, 0, 3.25841e-07, 0, -1, 0, 20, -300 )
@@ -61,7 +61,6 @@ __meta__ = {
 }
 
 [node name="Popup" type="PopupDialog" parent="UI"]
-visible = true
 margin_left = 10.0
 margin_top = 10.0
 margin_right = 1270.0
@@ -125,6 +124,7 @@ __meta__ = {
 }
 
 [node name="Settings" parent="UI" instance=ExtResource( 8 )]
+visible = false
 margin_left = 29.3977
 margin_top = 21.1388
 margin_right = 9.39771
