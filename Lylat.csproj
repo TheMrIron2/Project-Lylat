@@ -53,6 +53,7 @@
     <Reference Include="System" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Scripts\Game\PauseManager.cs" />
     <Compile Include="Scripts\Info.cs" />
     <Compile Include="Scripts\Game\ArwingController.cs" />
     <Compile Include="Scripts\Menu\UIController.cs" />
