@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Fonts/OpenSans.tres" type="DynamicFont" id=1]
 [ext_resource path="res://Scripts/Menu/UIController.cs" type="Script" id=2]
 [ext_resource path="res://Models/Arwing/Arwing.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Environments/Menu.tres" type="Environment" id=4]
 
 [sub_resource type="Theme" id=1]
 default_font = ExtResource( 1 )
@@ -13,6 +14,7 @@ default_font = ExtResource( 1 )
 
 [node name="Camera" type="Camera" parent="Scene"]
 keep_aspect = 0
+environment = ExtResource( 4 )
 
 [node name="Arwing" parent="Scene" instance=ExtResource( 3 )]
 transform = Transform( 0.753391, 0, -0.657573, 0, 1, 0, 0.657573, 0, 0.753391, 0, 0, -33.7398 )

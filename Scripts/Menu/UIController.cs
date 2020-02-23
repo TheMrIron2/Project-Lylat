@@ -8,6 +8,8 @@ public class UIController : Control
 
 	public override void _Ready()
 	{
+		OS.WindowPosition = new Vector2(0, 0);
+
 		start = GetNode<Button>("./ButtonStart");
 		settings = GetNode<Button>("./ButtonSettings");
 		quit = GetNode<Button>("./ButtonQuit");

@@ -19,8 +19,8 @@ config/name="Lylat"
 config/description="A Star Fox clone for PC."
 run/main_scene="res://Scenes/Menu.tscn"
 config/icon="res://Icons/Icon.png"
-config/macos_native_icon="res://Textures/macOS.icns"
-config/windows_native_icon="res://Textures/Windows.ico"
+config/macos_native_icon="res://Icons/macOS.icns"
+config/windows_native_icon="res://Icons/Windows.ico"
 
 [debug]
 
@@ -97,4 +97,5 @@ ui_end={
 
 quality/driver/fallback_to_gles2=true
 threads/thread_model=2
-environment/default_environment="res://Environments/Menu.tres"
+environment/default_clear_color=Color( 0.301961, 0.301961, 0.301961, 1 )
+environment/default_environment="res://Environments/Game.tres"

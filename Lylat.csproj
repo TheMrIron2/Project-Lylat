@@ -56,7 +56,7 @@
     <Compile Include="Scripts\Info.cs" />
     <Compile Include="Scripts\Game\ArwingController.cs" />
     <Compile Include="Scripts\Menu\UIController.cs" />
-    <Compile Include="Scripts\Settings\ButtonManager.cs" />
+    <Compile Include="Scripts\Settings\SettingsManager.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>
