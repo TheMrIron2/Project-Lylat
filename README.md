@@ -2,23 +2,22 @@
 On-rails 3D space shooter for PC in the style of Star Fox. <br>
 Written mostly in C#, this project uses **[Godot](https://godotengine.org)** as the game engine.
 
-The short term goal is to create a playable proof of concept with all working logic and a demo. (eg. Star Wolf battle)
-
+The short term goal is to create a playable proof of concept with all working logic and a demo. (eg. Star Wolf battle) <br>
 The long term goal is subject to discussion as we progress.
 
 ## Credits
 
-- TheMrIron2 - Project Management, Sound Design
-- Benjamin238 - Model Assistance
-- Apfel - Scripting
-- MotoLegacy - Planning and Scripting
-- MikeModder - Scripting
+- **[TheMrIron2](https://github.com/TheMrIron2)** - Project Management, Sound Design
+- **[Apfel](https://github.com/Apfel)** - Programming
+- **[benjamin238](https://github.com/benjamin238)** - Model Assistance
+- **[MikeModder](https://github.com/MikeModder)** - Programming
+- **[MotoLegacy](https://github.com/MotoLegacy)** - Planning and Programming
 
-### Gameplay Details
+## Gameplay Details
 
 - Pressing the "Fire" button shoots 1 green laser beam.
-- If "Fire" is held down, three consecutive beams will be shot, then a "charge" shot will be charged.
-- Charge shots will lock to an enemy and releasing the "Fire" button will release the shot.
+- If `Fire` (`Left Mouse` by default) is held down, three consecutive beams will be shot, then a "charge" shot will be charged.
+- Charge shots will lock to an enemy and releasing the `Fire` button will release the shot.
 - "Bombs" may also be fired if you have any; these are collected during gameplay.
 - Your laser beam may also be improved by a power up.
 - Collecting a laser power-up will increase the amount of shots to two simultaneous shots.
@@ -43,8 +42,7 @@ The long term goal is subject to discussion as we progress.
 - This affects the control of the ship and reverts any laser power-ups that may have been picked up.
 - All wings will be repaired if a Repair or Laser power-up is picked up.
 
-# DISCLAIMER
+# Disclaimer.
 
-This is a non-commercial, free project with no intention of infringement on any Nintendo IPs or otherwise.
-
-Models and the Star Fox name are recognised properties of Nintendo. 
+This is a non-commercial, free project with no intention of infringement on any Nintendo IPs or otherwise. <br>
+Models and the Star Fox name are recognised properties of [Nintendo](https://www.nintendo.com/). 
