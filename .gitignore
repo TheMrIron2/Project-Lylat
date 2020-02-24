@@ -1,5 +1,4 @@
 .import
 .mono
-*.import
 settings.json
 *.bat
