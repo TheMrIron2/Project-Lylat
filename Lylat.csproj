@@ -52,8 +52,6 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.IO" />
-  </ItemGroup>
-  <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" />
   </ItemGroup>
   <ItemGroup>
