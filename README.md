@@ -42,7 +42,7 @@ The long term goal is subject to discussion as we progress.
 - This affects the control of the ship and reverts any laser power-ups that may have been picked up.
 - All wings will be repaired if a Repair or Laser power-up is picked up.
 
-# Disclaimer.
+# Disclaimer
 
 This is a non-commercial, free project with no intention of infringement on any Nintendo IPs or otherwise. <br>
 Models and the Star Fox name are recognised properties of [Nintendo](https://www.nintendo.com/). 
