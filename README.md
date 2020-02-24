@@ -15,8 +15,8 @@ The long term goal is subject to discussion as we progress.
 
 ## Gameplay Details
 
-- Pressing the "Fire" button shoots 1 green laser beam.
-- If `Fire` (`Left Mouse` by default) is held down, three consecutive beams will be shot, then a "charge" shot will be charged.
+- Pressing the `Fire` (`Left Mouse` by default) button shoots 1 green laser beam.
+- If `Fire` is held down, three consecutive beams will be shot, then a "charge" shot will be charged.
 - Charge shots will lock to an enemy and releasing the `Fire` button will release the shot.
 - "Bombs" may also be fired if you have any; these are collected during gameplay.
 - Your laser beam may also be improved by a power up.
