@@ -35,7 +35,7 @@ transform = Transform( 0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, 0.707107, 0
 transform = Transform( 1, 0, 0, 0, 0.280918, 0.959732, 0, -0.959732, 0.280918, 0, 15.1611, 0 )
 
 [node name="Planet" parent="Scene" instance=ExtResource( 8 )]
-transform = Transform( 0.906308, 0.422618, 0, -0.422618, 0.906308, 0, 0, 0, 1, -55, 15, -100 )
+transform = Transform( -1.47656e-07, -6.88533e-08, 1, -0.422618, 0.906308, 0, -0.906308, -0.422618, -1.62921e-07, -149.77, 44.0506, -309.897 )
 
 [node name="UI" type="Control" parent="."]
 __meta__ = {
