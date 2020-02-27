@@ -31,6 +31,29 @@ default_bus_layout="res://Music/AudioLayout.tres"
 
 settings/crash_handler/message="Oh no, the game has crashed!"
 gdscript/warnings/enable=false
+gdscript/warnings/exclude_addons=false
+gdscript/warnings/unassigned_variable=false
+gdscript/warnings/unassigned_variable_op_assign=false
+gdscript/warnings/unused_variable=false
+gdscript/warnings/shadowed_variable=false
+gdscript/warnings/unused_argument=false
+gdscript/warnings/unreachable_code=false
+gdscript/warnings/standalone_expression=false
+gdscript/warnings/void_assignment=false
+gdscript/warnings/narrowing_conversion=false
+gdscript/warnings/function_may_yield=false
+gdscript/warnings/variable_conflicts_function=false
+gdscript/warnings/function_conflicts_variable=false
+gdscript/warnings/function_conflicts_constant=false
+gdscript/warnings/incompatible_ternary=false
+gdscript/warnings/unused_signal=false
+gdscript/warnings/return_value_discarded=false
+gdscript/warnings/property_used_as_function=false
+gdscript/warnings/constant_used_as_function=false
+gdscript/warnings/function_used_as_property=false
+gdscript/warnings/integer_division=false
+gdscript/warnings/deprecated_keyword=false
+gdscript/warnings/standalone_ternary=false
 
 [display]
 

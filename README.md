@@ -10,7 +10,6 @@ The long term goal is subject to discussion as we progress.
 - **[TheMrIron2](https://github.com/TheMrIron2)** - Project Management, Sound Design
 - **[Apfel](https://github.com/Apfel)** - Programming
 - **[benjamin238](https://github.com/benjamin238)** - Model Assistance
-- **[MikeModder](https://github.com/MikeModder)** - Programming
 - **[MotoLegacy](https://github.com/MotoLegacy)** - Planning and Programming
 
 ## Gameplay Details

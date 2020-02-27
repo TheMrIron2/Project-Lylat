@@ -52,7 +52,8 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.IO" />
-    <PackageReference Include="Newtonsoft.Json" /> <!-- Godot hates version numbers but we used 12.0.3. -->
+    <PackageReference Include="Newtonsoft.Json" />
+    <!-- Godot hates version numbers but we used 12.0.3. -->
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Scripts\AnimationController.cs" />

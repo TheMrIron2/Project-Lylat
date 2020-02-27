@@ -7,13 +7,13 @@ public class MenuManager : Node
 	private Button quit;
 	private SettingsManager dialog;
 
-	public override void _Ready()
+	/*public override void _Ready()
 	{
 		applySettings(new SettingsJSON());
 
-		start = GetNode<Button>("./UI/Start");
-		settings = GetNode<Button>("./UI/Settings");
-		quit = GetNode<Button>("./UI/Quit");
+		start = GetNode<Button>("./UIView/Container/Start");
+		settings = GetNode<Button>("./UIView/Container/Settings");
+		quit = GetNode<Button>("./UIView/Container/Quit");
 		dialog = GetNode<SettingsManager>("./UI/Dialog");
 	}
 
@@ -22,10 +22,11 @@ public class MenuManager : Node
 		if (start.Pressed) GetTree().ChangeScene("res://Scenes/Game.tscn");
 		else if (settings.Pressed) dialog.Visible = true;
 		else if (quit.Pressed) GetTree().Quit();
-	}
+	}*/
 
 	private void applySettings(SettingsJSON json)
 	{
+		ResourceLoader.Load<PackedScene>("").Instance
 		switch (json.MSAA)
 		{
 		case 0:

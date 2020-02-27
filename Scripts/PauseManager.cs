@@ -21,6 +21,8 @@ public class PauseManager : Node
 		dialog = GetNode<ConfirmationDialog>("./UI/Popup/Confirmation");
 		settings = GetNode<SettingsManager>("./UI/Settings");
 		audio = GetNode<AudioStreamPlayer>("./Audio");
+
+		dialog.Connect("confirmed", this, nameof(Confirmation));
 	}
 
 	public override void _Input(InputEvent @event)
@@ -60,7 +62,7 @@ public class PauseManager : Node
 		if (!audio.Playing && !audio.StreamPaused) audio.Play();
 	}
 
-	private void _on_Confirmation_confirmed()
+	public void Confirmation()
 	{
 		audio.Stop();
 		GetTree().Paused = false;

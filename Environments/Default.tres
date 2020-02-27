@@ -11,7 +11,7 @@ ground_curve = 0.355062
 ground_energy = 0.5
 sun_color = Color( 0.92549, 0.807843, 0.443137, 1 )
 sun_latitude = 20.0
-sun_longitude = 20.0
+sun_longitude = -30.0
 sun_angle_max = 50.0
 sun_energy = 25.0
 
