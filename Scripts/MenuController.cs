@@ -27,6 +27,7 @@ public class MenuController : Node
     {
         if (!animation.IsPlaying() && !ui.Visible)
         {
+            // TODO: fadein UI
             System.Threading.Thread.Sleep(400);
             ui.Show();
         }
