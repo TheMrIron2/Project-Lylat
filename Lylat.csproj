@@ -3,7 +3,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Tools</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{95E5C73E-7DA0-4EEA-AAFF-B1C446E6B266}</ProjectGuid>
+    <ProjectGuid>{A2817212-10C8-49E5-AE86-5984168E8862}</ProjectGuid>
     <OutputType>Library</OutputType>
     <OutputPath>.mono\temp\bin\$(Configuration)</OutputPath>
     <RootNamespace>Lylat</RootNamespace>
@@ -50,19 +50,13 @@
       <Private>False</Private>
       <HintPath>$(ProjectDir)/.mono/assemblies/$(ApiConfiguration)/GodotSharpEditor.dll</HintPath>
     </Reference>
-    <Reference Include="System" />
-    <Reference Include="System.IO" />
     <PackageReference Include="Newtonsoft.Json" />
-    <!-- Godot hates version numbers but we used 12.0.3. -->
+    <Reference Include="System" />
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
-    <Compile Include="Scripts\AnimationController.cs" />
-    <Compile Include="Scripts\ArwingController.cs" />
-    <Compile Include="Scripts\BeamController.cs" />
-    <Compile Include="Scripts\Info.cs" />
-    <Compile Include="Scripts\MenuManager.cs" />
-    <Compile Include="Scripts\PauseManager.cs" />
-    <Compile Include="Scripts\SettingsManager.cs" />
+    <Compile Include="Scripts\AssemblyInfo.cs" />
+    <Compile Include="Scripts\MenuController.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>
