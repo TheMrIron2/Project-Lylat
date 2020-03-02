@@ -6,7 +6,6 @@ public class InitialLoader : Control
 {
     private TextureRect loading;
     private Label info;
-
     private PackedScene menu;
     private bool loadDone = false;
     private bool textDone = false;
