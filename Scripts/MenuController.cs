@@ -12,6 +12,8 @@ public class MenuController : Node
 
     public override void _Ready()
     {
+        Input.SetMouseMode(Input.MouseMode.Visible);
+
         animation   = GetNode<AnimationPlayer>("./Animation");
         music       = GetNode<AudioStreamPlayer>("./Music");
         effects     = GetNode<AudioStreamPlayer>("./Effects");
