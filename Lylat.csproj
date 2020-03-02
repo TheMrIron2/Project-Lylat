@@ -58,6 +58,7 @@
     <Compile Include="Scripts\AssemblyInfo.cs" />
     <Compile Include="Scripts\InitialLoader.cs" />
     <Compile Include="Scripts\MenuController.cs" />
+    <Compile Include="Scripts\ThreadedLoader.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>

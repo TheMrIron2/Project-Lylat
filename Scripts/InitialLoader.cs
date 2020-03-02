@@ -1,19 +1,20 @@
 using Godot;
 using System;
-using System.Threading;
 
 public class InitialLoader : Control
 {
-    private TextureRect loading;
-    private Label info;
-    private PackedScene menu;
-    private bool loadDone = false;
-    private bool textDone = false;
-    private bool alphaDecrease = false;
-    private bool waitText = true;
-    private float alphaCounter = 0.0f;
-    private float timeCounter = 0.0f;
+    private ThreadedLoader loader;
 
+    private Label info;
+    private TextureRect loading;
+    
+    private float alphaCounter;
+    private float timeCounter;
+    private bool alphaDecrease;
+    private bool textDone;
+    private bool waitText;
+    
+    
     public override void _Ready()
     {
         Input.SetMouseMode(Input.MouseMode.Hidden);
@@ -21,13 +22,22 @@ public class InitialLoader : Control
         loading = GetNode<TextureRect>("./Loading");
         info = GetNode<Label>("./Info");
 
-        System.Threading.Thread thread = new System.Threading.Thread(new ThreadStart(loaderThread));
-        thread.Start();
+        loader = new ThreadedLoader("res://Scenes/Menu.tscn");
+
+        alphaCounter = 0.0f;
+        timeCounter = 0.0f;
+        alphaDecrease = false;
+        textDone = false;
+        waitText = true;
+
+        loader.Start();
     }
 
     public override void _Process(float delta)
     {
-        if (loadDone && textDone) GetTree().ChangeSceneTo(menu);
+        if (loader.Exception != null) throw new Exception($"Loading the Menu failed: \"{loader.Exception.Message}\"");
+
+        if (loader.Done && textDone) GetTree().ChangeSceneTo(loader.Content);
 
         if (loading.RectRotation == 360.0f) loading.RectRotation = 0.0f;
         loading.RectRotation = loading.RectRotation + 0.1f;
@@ -47,27 +57,5 @@ public class InitialLoader : Control
         else if (alphaCounter <= 0.0f && alphaDecrease) textDone = true;
     }
 
-    private void loaderThread()
-    {
-        ResourceInteractiveLoader loader = ResourceLoader.LoadInteractive("res://Scenes/Menu.tscn");
 
-        while (!loadDone)
-        {
-            Error error = loader.Poll();
-            switch (error)
-            {
-            case Error.Ok:
-                break;
-
-            case Error.FileEof:
-                menu = (PackedScene)loader.GetResource();
-                loadDone = true;
-                break;
-            
-            default:
-                throw new Exception($"Loading the Menu scene failed with code \"{error.ToString()}\".");
-            }
-            
-        }
-    }
 }
