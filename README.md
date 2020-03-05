@@ -5,15 +5,9 @@ Written mostly in C#, this project uses **[Godot](https://godotengine.org)** as 
 The short term goal is to create a playable proof of concept with all working logic and a demo. (eg. Star Wolf battle) <br>
 The long term goal is subject to discussion as we progress.
 
-## Credits
-
-- **[TheMrIron2](https://github.com/TheMrIron2)** - Project Management, Sound Design
-- **[Apfel](https://github.com/Apfel)** - Programming
-- **[benjamin238](https://github.com/benjamin238)** - Model Assistance
-- **[MotoLegacy](https://github.com/MotoLegacy)** - Planning and Programming
+If you want to get in touch, get more information or if you'd just like to hang out with the developers, join us on **[Discord](https://discord.gg/XaewHrj)**.
 
 ## Gameplay Details
-
 - Pressing the `Fire` (`Left Mouse` by default) button shoots 1 green laser beam.
 - If `Fire` is held down, three consecutive beams will be shot, then a "charge" shot will be charged.
 - Charge shots will lock to an enemy and releasing the `Fire` button will release the shot.
@@ -41,7 +35,14 @@ The long term goal is subject to discussion as we progress.
 - This affects the control of the ship and reverts any laser power-ups that may have been picked up.
 - All wings will be repaired if a Repair or Laser power-up is picked up.
 
-# Disclaimer
 
+## Credits
+- **[TheMrIron2](https://github.com/TheMrIron2)** - Project Management, Sound Design
+- **[Apfel](https://github.com/Apfel)** - Programming
+- **[benjamin238](https://github.com/benjamin238)** - Model Assistance
+- **[MotoLegacy](https://github.com/MotoLegacy)** - Planning and Programming
+
+## Disclaimer
 This is a non-commercial, free project with no intention of infringement on any Nintendo IPs or otherwise. <br>
-Models and the Star Fox name are recognised properties of [Nintendo](https://www.nintendo.com/). 
+Models and the Star Fox name are recognised properties of [Nintendo](https://www.nintendo.com/). <br>
+You can find this notice in our license too.
