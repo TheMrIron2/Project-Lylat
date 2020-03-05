@@ -5,41 +5,66 @@ public class MenuController : Node
     private AnimationPlayer animation;
     private AudioStreamPlayer music;
     private AudioStreamPlayer effects;
-    private Control ui;
-    private Button start;
-    private Button settings;
-    private Button quit;
+
+    private Control mainUI;
+    private Button mainStart;
+    private Button mainSettings;
+    private Button mainQuit;
+
+    private Control settingsUI;
+    private Button settingsBack;
+
+    private bool switchToSettings;
 
     public override void _Ready()
     {
         Input.SetMouseMode(Input.MouseMode.Visible);
 
-        animation   = GetNode<AnimationPlayer>("./Animation");
-        music       = GetNode<AudioStreamPlayer>("./Music");
-        effects     = GetNode<AudioStreamPlayer>("./Effects");
-        ui          = GetNode<Control>("./Control");
-        start       = GetNode<Button>("./Control/Start");
-        settings    = GetNode<Button>("./Control/Settings");
-        quit        = GetNode<Button>("./Control/Quit");
+        animation           = GetNode<AnimationPlayer>("./Animation");
+        music               = GetNode<AudioStreamPlayer>("./Music");
+        effects             = GetNode<AudioStreamPlayer>("./Effects");
+
+        mainUI              = GetNode<Control>("./MainUI");
+        mainStart           = GetNode<Button>("./MainUI/Start");
+        mainSettings        = GetNode<Button>("./MainUI/Settings");
+        mainQuit            = GetNode<Button>("./MainUI/Quit");
+
+        settingsUI          = GetNode<Control>("./SettingsUI");
+        settingsBack        = GetNode<Button>("./SettingsUI/Back");
+
+        switchToSettings    = false;
 
         animation.Play("CameraIntroduction");
     }
 
     public override void _Process(float delta)
     {
-        if (!animation.IsPlaying() && !ui.Visible)
+        if (!animation.IsPlaying())
         {
             // TODO: fadein UI
-            System.Threading.Thread.Sleep(400);
-            ui.Show();
+            if (!switchToSettings) mainUI.Show();
+            else settingsUI.Show();
         }
 
         // TODO: Loading manager
         // TODO: Settings logic
         // TODO: Confirmation on quit
         
-        if (start.Pressed) GetTree().ChangeScene("res://Scenes/Maps/1.tscn");
-        if (settings.Pressed) animation.Play("CameraMoveToSettings");
-        if (quit.Pressed) GetTree().Quit();
+        if (mainStart.Pressed) GetTree().ChangeScene("res://Scenes/Maps/1.tscn");
+        if (mainSettings.Pressed)
+        {
+            // TODO: UI viewport
+            mainUI.Visible = false;
+            switchToSettings = true;
+            animation.Play("CameraMoveToSettings");
+        }
+        if (mainQuit.Pressed) GetTree().Quit();
+
+        if (settingsBack.Pressed)
+        {
+            settingsUI.Visible = false;
+            switchToSettings = false;
+            animation.PlayBackwards("CameraMoveToSettings");
+        }
     }
 }
