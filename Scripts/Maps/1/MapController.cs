@@ -11,6 +11,6 @@ public class MapController : Node
 
     public override void _Process(float delta)
     {
-        if (Input.IsKeyPressed((int)KeyList.U)) arwing.UTurn();
+        
     }
 }

@@ -13,7 +13,7 @@ script = ExtResource( 3 )
 [node name="Spatial" type="Spatial" parent="."]
 
 [node name="Arwing" parent="Spatial" instance=ExtResource( 1 )]
-transform = Transform( -1, 0, -3.25841e-07, 0, 1, 0, 3.25841e-07, 0, -1, 0, 0, 0 )
+transform = Transform( -1, 0, -3.25841e-07, 0, 1, 0, 3.25841e-07, 0, -1, 0, 0, -20 )
 
 [node name="Camera" type="Camera" parent="Spatial"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 20, 15, 60 )
