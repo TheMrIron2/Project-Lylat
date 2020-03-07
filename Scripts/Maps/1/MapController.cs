@@ -7,6 +7,10 @@ public class MapController : Node
     public override void _Ready()
     {
         arwing = GetNode<Arwing>("./Spatial/Arwing");
-        arwing.UTurn();
-    } 
+    }
+
+    public override void _Process(float delta)
+    {
+        if (Input.IsKeyPressed((int)KeyList.U)) arwing.UTurn();
+    }
 }

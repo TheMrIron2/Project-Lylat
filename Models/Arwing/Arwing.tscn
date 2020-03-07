@@ -1,4 +1,4 @@
-[gd_scene load_steps=179 format=2]
+[gd_scene load_steps=178 format=2]
 
 [ext_resource path="res://Models/Arwing/Characters.material" type="Material" id=1]
 [ext_resource path="res://Models/Arwing/LogosFront.material" type="Material" id=2]
@@ -6,7 +6,6 @@
 [ext_resource path="res://Models/Arwing/Body.material" type="Material" id=4]
 [ext_resource path="res://Models/Arwing/LogosBack.material" type="Material" id=5]
 [ext_resource path="res://Scripts/Arwing.cs" type="Script" id=6]
-[ext_resource path="res://Animation/Arwing/U-Turn.tres" type="Animation" id=7]
 
 [sub_resource type="ArrayMesh" id=1]
 surfaces/0 = {
@@ -642,7 +641,6 @@ points = PoolVector3Array( 0.114363, 0.0475551, -0.0435052, 0.114363, 0.0475551,
 script = ExtResource( 6 )
 
 [node name="Animation" type="AnimationPlayer" parent="."]
-anims/U-Turn = ExtResource( 7 )
 
 [node name="Body" type="StaticBody" parent="."]
 
