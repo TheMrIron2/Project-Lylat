@@ -1,21 +1,21 @@
 {
-	"folders": [
+	"folders":
+	[
 		{
 			"name": "Lylat",
 			"path": "."
-		},
-		{
-			"name": "UE4",
-			"path": "D:\\Epic\\UE_4.24"
 		}
+		// Removed UE4 directory due to path inconsistency across different developers.
 	],
-	"settings": {
+	"settings":
+	{
 		"typescript.tsc.autoDetect": "off"
 	},
 	"extensions": {
-		"recommendations": [
-			"ms-vscode.cpptools",
-			"ms-vscode.csharp"
+		"recommendations":
+		[
+			"ms-dotnettools.csharp",
+			"ms-vscode.cpptools"
 		]
 	}
 }
