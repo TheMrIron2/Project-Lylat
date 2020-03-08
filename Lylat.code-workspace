@@ -1,0 +1,21 @@
+{
+	"folders": [
+		{
+			"name": "Lylat",
+			"path": "."
+		},
+		{
+			"name": "UE4",
+			"path": "D:\\Epic\\UE_4.24"
+		}
+	],
+	"settings": {
+		"typescript.tsc.autoDetect": "off"
+	},
+	"extensions": {
+		"recommendations": [
+			"ms-vscode.cpptools",
+			"ms-vscode.csharp"
+		]
+	}
+}

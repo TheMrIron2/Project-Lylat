@@ -1,7 +1,13 @@
-.build
-.import
+# Folders
 .vscode
-.mono
+Binaries
+Content/Developers
+DerivedDataCache
+Intermediate
+Saved
 
+# Files
 *.bat
-settings.json
+*.sln
+*.sdf
+*.suo
