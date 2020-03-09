@@ -11,21 +11,5 @@
  */
 UCLASS() class LYLAT_API ALylatGameModeBase : public AGameModeBase
 {
-	GENERATED_BODY()	
-};
-
-/**
- * On-Rails Shooter mode.
- */
-UCLASS() class LYLAT_API ALylatGameModeOnRails : public ALylatGameModeBase
-{
-	GENERATED_BODY()
-};
-
-/**
- * 360° Movement mode.
- */
-UCLASS() class LYLAT_API ALylatGameMode360 : public ALylatGameModeBase
-{
 	GENERATED_BODY()
 };
