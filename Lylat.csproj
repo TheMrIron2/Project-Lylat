@@ -56,9 +56,11 @@
   <ItemGroup />
   <ItemGroup>
     <Compile Include="Scripts\Arwing.cs" />
+    <Compile Include="Scripts\ArwingBody.cs" />
     <Compile Include="Scripts\AssemblyInfo.cs" />
     <Compile Include="Scripts\InitialLoader.cs" />
     <Compile Include="Scripts\Maps\1\MapController.cs" />
+    <Compile Include="Scripts\KeyMap.cs" />
     <Compile Include="Scripts\MenuController.cs" />
     <Compile Include="Scripts\ThreadedLoader.cs" />
   </ItemGroup>

@@ -1,4 +1,4 @@
-[gd_scene load_steps=178 format=2]
+[gd_scene load_steps=179 format=2]
 
 [ext_resource path="res://Models/Arwing/Characters.material" type="Material" id=1]
 [ext_resource path="res://Models/Arwing/LogosFront.material" type="Material" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://Models/Arwing/Body.material" type="Material" id=4]
 [ext_resource path="res://Models/Arwing/LogosBack.material" type="Material" id=5]
 [ext_resource path="res://Scripts/Arwing.cs" type="Script" id=6]
+[ext_resource path="res://Scripts/ArwingBody.cs" type="Script" id=7]
 
 [sub_resource type="ArrayMesh" id=1]
 surfaces/0 = {
@@ -23,14 +24,19 @@ surfaces/0 = {
 
 [sub_resource type="Skin" id=2]
 bind_count = 5
+bind/0/name = ""
 bind/0/bone = 0
 bind/0/pose = Transform( 0.129771, -0.541075, -0.830901, 0.830901, 0.516623, -0.206649, 0.541075, -0.66358, 0.516623, -0.0200949, -0.0949929, -0.0196761 )
+bind/1/name = ""
 bind/1/bone = 1
 bind/1/pose = Transform( 1, 0, 0, 0, 1, 2.06632e-07, 0, -2.06632e-07, 1, 0, 0.01524, 0.01397 )
+bind/2/name = ""
 bind/2/bone = 2
 bind/2/pose = Transform( 1, 0, 0, 0, 1, 2.06632e-07, 0, -2.06632e-07, 1, 0, 0, 0 )
+bind/3/name = ""
 bind/3/bone = 3
 bind/3/pose = Transform( 0.129771, 0.541075, 0.830902, -0.830901, 0.516623, -0.206649, -0.541075, -0.66358, 0.516623, 0.020095, -0.0949934, -0.0196763 )
+bind/4/name = ""
 bind/4/bone = 4
 bind/4/pose = Transform( 1, 0, 0, 0, 1, 4.37114e-08, 0, -4.37114e-08, 1, 0, -0.0311122, -0.0414754 )
 
@@ -50,8 +56,10 @@ surfaces/0 = {
 
 [sub_resource type="Skin" id=4]
 bind_count = 2
+bind/0/name = ""
 bind/0/bone = 2
 bind/0/pose = Transform( 1, 0, 0, 0, 1, 2.06632e-07, 0, -2.06632e-07, 1, 0, 0, 0 )
+bind/1/name = ""
 bind/1/bone = 1
 bind/1/pose = Transform( 1, 0, 0, 0, 1, 2.06632e-07, 0, -2.06632e-07, 1, 0, 0.01524, 0.01397 )
 
@@ -71,6 +79,7 @@ surfaces/0 = {
 
 [sub_resource type="Skin" id=6]
 bind_count = 1
+bind/0/name = ""
 bind/0/bone = 4
 bind/0/pose = Transform( 1, 0, 0, 0, 1, 4.37114e-08, 0, -4.37114e-08, 1, 0, -0.0311122, -0.0414754 )
 
@@ -95,6 +104,7 @@ surfaces/0 = {
 
 [sub_resource type="Skin" id=9]
 bind_count = 1
+bind/0/name = ""
 bind/0/bone = 2
 bind/0/pose = Transform( 1, 0, 0, 0, 1, 2.06632e-07, 0, -2.06632e-07, 1, 0, 0, 0 )
 
@@ -114,6 +124,7 @@ surfaces/0 = {
 
 [sub_resource type="Skin" id=11]
 bind_count = 1
+bind/0/name = ""
 bind/0/bone = 2
 bind/0/pose = Transform( 1, 0, 0, 0, 1, 2.06632e-07, 0, -2.06632e-07, 1, 0, 0, 0 )
 
@@ -134,6 +145,7 @@ surfaces/0 = {
 
 [sub_resource type="Skin" id=13]
 bind_count = 1
+bind/0/name = ""
 bind/0/bone = 2
 bind/0/pose = Transform( 1, 0, 0, 0, 1, 2.06632e-07, 0, -2.06632e-07, 1, 0, 0, 0 )
 
@@ -153,6 +165,7 @@ surfaces/0 = {
 
 [sub_resource type="Skin" id=15]
 bind_count = 1
+bind/0/name = ""
 bind/0/bone = 2
 bind/0/pose = Transform( 1, 0, 0, 0, 1, 2.06632e-07, 0, -2.06632e-07, 1, 0, 0, 0 )
 
@@ -172,6 +185,7 @@ surfaces/0 = {
 
 [sub_resource type="Skin" id=17]
 bind_count = 1
+bind/0/name = ""
 bind/0/bone = 2
 bind/0/pose = Transform( 1, 0, 0, 0, 1, 2.06632e-07, 0, -2.06632e-07, 1, 0, 0, 0 )
 
@@ -642,7 +656,10 @@ script = ExtResource( 6 )
 
 [node name="Animation" type="AnimationPlayer" parent="."]
 
-[node name="Body" type="StaticBody" parent="."]
+[node name="Body" type="KinematicBody" parent="."]
+collision_layer = 2
+collision_mask = 13
+script = ExtResource( 7 )
 
 [node name="Body" type="MeshInstance" parent="Body"]
 transform = Transform( 100, 0, 0, 0, -4.37114e-06, 100, 0, -100, -4.37114e-06, 0, 0, 0 )

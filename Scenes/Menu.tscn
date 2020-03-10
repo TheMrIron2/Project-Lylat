@@ -40,12 +40,12 @@ anims/CameraMoveToSettings = ExtResource( 8 )
 [node name="Spatial" type="Spatial" parent="."]
 
 [node name="Camera" type="Camera" parent="Spatial"]
-transform = Transform( 0.866025, 0, 0.5, 0, 1, 0, -0.5, 0, 0.866025, 15, 0, -85 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.119198, -3.8147e-06, -0.0852051 )
 keep_aspect = 0
 environment = SubResource( 2 )
 fov = 90.0
 near = 0.01
-far = 90.0
+far = 1024.0
 
 [node name="Arwing" parent="Spatial" instance=ExtResource( 5 )]
 transform = Transform( 0.965926, 0, 0.258819, 0, 1, 0, -0.258819, 0, 0.965926, -20, -10, -130 )

@@ -6,6 +6,8 @@ public class MenuController : Node
     private AudioStreamPlayer music;
     private AudioStreamPlayer effects;
 
+    private Arwing arwing;
+
     private Control mainUI;
     private Button mainStart;
     private Button mainSettings;
@@ -24,6 +26,8 @@ public class MenuController : Node
         music               = GetNode<AudioStreamPlayer>("./Music");
         effects             = GetNode<AudioStreamPlayer>("./Effects");
 
+        arwing              = GetNode<Arwing>("./Spatial/Arwing");
+
         mainUI              = GetNode<Control>("./MainUI");
         mainStart           = GetNode<Button>("./MainUI/Start");
         mainSettings        = GetNode<Button>("./MainUI/Settings");
@@ -34,6 +38,7 @@ public class MenuController : Node
 
         switchToSettings    = false;
 
+        arwing.MenuMode(true);
         animation.Play("CameraIntroduction");
     }
 
