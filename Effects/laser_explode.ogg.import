@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/laser_explode.ogg-d28f7097d0b0030c18dbd990ec4d1d58.oggstr"
+
+[deps]
+
+source_file="res://Effects/laser_explode.ogg"
+dest_files=[ "res://.import/laser_explode.ogg-d28f7097d0b0030c18dbd990ec4d1d58.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

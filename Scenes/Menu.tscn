@@ -1,0 +1,208 @@
+[gd_scene load_steps=13 format=2]
+
+[ext_resource path="res://Fonts/OpenSans.tres" type="DynamicFont" id=1]
+[ext_resource path="res://Textures/Menus/Header.png" type="Texture" id=2]
+[ext_resource path="res://Textures/Menus/Button/Normal.tres" type="StyleBox" id=3]
+[ext_resource path="res://Textures/Menus/Button/Pressed.tres" type="StyleBox" id=4]
+[ext_resource path="res://Models/Arwing/Arwing.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Scripts/MenuController.cs" type="Script" id=6]
+[ext_resource path="res://Animation/Menu/CameraIntroduction.tres" type="Animation" id=7]
+[ext_resource path="res://Animation/Menu/CameraMoveToSettings.tres" type="Animation" id=8]
+
+[sub_resource type="ProceduralSky" id=1]
+sky_top_color = Color( 0.0392157, 0.0392157, 0.117647, 1 )
+sky_horizon_color = Color( 0, 0, 0.0392157, 1 )
+ground_bottom_color = Color( 0, 0, 0, 1 )
+ground_horizon_color = Color( 0, 0, 0.0392157, 1 )
+sun_latitude = -35.0
+
+[sub_resource type="Environment" id=2]
+background_mode = 2
+background_sky = SubResource( 1 )
+
+[sub_resource type="Theme" id=3]
+default_font = ExtResource( 1 )
+
+[sub_resource type="Theme" id=4]
+default_font = ExtResource( 1 )
+
+[node name="Menu" type="Node"]
+script = ExtResource( 6 )
+
+[node name="Animation" type="AnimationPlayer" parent="."]
+anims/CameraIntroduction = ExtResource( 7 )
+anims/CameraMoveToSettings = ExtResource( 8 )
+
+[node name="Music" type="AudioStreamPlayer" parent="."]
+
+[node name="Effects" type="AudioStreamPlayer" parent="."]
+
+[node name="Spatial" type="Spatial" parent="."]
+
+[node name="Camera" type="Camera" parent="Spatial"]
+transform = Transform( 0.866025, 0, 0.5, 0, 1, 0, -0.5, 0, 0.866025, 15, 0, -85 )
+keep_aspect = 0
+environment = SubResource( 2 )
+fov = 90.0
+near = 0.01
+far = 90.0
+
+[node name="Arwing" parent="Spatial" instance=ExtResource( 5 )]
+transform = Transform( 0.965926, 0, 0.258819, 0, 1, 0, -0.258819, 0, 0.965926, -20, -10, -130 )
+
+[node name="OmniLight" type="OmniLight" parent="Spatial"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 20, 10, -95 )
+light_energy = 2.0
+light_bake_mode = 2
+omni_range = 340.0
+
+[node name="MainUI" type="Control" parent="."]
+visible = false
+margin_right = 1280.0
+margin_bottom = 720.0
+theme = SubResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Header" type="TextureRect" parent="MainUI"]
+margin_left = 470.0
+margin_top = 220.0
+margin_right = 880.0
+margin_bottom = 270.0
+texture = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="MainUI/Header"]
+margin_left = 3.0
+margin_top = -2.0
+margin_right = 118.0
+margin_bottom = 48.0
+text = " menu"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Start" type="Button" parent="MainUI"]
+margin_left = 470.903
+margin_top = 280.0
+margin_right = 770.903
+margin_bottom = 340.0
+focus_mode = 0
+custom_styles/hover = ExtResource( 4 )
+custom_styles/pressed = ExtResource( 3 )
+custom_styles/normal = ExtResource( 3 )
+action_mode = 0
+enabled_focus_mode = 0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="MainUI/Start"]
+margin_left = 10.0
+margin_right = 95.0
+margin_bottom = 50.0
+text = "story"
+
+[node name="Settings" type="Button" parent="MainUI"]
+margin_left = 470.0
+margin_top = 350.0
+margin_right = 770.0
+margin_bottom = 410.0
+focus_mode = 0
+custom_styles/hover = ExtResource( 4 )
+custom_styles/pressed = ExtResource( 3 )
+custom_styles/normal = ExtResource( 3 )
+action_mode = 0
+enabled_focus_mode = 0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="MainUI/Settings"]
+margin_left = 10.0
+margin_right = 141.0
+margin_bottom = 50.0
+text = "settings"
+
+[node name="Quit" type="Button" parent="MainUI"]
+margin_left = 470.0
+margin_top = 420.0
+margin_right = 770.0
+margin_bottom = 480.0
+focus_mode = 0
+custom_styles/hover = ExtResource( 4 )
+custom_styles/pressed = ExtResource( 3 )
+custom_styles/normal = ExtResource( 3 )
+action_mode = 0
+enabled_focus_mode = 0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="MainUI/Quit"]
+margin_left = 10.0
+margin_right = 82.0
+margin_bottom = 60.0
+text = "quit"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="SettingsUI" type="Control" parent="."]
+visible = false
+margin_right = 40.0
+margin_bottom = 40.0
+theme = SubResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Header" type="TextureRect" parent="SettingsUI"]
+margin_left = 470.0
+margin_top = 220.0
+margin_right = 880.0
+margin_bottom = 270.0
+rect_scale = Vector2( 1, 1.2 )
+texture = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="SettingsUI/Header"]
+margin_left = 4.0
+margin_top = -2.07664
+margin_right = 144.0
+margin_bottom = 47.9234
+rect_scale = Vector2( 1, 0.87 )
+text = " settings"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Back" type="Button" parent="SettingsUI"]
+margin_left = 470.0
+margin_top = 431.0
+margin_right = 770.0
+margin_bottom = 491.0
+focus_mode = 0
+custom_styles/hover = ExtResource( 4 )
+custom_styles/pressed = ExtResource( 3 )
+custom_styles/normal = ExtResource( 3 )
+action_mode = 0
+enabled_focus_mode = 0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="SettingsUI/Back"]
+margin_left = 21.0
+margin_top = 4.0
+margin_right = 106.0
+margin_bottom = 54.0
+text = "back"
+__meta__ = {
+"_edit_use_anchors_": false
+}

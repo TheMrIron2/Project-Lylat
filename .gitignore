@@ -1,17 +1,7 @@
-# Folders
+.build
+.import
 .vscode
-Binaries
-Content/Developers
-DerivedDataCache
-Intermediate
-Saved
+.mono
 
-# Files
-Lylat.code-workspace
-
-# File types
 *.bat
-*.log
-*.sdf
-*.sln
-*.suo
+settings.json
