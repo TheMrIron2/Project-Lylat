@@ -7,6 +7,9 @@ Intermediate
 Saved
 
 # Files
+Lylat.code-workspace
+
+# File types
 *.bat
 *.log
 *.sdf

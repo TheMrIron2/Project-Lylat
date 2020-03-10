@@ -1,4 +1,4 @@
-// Copyright 2020 Project Lylat.
+// Copyright (c) 2020 Project Lylat.
 
 #pragma once
 
@@ -9,7 +9,11 @@
 /**
  * Default Game mode.
  */
-UCLASS() class LYLAT_API ALylatGameModeBase : public AGameModeBase
+UCLASS()
+class LYLAT_API ALylatGameModeBase : public AGameModeBase
 {
 	GENERATED_BODY()
+
+public:
+	ALylatGameModeBase();
 };

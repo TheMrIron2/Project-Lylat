@@ -10,7 +10,8 @@
 /**
  * Full movement mode.
  */
-UCLASS() class LYLAT_API ALylatGameModeFullMovement : public ALylatGameModeBase
+UCLASS()
+class LYLAT_API ALylatGameModeFullMovement : public ALylatGameModeBase
 {
 	GENERATED_BODY()
 };

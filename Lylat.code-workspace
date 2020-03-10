@@ -5,17 +5,17 @@
 			"name": "Lylat",
 			"path": "."
 		}
-		// Removed UE4 directory due to path inconsistency across different developers.
 	],
 	"settings":
 	{
 		"typescript.tsc.autoDetect": "off"
 	},
-	"extensions": {
+	"extensions":
+	{
 		"recommendations":
 		[
-			"ms-dotnettools.csharp",
-			"ms-vscode.cpptools"
+			"ms-vscode.cpptools",
+			"ms-vscode.csharp"
 		]
 	}
 }

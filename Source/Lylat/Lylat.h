@@ -1,4 +1,4 @@
-// Copyright 2020 Project Lylat.
+// Copyright (c) 2020 Project Lylat.
 
 #pragma once
 

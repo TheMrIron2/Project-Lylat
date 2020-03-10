@@ -10,7 +10,8 @@
 /**
  * On-Rails Shooter mode.
  */
-UCLASS() class LYLAT_API ALylatGameModeOnRails : public ALylatGameModeBase
+UCLASS()
+class LYLAT_API ALylatGameModeOnRails : public ALylatGameModeBase
 {
 	GENERATED_BODY()
 };
