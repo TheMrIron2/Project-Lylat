@@ -1,6 +1,6 @@
 using Godot;
 
-public class Arwing : Spatial
+public class Arwing : KinematicBody
 {
     [Export]
     public float Acceleration = 0.1f;
@@ -18,7 +18,6 @@ public class Arwing : Spatial
     public float RailSwapLimit = 50.0f;
 
     private AnimationPlayer animation;
-    private ArwingBody body;
     private AudioStreamPlayer3D effects;
 
     private bool fullMovement;
@@ -27,7 +26,6 @@ public class Arwing : Spatial
     public override void _Ready()
     {
         animation       = GetNode<AnimationPlayer>("./Animation");
-        body            = GetNode<ArwingBody>("./Body");
         effects         = GetNode<AudioStreamPlayer3D>("./Effects");
         fullMovement    = false;
         menuMode        = false;
@@ -45,6 +43,14 @@ public class Arwing : Spatial
         else if (Input.IsActionPressed(KeyMap.Right) && !(GlobalTransform.origin.x < -RailSwapLimit)) GlobalTranslate(new Vector3(-RailSwapSpeed, 0, 0));
 
         if (Input.IsKeyPressed((int)KeyList.R)) GetTree().ReloadCurrentScene();
+    }
+
+    public override void _PhysicsProcess(float delta)
+    {
+        KinematicCollision collision = MoveAndCollide(GetFloorVelocity() * delta);
+        if (collision != null) GetFloorVelocity().Slide(collision.Normal);
+
+        GetNode<Spatial>("./..").GlobalTransform = GlobalTransform;
     }
 
     public void FullMovement(bool enable) => fullMovement = enable;
