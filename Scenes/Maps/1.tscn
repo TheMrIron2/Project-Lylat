@@ -4,12 +4,12 @@
 [ext_resource path="res://Fonts/OpenSans.tres" type="DynamicFont" id=2]
 [ext_resource path="res://Scripts/Maps/1/MapController.cs" type="Script" id=3]
 
-[sub_resource type="SpatialMaterial" id=3]
+[sub_resource type="SpatialMaterial" id=1]
 albedo_color = Color( 0.521569, 0.521569, 0.521569, 1 )
 metallic = 0.5
 metallic_texture_channel = 4
 
-[sub_resource type="ArrayMesh" id=4]
+[sub_resource type="ArrayMesh" id=2]
 resource_name = "CuboidMesh"
 surfaces/0 = {
 "aabb": AABB( -16, -1, -6, 32.1, 12.1, 12 ),
@@ -18,49 +18,49 @@ surfaces/0 = {
 "blend_shape_data": [  ],
 "format": 97559,
 "index_count": 180,
-"material": SubResource( 3 ),
+"material": SubResource( 1 ),
 "primitive": 4,
 "skeleton_aabb": [  ],
 "vertex_count": 114
 }
 
-[sub_resource type="ConvexPolygonShape" id=5]
+[sub_resource type="ConvexPolygonShape" id=3]
 points = PoolVector3Array( -16.1099, 10.7627, 5.76231, -16.1099, 10.7627, 6.20203, -16.1099, 10.9825, 2.46509, -16.1099, 11.2024, 6.20203, 15.7702, 10.7627, 6.20203, 15.7702, 11.2024, 6.20203, 16, 10.7595, 5.7829, 16, 10.9825, 2.43816 )
 
-[sub_resource type="ConvexPolygonShape" id=6]
+[sub_resource type="ConvexPolygonShape" id=4]
 points = PoolVector3Array( -16.1099, 5.04623, 5.76267, -16.1099, 5.04623, 6.2024, -16.1099, 10.7627, 5.76267, -16.1099, 10.7627, 6.2024, 15.7702, 5.04623, 6.2024, 15.7702, 10.7627, 6.2024, 16, 5.00503, 5.7595, 16, 10.8039, 5.7595 )
 
-[sub_resource type="ConvexPolygonShape" id=7]
+[sub_resource type="ConvexPolygonShape" id=5]
 points = PoolVector3Array( -16.1099, -1.10993, 6.20233, -16.1099, -0.889982, 5.54287, -16.1099, 5.04623, 5.76274, -16.1099, 5.04623, 6.20233, -15.5406, -1, 5.55465, 15.2009, -1, 5.55465, 15.7702, -1.10993, 6.20233, 15.7702, 5.04623, 6.20233, 15.8261, -0.9, 5.54172, 16, 5.09061, 5.76115 )
 
-[sub_resource type="ConvexPolygonShape" id=8]
+[sub_resource type="ConvexPolygonShape" id=6]
 points = PoolVector3Array( -16.1099, -1.10991, 2.46473, -16.1099, -1.10991, 5.54281, -14.6697, -0.9, 2.60378, -14.6697, -0.9, 5.40375, 15.7702, -1.10991, 2.46473, 15.7702, -1.10991, 5.54281 )
 
-[sub_resource type="ConvexPolygonShape" id=9]
+[sub_resource type="ConvexPolygonShape" id=7]
 points = PoolVector3Array( -16.1099, 10.9826, -5.67021, -16.1099, 10.9826, 2.46473, 16, 10.981, -5.72884, 16, 10.981, 2.52336 )
 
-[sub_resource type="ConvexPolygonShape" id=10]
+[sub_resource type="ConvexPolygonShape" id=8]
 points = PoolVector3Array( -16.1099, 4.60651, -6.10993, -16.1099, 10.9816, -5.67021, -16.1099, 11.2018, -6.10993, -15.6181, 11.1, -5.67699, 15.2784, 11.1, -5.67699, 15.7702, 4.60651, -6.10993, 15.7702, 11.2018, -6.10993, 15.8655, 11, -5.66889 )
 
-[sub_resource type="ConvexPolygonShape" id=11]
+[sub_resource type="ConvexPolygonShape" id=9]
 points = PoolVector3Array( -16.1099, -1.10991, -5.67021, -16.1099, -1.10991, 2.46473, -14.6697, -0.9, -5.30271, -14.6697, -0.9, 2.09723, 15.7702, -1.10991, -5.67021, 15.7702, -1.10991, 2.46473 )
 
-[sub_resource type="ConvexPolygonShape" id=12]
+[sub_resource type="ConvexPolygonShape" id=10]
 points = PoolVector3Array( -16.1099, -1.10993, -6.10993, -16.1099, -0.889466, -5.67021, -16.1099, 4.60651, -5.89007, -15.4969, -1, -5.67866, 15.1571, -1, -5.67866, 15.7702, -1.10993, -6.10993, 15.8339, -0.9, -5.66933, 16, 4.64771, -5.89007 )
 
-[sub_resource type="ConvexPolygonShape" id=13]
+[sub_resource type="ConvexPolygonShape" id=11]
 points = PoolVector3Array( 15.7491, 4.74958, 5.9, 15.7689, 11, 2.45362, 15.7702, 5.04623, 6.20203, 15.7702, 11.2024, 6.20203, 15.9901, 5.04623, 2.46509, 16.2099, 5.04623, 2.46509, 16.2099, 5.04623, 6.20203, 16.2099, 11.2024, 2.46509, 16.2099, 11.2024, 6.20203 )
 
-[sub_resource type="ConvexPolygonShape" id=14]
+[sub_resource type="ConvexPolygonShape" id=12]
 points = PoolVector3Array( 15.7491, 5.34288, 5.9, 15.7695, -0.9, 2.45854, 15.7702, -1.10993, 6.20203, 15.7702, 5.04623, 6.20203, 15.7781, -1, 2.53182, 15.9901, 5.04623, 2.46509, 16.2099, -1.10993, 2.46509, 16.2099, -1.10993, 6.20203, 16.2099, 5.04623, 2.46509, 16.2099, 5.04623, 6.20203 )
 
-[sub_resource type="ConvexPolygonShape" id=15]
+[sub_resource type="ConvexPolygonShape" id=13]
 points = PoolVector3Array( 15.7689, 11, 2.49035, 15.7697, 4.59774, -5.9, 15.7759, 4.69106, -6, 15.777, 11.1, -5.97764, 15.9901, 4.60651, 2.46473, 16.2099, 4.60651, -6.10993, 16.2099, 4.60651, 2.46473, 16.2099, 11.2018, -6.10993, 16.2099, 11.2018, 2.46473 )
 
-[sub_resource type="ConvexPolygonShape" id=16]
+[sub_resource type="ConvexPolygonShape" id=14]
 points = PoolVector3Array( 15.7694, -0.9, 2.48185, 15.7697, 4.61411, -5.9, 15.7759, 4.53322, -6, 15.7787, -1, -5.94503, 15.9901, 4.60651, 2.46473, 16.2099, -1.10993, -6.10993, 16.2099, -1.10993, 2.46473, 16.2099, 4.60651, -6.10993, 16.2099, 4.60651, 2.46473 )
 
-[sub_resource type="Theme" id=2]
+[sub_resource type="Theme" id=15]
 default_font = ExtResource( 2 )
 
 [node name="Map" type="Node"]
@@ -81,50 +81,50 @@ transform = Transform( -1.62921e-06, 0, 10, 0, 10, 0, -10, 0, -1.62921e-06, 0, 0
 collision_mask = 14
 
 [node name="Mesh" type="MeshInstance" parent="Spatial/StartingCuboid"]
-mesh = SubResource( 4 )
+mesh = SubResource( 2 )
 material/0 = null
 
 [node name="CollisionShape12" type="CollisionShape" parent="Spatial/StartingCuboid"]
-shape = SubResource( 5 )
+shape = SubResource( 3 )
 
 [node name="CollisionShape11" type="CollisionShape" parent="Spatial/StartingCuboid"]
-shape = SubResource( 6 )
+shape = SubResource( 4 )
 
 [node name="CollisionShape10" type="CollisionShape" parent="Spatial/StartingCuboid"]
-shape = SubResource( 7 )
+shape = SubResource( 5 )
 
 [node name="CollisionShape9" type="CollisionShape" parent="Spatial/StartingCuboid"]
-shape = SubResource( 8 )
+shape = SubResource( 6 )
 
 [node name="CollisionShape8" type="CollisionShape" parent="Spatial/StartingCuboid"]
-shape = SubResource( 9 )
+shape = SubResource( 7 )
 
 [node name="CollisionShape7" type="CollisionShape" parent="Spatial/StartingCuboid"]
-shape = SubResource( 10 )
+shape = SubResource( 8 )
 
 [node name="CollisionShape6" type="CollisionShape" parent="Spatial/StartingCuboid"]
-shape = SubResource( 11 )
+shape = SubResource( 9 )
 
 [node name="CollisionShape5" type="CollisionShape" parent="Spatial/StartingCuboid"]
-shape = SubResource( 12 )
+shape = SubResource( 10 )
 
 [node name="CollisionShape4" type="CollisionShape" parent="Spatial/StartingCuboid"]
-shape = SubResource( 13 )
+shape = SubResource( 11 )
 
 [node name="CollisionShape3" type="CollisionShape" parent="Spatial/StartingCuboid"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.462916, -0.245866, 0.0330796 )
-shape = SubResource( 14 )
+shape = SubResource( 12 )
 
 [node name="CollisionShape2" type="CollisionShape" parent="Spatial/StartingCuboid"]
-shape = SubResource( 15 )
+shape = SubResource( 13 )
 
 [node name="CollisionShape" type="CollisionShape" parent="Spatial/StartingCuboid"]
-shape = SubResource( 16 )
+shape = SubResource( 14 )
 
 [node name="Control" type="Control" parent="."]
 margin_right = 1280.0
 margin_bottom = 720.0
-theme = SubResource( 2 )
+theme = SubResource( 15 )
 __meta__ = {
 "_edit_use_anchors_": false
 }

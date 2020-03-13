@@ -7,13 +7,14 @@ public class MenuController : Node
     private AudioStreamPlayer effects;
 
     private Arwing arwing;
-
+    
     private Control mainUI;
     private Button mainStart;
     private Button mainSettings;
     private Button mainQuit;
 
     private Control settingsUI;
+    private Label settingsVersion;
     private Button settingsBack;
 
     private bool switchToSettings;
@@ -35,8 +36,11 @@ public class MenuController : Node
 
         settingsUI          = GetNode<Control>("./SettingsUI");
         settingsBack        = GetNode<Button>("./SettingsUI/Back");
+        settingsVersion     = GetNode<Label>("./SettingsUI/Version");
 
         switchToSettings    = false;
+
+        settingsVersion.Text = $"Version {typeof(MenuController).Assembly.GetName().Version}";
 
         arwing.MenuMode(true);
         animation.Play("CameraIntroduction");
