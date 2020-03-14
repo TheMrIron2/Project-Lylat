@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=2]
+[gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://Models/Arwing/Arwing.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Fonts/OpenSans.tres" type="DynamicFont" id=2]
@@ -63,6 +63,12 @@ points = PoolVector3Array( 15.7694, -0.9, 2.48185, 15.7697, 4.61411, -5.9, 15.77
 [sub_resource type="Theme" id=15]
 default_font = ExtResource( 2 )
 
+[sub_resource type="Gradient" id=16]
+
+[sub_resource type="GradientTexture" id=17]
+gradient = SubResource( 16 )
+width = 40
+
 [node name="Map" type="Node"]
 script = ExtResource( 3 )
 
@@ -121,10 +127,16 @@ shape = SubResource( 13 )
 [node name="CollisionShape" type="CollisionShape" parent="Spatial/StartingCuboid"]
 shape = SubResource( 14 )
 
-[node name="Control" type="Control" parent="."]
+[node name="UI" type="Control" parent="."]
 margin_right = 1280.0
 margin_bottom = 720.0
 theme = SubResource( 15 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="AimCursor" type="TextureRect" parent="UI"]
+margin_right = 40.0
+margin_bottom = 40.0
+texture = SubResource( 17 )
+expand = true
