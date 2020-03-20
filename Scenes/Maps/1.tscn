@@ -1,8 +1,9 @@
-[gd_scene load_steps=21 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://Models/Arwing/Arwing.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Fonts/OpenSans.tres" type="DynamicFont" id=2]
 [ext_resource path="res://Scripts/Maps/1/MapController.cs" type="Script" id=3]
+[ext_resource path="res://Objects/AimCursor.tscn" type="PackedScene" id=4]
 
 [sub_resource type="SpatialMaterial" id=1]
 albedo_color = Color( 0.521569, 0.521569, 0.521569, 1 )
@@ -63,12 +64,6 @@ points = PoolVector3Array( 15.7694, -0.9, 2.48185, 15.7697, 4.61411, -5.9, 15.77
 [sub_resource type="Theme" id=15]
 default_font = ExtResource( 2 )
 
-[sub_resource type="Gradient" id=16]
-
-[sub_resource type="GradientTexture" id=17]
-gradient = SubResource( 16 )
-width = 40
-
 [node name="Map" type="Node"]
 script = ExtResource( 3 )
 
@@ -87,6 +82,7 @@ transform = Transform( -1.62921e-06, 0, 10, 0, 10, 0, -10, 0, -1.62921e-06, 0, 0
 collision_mask = 14
 
 [node name="Mesh" type="MeshInstance" parent="Spatial/StartingCuboid"]
+transform = Transform( 1, 0, -5.68434e-14, 0, 1, 0, 5.68434e-14, 0, 1, 0.00295734, 4.76837e-08, -0.00723343 )
 mesh = SubResource( 2 )
 material/0 = null
 
@@ -128,15 +124,12 @@ shape = SubResource( 13 )
 shape = SubResource( 14 )
 
 [node name="UI" type="Control" parent="."]
+margin_top = 1.23956
 margin_right = 1280.0
-margin_bottom = 720.0
+margin_bottom = 721.24
 theme = SubResource( 15 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="AimCursor" type="TextureRect" parent="UI"]
-margin_right = 40.0
-margin_bottom = 40.0
-texture = SubResource( 17 )
-expand = true
+[node name="AimCursor" parent="UI" instance=ExtResource( 4 )]

@@ -3,5 +3,6 @@
 .vscode
 .mono
 
+.DS_Store
 *.bat
 settings.json

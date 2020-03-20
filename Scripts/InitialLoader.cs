@@ -1,7 +1,7 @@
 using Godot;
 using System;
 
-public class InitialLoader : Control
+public class InitialLoader : Node
 {
 	private ThreadedLoader loader;
 
@@ -19,8 +19,8 @@ public class InitialLoader : Control
 	{
 		Input.SetMouseMode(Input.MouseMode.Hidden);
 
-		loading = GetNode<TextureRect>("./Loading");
-		info = GetNode<Label>("./Info");
+		loading = GetNode<TextureRect>("./UI/Loading");
+		info = GetNode<Label>("./UI/Info");
 
 		loader = new ThreadedLoader("res://Scenes/Menu.tscn");
 
@@ -30,6 +30,8 @@ public class InitialLoader : Control
 		textDone = false;
 		waitText = true;
 
+		OS.SetWindowTitle("Project Lylat");
+		
 		loader.Start();
 	}
 
@@ -61,6 +63,4 @@ public class InitialLoader : Control
 		if (alphaCounter >= 1.0f) alphaDecrease = true;
 		else if (alphaCounter <= 0.0f && alphaDecrease) textDone = true;
 	}
-
-
 }
