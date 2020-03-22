@@ -14,23 +14,22 @@ public class InitialLoader : Node
 	private bool textDone;
 	private bool waitText;
 	
-	
 	public override void _Ready()
 	{
 		Input.SetMouseMode(Input.MouseMode.Hidden);
 
-		loading = GetNode<TextureRect>("./UI/Loading");
-		info = GetNode<Label>("./UI/Info");
+		loading			= GetNode<TextureRect>("./UI/Loading");
+		info			= GetNode<Label>("./UI/Info");
 
-		loader = new ThreadedLoader("res://Scenes/Menu.tscn");
+		loader			= new ThreadedLoader("res://Scenes/Menu.tscn");
 
-		alphaCounter = 0.0f;
-		timeCounter = 0.0f;
-		alphaDecrease = false;
-		textDone = false;
-		waitText = true;
+		alphaCounter	= 0.0f;
+		timeCounter 	= 0.0f;
+		alphaDecrease	= false;
+		textDone		= false;
+		waitText		= true;
 
-		OS.SetWindowTitle("Project Lylat");
+		OS.SetWindowTitle("Project: Lylat");
 		
 		loader.Start();
 	}

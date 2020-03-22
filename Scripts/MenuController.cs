@@ -12,6 +12,10 @@ public class MenuController : Node
 	private Button mainStart;
 	private Button mainSettings;
 	private Button mainQuit;
+	private TextureRect mainQuitMessageBox;
+	private Label mainQuitMessage;
+	private Button mainQuitAccept;
+	private Button mainQuitDecline;
 
 	private Control settingsUI;
 	private Label settingsVersion;
@@ -34,6 +38,11 @@ public class MenuController : Node
 		mainSettings        = GetNode<Button>("./MainUI/Settings");
 		mainQuit            = GetNode<Button>("./MainUI/Quit");
 
+		mainQuitMessageBox	= GetNode<TextureRect>("./MainUI/QuitMessage");
+		mainQuitMessage		= GetNode<Label>("./MainUI/QuitMessage/Message");
+		mainQuitAccept		= GetNode<Button>("./MainUI/QuitMessage/Accept");
+		mainQuitDecline		= GetNode<Button>("./MainUI/QuitMessage/Decline");
+
 		settingsUI          = GetNode<Control>("./SettingsUI");
 		settingsBack        = GetNode<Button>("./SettingsUI/Back");
 		settingsVersion     = GetNode<Label>("./SettingsUI/Version");
@@ -42,13 +51,31 @@ public class MenuController : Node
 
 		settingsVersion.Text = $"Version {typeof(MenuController).Assembly.GetName().Version}";
 
+		string osName;
+
+		switch (OS.GetName())
+		{
+		case "OSX":
+			osName = "macOS";
+			break;
+
+		case "X11":
+			osName = "Linux";
+			break;
+
+		default:
+			osName = OS.GetName();
+			break;
+		}
+
+		mainQuitMessage.Text = $"Do you want to go back to {osName}?";
+
 		arwing.MenuMode(true);
 		animation.Play("CameraIntroduction");
 	}
 
 	public override void _Process(float delta)
 	{
-
 		if (!animation.IsPlaying())
 		{
 			// TODO: fadein UI
@@ -56,9 +83,14 @@ public class MenuController : Node
 			else settingsUI.Show();
 		}
 
+		if (mainQuitMessageBox.Visible)
+		{
+			if (mainQuitAccept.Pressed) GetTree().Quit();
+			else if (mainQuitDecline.Pressed) mainQuitMessageBox.Visible = false;
+		}
+
 		// TODO: Loading manager
 		// TODO: Settings logic
-		// TODO: Confirmation on quit
 		
 		if (mainStart.Pressed) GetTree().ChangeScene("res://Scenes/Maps/1.tscn");
 		if (mainSettings.Pressed)
@@ -68,7 +100,8 @@ public class MenuController : Node
 			switchToSettings = true;
 			animation.Play("CameraMoveToSettings");
 		}
-		if (mainQuit.Pressed) GetTree().Quit();
+
+		if (mainQuit.Pressed) mainQuitMessageBox.Visible = true;
 
 		if (settingsBack.Pressed)
 		{

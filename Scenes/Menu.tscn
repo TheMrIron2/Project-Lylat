@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://Fonts/OpenSans.tres" type="DynamicFont" id=1]
 [ext_resource path="res://Textures/Menus/Header.png" type="Texture" id=2]
@@ -9,6 +9,7 @@
 [ext_resource path="res://Animation/Menu/CameraIntroduction.tres" type="Animation" id=7]
 [ext_resource path="res://Animation/Menu/CameraMoveToSettings.tres" type="Animation" id=8]
 [ext_resource path="res://Environments/Menu.tres" type="Environment" id=9]
+[ext_resource path="res://Textures/Menus/MessageBox.png" type="Texture" id=10]
 
 [sub_resource type="Theme" id=1]
 default_font = ExtResource( 1 )
@@ -141,10 +142,95 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="QuitMessage" type="TextureRect" parent="MainUI"]
+visible = false
+margin_left = 250.0
+margin_top = 130.0
+margin_right = 1050.0
+margin_bottom = 571.0
+texture = ExtResource( 10 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Title" type="Label" parent="MainUI/QuitMessage"]
+margin_left = 68.0
+margin_top = 70.0
+margin_right = 731.0
+margin_bottom = 164.0
+text = "warning"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Message" type="Label" parent="MainUI/QuitMessage"]
+margin_left = 55.0
+margin_top = 188.0
+margin_right = 746.0
+margin_bottom = 341.0
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Accept" type="Button" parent="MainUI/QuitMessage"]
+margin_left = 70.0
+margin_top = 320.0
+margin_right = 370.0
+margin_bottom = 380.0
+focus_mode = 0
+custom_styles/hover = ExtResource( 4 )
+custom_styles/pressed = ExtResource( 3 )
+custom_styles/normal = ExtResource( 3 )
+action_mode = 0
+enabled_focus_mode = 0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="MainUI/QuitMessage/Accept"]
+margin_left = 17.0
+margin_top = -1.0
+margin_right = 102.0
+margin_bottom = 49.0
+text = "yes"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Decline" type="Button" parent="MainUI/QuitMessage"]
+margin_left = 435.0
+margin_top = 320.0
+margin_right = 735.0
+margin_bottom = 380.0
+focus_mode = 0
+custom_styles/hover = ExtResource( 4 )
+custom_styles/pressed = ExtResource( 3 )
+custom_styles/normal = ExtResource( 3 )
+action_mode = 0
+enabled_focus_mode = 0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="MainUI/QuitMessage/Decline"]
+margin_left = 17.0
+margin_top = -1.0
+margin_right = 102.0
+margin_bottom = 49.0
+text = "no"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="SettingsUI" type="Control" parent="."]
 visible = false
-margin_right = 40.0
-margin_bottom = 40.0
+margin_right = 1280.0
+margin_bottom = 720.0
 theme = SubResource( 2 )
 __meta__ = {
 "_edit_use_anchors_": false
