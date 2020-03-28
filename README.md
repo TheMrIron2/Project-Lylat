@@ -1,6 +1,7 @@
 # Project Lylat
 On-rails 3D space shooter for PC in the style of Star Fox. <br>
-Written mostly in C#, this project uses **[Godot](https://godotengine.org)** as the game engine.
+
+Project Lylat is made using **[Unreal](https://www.unrealengine.com/)**, using C++ for code.
 
 The short term goal is to create a playable proof of concept with all working logic and a demo. (eg. Star Wolf battle) <br>
 The long term goal is subject to discussion as we progress.
@@ -22,7 +23,7 @@ If you want to get in touch, get more information or if you'd just like to hang 
 - The player may also perform a "somersault" or a "barrel roll".
 - Somersaults can be performed by pressing the somersault button, or by moving upwards and braking.
 - Barrel rolls can be performed by leaning left or right twice in quick succession.
-- In "all range" mode, the player may also perform a U-turn by pressing the U-turn button.
+- In "all range" mode, the player may also perform a U-turn by pressing the U-turn button (`F` by default.).
 - Boosting, braking, somersaults and U-turns all use the "Boost Meter".
 - If the meter turns completely red, these techniques cannot be performed until the meter resets.
 

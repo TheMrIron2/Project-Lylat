@@ -1,0 +1,18 @@
+{
+	"FileVersion": 3,
+	"EngineAssociation": "{00046E15-08D7-D11D-2F9E-07484D835703}",
+	"Category": "",
+	"Description": "",
+	"Modules": [
+		{
+			"Name": "Lylat",
+			"Type": "Runtime",
+			"LoadingPhase": "Default"
+		}
+	],
+	"TargetPlatforms": [
+		"LinuxNoEditor",
+		"MacNoEditor",
+		"WindowsNoEditor"
+	]
+}
