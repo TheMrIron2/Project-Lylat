@@ -1,7 +1,7 @@
 # Project Lylat
 On-rails 3D space shooter for PC in the style of Star Fox. <br>
 
-Project Lylat is made using **[Unreal](https://www.unrealengine.com/)**, using C++ for code.
+Project Lylat is made with **[Unreal](https://www.unrealengine.com/)**, written in C++.
 
 The short term goal is to create a playable proof of concept with all working logic and a demo. (eg. Star Wolf battle) <br>
 The long term goal is subject to discussion as we progress.

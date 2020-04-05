@@ -3,25 +3,22 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "GameFramework/Character.h"
+#include "GameFramework/Pawn.h"
 #include "LylatArwing.generated.h"
 
-class UInputComponent;
-class UCameraComponent;
-class USkeletalMeshComponent;
-class USoundBase;
-class UAnimMontage;
-
 UCLASS(config=Game)
-class ALylatArwing : public ACharacter
+class ALylatArwing : public APawn
 {
     GENERATED_BODY()
 
-    UPROPERTY(VisibleDefaultsOnly, Category = Mesh)
-    USkeletalMeshComponent* ArwingMesh;
+    UPROPERTY(VisibleDefaultsOnly, Category = Mesh, meta = (AllowPrivateAccess = "true"))
+    class USkeletalMeshComponent* CharacterMesh;
 
     UPROPERTY(VisibleDefaultsOnly, Category = Camera, meta = (AllowPrivateAccess = "true"))
-    UCameraComponent* Camera;
+    class USpringArmComponent* SpringArm;
+
+    UPROPERTY(VisibleDefaultsOnly, Category = Camera, meta = (AllowPrivateAccess = "true"))
+    class UCameraComponent* Camera;
 
 public:
     ALylatArwing();
@@ -34,9 +31,6 @@ public:
 
     UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Controls)
     float BreakAcceleration;
-
-    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Content)
-    UAnimMontage* LaserFireAnimation;
 
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Content)
     USoundBase* LaserFireSound;
@@ -59,19 +53,23 @@ public:
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Gameplay)
     float LaserRange;
 
+private:
+    float currentAccel;
+
 protected:
     void OnLaserFire();
-    
-    void OnMoveVertical(float value);
-    void OnMoveHorizontal(float value);
-    void OnTurn(float value);
-    void OnLookUp(float value);
+    void OnBoost();
+    void OnBreak();
+    void OnBoostBreakRelease();
 
     FHitResult LaserTrace(const FVector& begin, const FVector& end) const;
 
-    virtual void SetupPlayerInputComponent(class UInputComponent* component);
+    virtual void SetupPlayerInputComponent(class UInputComponent* component) override;
+    virtual void Tick(float delta) override;
+    virtual void NotifyHit(class UPrimitiveComponent* current, class AActor* other, class UPrimitiveComponent* otherComp, bool bSelfMoved, FVector hitLocation, FVector hitNormal, FVector normalImpulse, const FHitResult& hit) override;
 
 public:
-    FORCEINLINE class USkeletalMeshComponent* GetArwingMesh() const { return ArwingMesh; }
+    FORCEINLINE class USpringArmComponent* GetSpringArm() const { return SpringArm; }
     FORCEINLINE class UCameraComponent* GetCamera() const { return Camera; }
+    FORCEINLINE class USkeletalMeshComponent* GetCharacterMesh() const { return CharacterMesh; }
 };

@@ -7,8 +7,6 @@
 
 ALylatGameModeBase::ALylatGameModeBase()
 {
-    static ConstructorHelpers::FClassFinder<APawn> PlayerPawnClassFinder(TEXT("/Game/")); // TODO: add path to data
-	DefaultPawnClass = PlayerPawnClassFinder.Class;
-
+	DefaultPawnClass = ALylatArwing::StaticClass();
     HUDClass = ALylatHUD::StaticClass();
 }
