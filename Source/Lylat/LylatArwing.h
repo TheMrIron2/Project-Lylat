@@ -20,20 +20,38 @@ class ALylatArwing : public APawn
     UPROPERTY(VisibleDefaultsOnly, Category = Camera, meta = (AllowPrivateAccess = "true"))
     class UCameraComponent* Camera;
 
+    UPROPERTY(VisibleDefaultsOnly, Category = Particles, meta = (AllowPrivateAccess = "true"))
+    class UParticleSystemComponent* Particles;
+
 public:
     ALylatArwing();
 
-    UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Controls)
+    UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = Controls)
     float BaseAcceleration;
 
-    UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Controls)
+    UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = Controls)
     float BoostAcceleration;
 
-    UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Controls)
+    UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = Controls)
     float BreakAcceleration;
+
+    UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = Controls)
+    float VerticalLimit;
+
+    UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = Controls)
+    float HorizontalLimit;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Content)
+    USoundBase* BoostSound;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Content)
+    USoundBase* BreakSound;
 
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Content)
     USoundBase* LaserFireSound;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Content)
+    UStaticMesh* LaserModel;
 
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Gameplay)
     int BoostMeterLevel;
@@ -61,6 +79,10 @@ protected:
     void OnBoost();
     void OnBreak();
     void OnBoostBreakRelease();
+    void OnMoveUp();
+    void OnMoveDown();
+    void OnMoveLeft();
+    void OnMoveRight();
 
     FHitResult LaserTrace(const FVector& begin, const FVector& end) const;
 
