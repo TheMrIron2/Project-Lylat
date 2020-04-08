@@ -17,5 +17,7 @@ public:
 	virtual void DrawHUD() override;
 
 private:
-
+	class UTexture2D* Crosshair;
+	class UTexture2D* BoostMeter;
+	class UTexture2D* BoostLevel;
 };

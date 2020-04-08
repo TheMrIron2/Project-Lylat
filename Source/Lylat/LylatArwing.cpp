@@ -44,7 +44,7 @@ ALylatArwing::ALylatArwing()
 
     SpringArm = CreateDefaultSubobject<USpringArmComponent>(TEXT("Spring Arm"));
     SpringArm->SetupAttachment(RootComponent);
-    SpringArm->TargetArmLength = 600.f;
+    SpringArm->TargetArmLength = 800.f;
     SpringArm->SocketOffset = FVector(0.f, 70.f, 100.f);
     SpringArm->bEnableCameraLag = true;
 
@@ -54,7 +54,6 @@ ALylatArwing::ALylatArwing()
 
     Particles = CreateDefaultSubobject<UParticleSystemComponent>(TEXT("Particles"));
     Particles->SetupAttachment(RootComponent);
-    //Particles->Material
 
     LaserModel = meshLoader(TEXT("/Game/Models/Laser/Meshes/Laser.Laser")).Mesh.Get();
 
@@ -74,38 +73,75 @@ ALylatArwing::ALylatArwing()
     BoostSound = soundLoader(TEXT("/Game/Effects/Boost.Boost")).Sound.Get();
     BreakSound = soundLoader(TEXT("/Game/Effects/Break.Break")).Sound.Get();
     LaserFireSound = soundLoader(TEXT("/Game/Effects/LaserOnce.LaserOnce")).Sound.Get();
-
-    currentAccel = BaseAcceleration;
 }
 
 void ALylatArwing::SetupPlayerInputComponent(class UInputComponent* component)
 {
     check(component);
 
+    component->BindAction("Restart", IE_Pressed, this, &ALylatArwing::OnRestart);
+
     component->BindAction("Fire", IE_Pressed, this, &ALylatArwing::OnLaserFire);
 
     component->BindAction("Boost", IE_Pressed, this, &ALylatArwing::OnBoost);
-    component->BindAction("Boost", IE_Released, this, &ALylatArwing::OnBoostBreakRelease);
+    component->BindAction("Boost", IE_Released, this, &ALylatArwing::OnBoostRelease);
 
     component->BindAction("Break", IE_Pressed, this, &ALylatArwing::OnBreak);
-    component->BindAction("Break", IE_Released, this, &ALylatArwing::OnBoostBreakRelease);
+    component->BindAction("Break", IE_Released, this, &ALylatArwing::OnBoostRelease);
 
     component->BindAction("MoveUp", IE_Pressed, this, &ALylatArwing::OnMoveUp);
+    component->BindAction("MoveUp", IE_Released, this, &ALylatArwing::OnMoveUpRelease);
+
     component->BindAction("MoveDown", IE_Pressed, this, &ALylatArwing::OnMoveDown);
+    component->BindAction("MoveDown", IE_Released, this, &ALylatArwing::OnMoveDownRelease);
+
     component->BindAction("MoveLeft", IE_Pressed, this, &ALylatArwing::OnMoveLeft);
+    component->BindAction("MoveLeft", IE_Released, this, &ALylatArwing::OnMoveLeftRelease);
+    
     component->BindAction("MoveRight", IE_Pressed, this, &ALylatArwing::OnMoveRight);
+    component->BindAction("MoveRight", IE_Released, this, &ALylatArwing::OnMoveRightRelease);
 }
 
 void ALylatArwing::Tick(float delta)
 {
     Super::Tick(delta);
 
-    SetActorLocation(FVector(GetActorLocation().X + currentAccel, GetActorLocation().Y, GetActorLocation().Z));
+    float x = 0, y = 0, z = 0;
+
+    if (up) z = -6.f;
+    else if (down) z = 6.f;
+
+    if (left) y = -6.f;
+    else if (right) y = 6.f;
+
+    if (boost)
+    {
+        x = BoostAcceleration;
+        if (SpringArm->TargetArmLength != 1000.f) SpringArm->TargetArmLength = SpringArm->TargetArmLength = SpringArm->TargetArmLength + 5;
+    }
+    else if (_break)
+    {
+        x = BreakAcceleration;
+        if (SpringArm->TargetArmLength != 600.f) SpringArm->TargetArmLength = SpringArm->TargetArmLength = SpringArm->TargetArmLength - 5;
+    }
+    else
+    {
+        x = BaseAcceleration;
+        if (SpringArm->TargetArmLength != 800.f && SpringArm->TargetArmLength < 800.f) SpringArm->TargetArmLength = SpringArm->TargetArmLength = SpringArm->TargetArmLength + 5;
+        else if (SpringArm->TargetArmLength != 800.f && SpringArm->TargetArmLength > 800.f) SpringArm->TargetArmLength = SpringArm->TargetArmLength = SpringArm->TargetArmLength - 5;
+    }
+
+    SetActorLocation(FVector(GetActorLocation().X + x, GetActorLocation().Y + y, GetActorLocation().Z - z));
 }
 
 void ALylatArwing::NotifyHit(class UPrimitiveComponent* current, class AActor* other, class UPrimitiveComponent* otherComp, bool bSelfMoved, FVector hitLocation, FVector hitNormal, FVector normalImpulse, const FHitResult& hit)
 {
     Super::NotifyHit(current, other, otherComp, bSelfMoved, hitLocation, hitNormal, normalImpulse, hit);
+}
+
+void ALylatArwing::OnRestart()
+{
+    GetWorld()->ServerTravel(FString("/Game/Maps/Map1.Map1"), true, true);
 }
 
 void ALylatArwing::OnLaserFire()
@@ -137,45 +173,31 @@ void ALylatArwing::OnLaserFire()
     
 void ALylatArwing::OnBoost()
 {
-    currentAccel = BoostAcceleration;
-    SpringArm->TargetArmLength = 800.f;
+    boost = true;
     if (BoostSound != NULL) UGameplayStatics::PlaySoundAtLocation(this, BoostSound, GetActorLocation());
 }
 
+void ALylatArwing::OnBoostRelease() { boost = false; }
+
 void ALylatArwing::OnBreak()
 {
-    currentAccel = BreakAcceleration;
-    SpringArm->TargetArmLength = 400.f;
+    _break = true;
     if (BreakSound != NULL) UGameplayStatics::PlaySoundAtLocation(this, BreakSound, GetActorLocation());
 }
 
-void ALylatArwing::OnBoostBreakRelease()
-{
-    currentAccel = BaseAcceleration;
-    SpringArm->TargetArmLength = 600.f;
-}
+void ALylatArwing::OnBreakRelease() { _break = false; }
 
-// TODO: Tick() blocks this. This should be replaced by animations, perhaps?
+void ALylatArwing::OnMoveUp() { up = true; }
+void ALylatArwing::OnMoveUpRelease() { up = false; }
 
-void ALylatArwing::OnMoveUp()
-{   
-    SetActorLocation(FVector(GetActorLocation().X, GetActorLocation().Y, GetActorLocation().Z + 3.f));
-}
+void ALylatArwing::OnMoveDown() { down = true; }
+void ALylatArwing::OnMoveDownRelease() { down = false; }
 
-void ALylatArwing::OnMoveDown()
-{
-    SetActorLocation(FVector(GetActorLocation().X, GetActorLocation().Y, GetActorLocation().Z - 3.f));
-}
+void ALylatArwing::OnMoveLeft() { left = true; }
+void ALylatArwing::OnMoveLeftRelease() { left = false; }
 
-void ALylatArwing::OnMoveLeft()
-{
-    SetActorLocation(FVector(GetActorLocation().X, GetActorLocation().Y - 3.f, GetActorLocation().Z));
-}
-
-void ALylatArwing::OnMoveRight()
-{
-    SetActorLocation(FVector(GetActorLocation().X, GetActorLocation().Y + 3.f, GetActorLocation().Z));
-}
+void ALylatArwing::OnMoveRight() { right = true; }
+void ALylatArwing::OnMoveRightRelease() { right = false; }
 
 FHitResult ALylatArwing::LaserTrace(const FVector& begin, const FVector& end) const
 {

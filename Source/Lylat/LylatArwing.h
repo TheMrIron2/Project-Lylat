@@ -72,17 +72,36 @@ public:
     float LaserRange;
 
 private:
-    float currentAccel;
+    // this is incredibly crude, but whatever, I'm sorry
+    bool boost;
+    bool _break;
+    bool up;
+    bool down;
+    bool right;
+    bool left;
 
 protected:
+    void OnRestart();
+
     void OnLaserFire();
+    
     void OnBoost();
+    void OnBoostRelease();
+
     void OnBreak();
-    void OnBoostBreakRelease();
+    void OnBreakRelease();
+
     void OnMoveUp();
+    void OnMoveUpRelease();
+
     void OnMoveDown();
+    void OnMoveDownRelease();
+
     void OnMoveLeft();
+    void OnMoveLeftRelease();
+
     void OnMoveRight();
+    void OnMoveRightRelease();
 
     FHitResult LaserTrace(const FVector& begin, const FVector& end) const;
 
