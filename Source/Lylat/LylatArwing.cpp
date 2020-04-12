@@ -87,7 +87,7 @@ void ALylatArwing::SetupPlayerInputComponent(class UInputComponent* component)
     component->BindAction("Boost", IE_Released, this, &ALylatArwing::OnBoostRelease);
 
     component->BindAction("Break", IE_Pressed, this, &ALylatArwing::OnBreak);
-    component->BindAction("Break", IE_Released, this, &ALylatArwing::OnBoostRelease);
+    component->BindAction("Break", IE_Released, this, &ALylatArwing::OnBreakRelease);
 
     component->BindAction("MoveUp", IE_Pressed, this, &ALylatArwing::OnMoveUp);
     component->BindAction("MoveUp", IE_Released, this, &ALylatArwing::OnMoveUpRelease);
@@ -108,8 +108,8 @@ void ALylatArwing::Tick(float delta)
 
     float x = 0, y = 0, z = 0;
 
-    if (up) z = -6.f;
-    else if (down) z = 6.f;
+    if (up) z = 6.f;
+    else if (down) z = -6.f;
 
     if (left) y = -6.f;
     else if (right) y = 6.f;
@@ -131,12 +131,15 @@ void ALylatArwing::Tick(float delta)
         else if (SpringArm->TargetArmLength != 800.f && SpringArm->TargetArmLength > 800.f) SpringArm->TargetArmLength = SpringArm->TargetArmLength = SpringArm->TargetArmLength - 5;
     }
 
-    SetActorLocation(FVector(GetActorLocation().X + x, GetActorLocation().Y + y, GetActorLocation().Z - z));
+    SetActorLocation(FVector(GetActorLocation().X + x, GetActorLocation().Y + y, GetActorLocation().Z + z));
 }
 
 void ALylatArwing::NotifyHit(class UPrimitiveComponent* current, class AActor* other, class UPrimitiveComponent* otherComp, bool bSelfMoved, FVector hitLocation, FVector hitNormal, FVector normalImpulse, const FHitResult& hit)
 {
     Super::NotifyHit(current, other, otherComp, bSelfMoved, hitLocation, hitNormal, normalImpulse, hit);
+
+    FRotator CurrentRotation = GetActorRotation();
+	SetActorRotation(FQuat::Slerp(CurrentRotation.Quaternion(), hitNormal.ToOrientationQuat(), 0.025f));
 }
 
 void ALylatArwing::OnRestart()
