@@ -12,9 +12,9 @@ class ALylatLaserProjectile : public AActor
 	GENERATED_BODY()
 
 	UPROPERTY(VisibleDefaultsOnly, Category = Projectile, meta = (AllowPrivateAccess = "true"))
-	class UStaticMeshComponent* CollisionComp;
+	class UStaticMeshComponent* Projectile;
 
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Movement, meta = (AllowPrivateAccess = "true"))
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Projectile, meta = (AllowPrivateAccess = "true"))
 	class UProjectileMovementComponent* ProjectileMovement;
 
 public:
@@ -25,7 +25,7 @@ public:
 
 	virtual void Tick(float delta) override;
 
-	FORCEINLINE class UStaticMeshComponent* GetCollisionComp() const { return CollisionComp; }
+	FORCEINLINE class UStaticMeshComponent* GetProjectile() const { return Projectile; }
 	FORCEINLINE class UProjectileMovementComponent* GetProjectileMovement() const { return ProjectileMovement; }
 };
 

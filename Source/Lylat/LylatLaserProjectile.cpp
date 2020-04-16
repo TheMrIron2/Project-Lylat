@@ -13,21 +13,21 @@ typedef struct _meshLoader
 
 ALylatLaserProjectile::ALylatLaserProjectile() 
 {
-	CollisionComp = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Projectile"));
-	CollisionComp->BodyInstance.SetCollisionProfileName("Projectile");
-	CollisionComp->SetStaticMesh(meshLoader(TEXT("/Game/Models/Laser/Meshes/Laser.Laser")).Mesh.Get());
-	CollisionComp->OnComponentHit.AddDynamic(this, &ALylatLaserProjectile::OnHit);
-	CollisionComp->SetWalkableSlopeOverride(FWalkableSlopeOverride(WalkableSlope_Unwalkable, 0.f));
-	CollisionComp->CanCharacterStepUpOn = ECB_No;
+	Projectile = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Projectile"));
+	Projectile->BodyInstance.SetCollisionProfileName("Projectile");
+	Projectile->SetStaticMesh(meshLoader(TEXT("/Game/Models/Laser/Meshes/Laser.Laser")).Mesh.Get());
+	Projectile->OnComponentHit.AddDynamic(this, &ALylatLaserProjectile::OnHit);
+	Projectile->SetWalkableSlopeOverride(FWalkableSlopeOverride(WalkableSlope_Unwalkable, 0.f));
+	Projectile->CanCharacterStepUpOn = ECB_No;
 
-	RootComponent = CollisionComp;
+	RootComponent = Projectile;
 
 	ProjectileMovement = CreateDefaultSubobject<UProjectileMovementComponent>(TEXT("ProjectileComp"));
-	ProjectileMovement->UpdatedComponent = CollisionComp;
+	ProjectileMovement->UpdatedComponent = Projectile;
 	ProjectileMovement->InitialSpeed = 300.f;
 	ProjectileMovement->MaxSpeed = 300.f;
 	ProjectileMovement->bRotationFollowsVelocity = true;
-	ProjectileMovement->bShouldBounce = true;
+	ProjectileMovement->bShouldBounce = false;
 
 	//InitialLifeSpan = 3.0f;
 }
