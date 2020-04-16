@@ -103,8 +103,6 @@ protected:
     void OnMoveRight();
     void OnMoveRightRelease();
 
-    FHitResult LaserTrace(const FVector& begin, const FVector& end) const;
-
     virtual void SetupPlayerInputComponent(class UInputComponent* component) override;
     virtual void Tick(float delta) override;
     virtual void NotifyHit(class UPrimitiveComponent* current, class AActor* other, class UPrimitiveComponent* otherComp, bool bSelfMoved, FVector hitLocation, FVector hitNormal, FVector normalImpulse, const FHitResult& hit) override;

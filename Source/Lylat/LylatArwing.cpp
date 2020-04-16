@@ -1,6 +1,7 @@
 // Copyright 2020 Project Lylat. All Rights Reserved.
 
 #include "LylatArwing.h"
+#include "LylatLaserProjectile.h"
 #include "Animation/AnimInstance.h"
 #include "Camera/CameraComponent.h"
 #include "Components/InputComponent.h"
@@ -11,12 +12,6 @@
 #include "UObject/ConstructorHelpers.h"
 
 // TODO: Maybe use T for types? Maybe convert them to classes?
-
-typedef struct _meshLoader
-{
-    ConstructorHelpers::FObjectFinderOptional<UStaticMesh> Mesh;
-    _meshLoader(const TCHAR* path) : Mesh(path) { }
-} meshLoader;
 
 typedef struct _particleLoader
 {
@@ -55,8 +50,6 @@ ALylatArwing::ALylatArwing()
     Particles = CreateDefaultSubobject<UParticleSystemComponent>(TEXT("Particles"));
     Particles->SetupAttachment(RootComponent);
 
-    LaserModel = meshLoader(TEXT("/Game/Models/Laser/Meshes/Laser.Laser")).Mesh.Get();
-
     BaseAcceleration    = 25.f;
     BoostAcceleration   = 100.f;
     BreakAcceleration   = 5.f;
@@ -67,7 +60,7 @@ ALylatArwing::ALylatArwing()
     LaserAmount         = 1;
     LaserDamage         = 5.f;
     LaserDelayInSeconds = 0.1f;
-    LaserOffset         = FVector(0.f, 5.f,0.f);
+    LaserOffset         = FVector(20.f, 0.f, 0.f);
     LaserRange          = 500.f;
 
     BoostSound = soundLoader(TEXT("/Game/Effects/Boost.Boost")).Sound.Get();
@@ -150,28 +143,7 @@ void ALylatArwing::OnRestart()
 void ALylatArwing::OnLaserFire()
 {
     if (LaserFireSound != NULL) UGameplayStatics::PlaySoundAtLocation(this, LaserFireSound, GetActorLocation());
-
-    APlayerController* PlayerController = Cast<APlayerController>(GetController());
-        
-    FVector ShootDir = FVector::ZeroVector;
-    FVector StartTrace = FVector::ZeroVector;
-
-    if (PlayerController)
-    {
-        FRotator CamRot;
-        PlayerController->GetPlayerViewPoint(StartTrace, CamRot);
-        ShootDir = CamRot.Vector();
-
-        StartTrace = StartTrace + ShootDir * ((GetActorLocation() - StartTrace) | ShootDir);
-    }
-
-    const FVector EndTrace = StartTrace + ShootDir * LaserRange;
-    const FHitResult Impact = LaserTrace(StartTrace, EndTrace);
-
-    AActor* DamagedActor = Impact.GetActor();
-    UPrimitiveComponent* DamagedComponent = Impact.GetComponent();
-
-    if ((DamagedActor != NULL) && (DamagedActor != this) && (DamagedComponent != NULL) && DamagedComponent->IsSimulatingPhysics()) DamagedComponent->AddImpulseAtLocation(ShootDir * LaserDamage, Impact.Location);
+    GetWorld()->SpawnActor(ALylatLaserProjectile::StaticClass(), &LaserOffset); 
 }
     
 void ALylatArwing::OnBoost()
@@ -201,9 +173,3 @@ void ALylatArwing::OnMoveLeftRelease() { left = false; }
 
 void ALylatArwing::OnMoveRight() { right = true; }
 void ALylatArwing::OnMoveRightRelease() { right = false; }
-
-FHitResult ALylatArwing::LaserTrace(const FVector& begin, const FVector& end) const
-{
-    FHitResult Hit(ForceInit);
-    return Hit;
-}
