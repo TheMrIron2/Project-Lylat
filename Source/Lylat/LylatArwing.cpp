@@ -1,6 +1,7 @@
 // Copyright 2020 Project Lylat. All Rights Reserved.
 
 #include "LylatArwing.h"
+#include "LylatResourceLoader.h"
 #include "LylatLaserProjectile.h"
 #include "Animation/AnimInstance.h"
 #include "Camera/CameraComponent.h"
@@ -11,30 +12,10 @@
 #include "Particles/ParticleSystemComponent.h"
 #include "UObject/ConstructorHelpers.h"
 
-// TODO: Maybe use T for types? Maybe convert them to classes?
-
-typedef struct _particleLoader
-{
-    ConstructorHelpers::FObjectFinderOptional<UParticleSystem> Particles;
-    _particleLoader(const TCHAR* path) : Particles(path) { }
-} particleLoader;
-
-typedef struct _skeletalMeshLoader
-{
-    ConstructorHelpers::FObjectFinderOptional<USkeletalMesh> Mesh;
-    _skeletalMeshLoader(const TCHAR* path) : Mesh(path) { }
-} skeletalMeshLoader;
-
-typedef struct _soundLoader
-{
-    ConstructorHelpers::FObjectFinderOptional<USoundBase> Sound;
-    _soundLoader(const TCHAR* path) : Sound(path) { }
-} soundLoader;
-
 ALylatArwing::ALylatArwing()
 {
     CharacterMesh = CreateDefaultSubobject<USkeletalMeshComponent>(TEXT("Arwing"));
-    CharacterMesh->SetSkeletalMesh(skeletalMeshLoader(TEXT("/Game/Models/Arwing/Meshes/Arwing.Arwing")).Mesh.Get());
+    CharacterMesh->SetSkeletalMesh(LylatGetResource<USkeletalMesh>(TEXT("/Game/Models/Arwing/Meshes/Arwing.Arwing")));
     RootComponent = CharacterMesh;
 
     SpringArm = CreateDefaultSubobject<USpringArmComponent>(TEXT("Spring Arm"));
@@ -63,9 +44,9 @@ ALylatArwing::ALylatArwing()
     LaserOffset         = FVector(20.f, 0.f, 0.f);
     LaserRange          = 500.f;
 
-    BoostSound = soundLoader(TEXT("/Game/Effects/Boost.Boost")).Sound.Get();
-    BreakSound = soundLoader(TEXT("/Game/Effects/Break.Break")).Sound.Get();
-    LaserFireSound = soundLoader(TEXT("/Game/Effects/LaserOnce.LaserOnce")).Sound.Get();
+    BoostSound = LylatGetResource<USoundBase>(TEXT("/Game/Effects/Boost.Boost"));
+    BreakSound = LylatGetResource<USoundBase>(TEXT("/Game/Effects/Break.Break"));
+    LaserFireSound = LylatGetResource<USoundBase>(TEXT("/Game/Effects/LaserOnce.LaserOnce"));
 }
 
 void ALylatArwing::SetupPlayerInputComponent(class UInputComponent* component)

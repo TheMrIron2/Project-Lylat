@@ -1,6 +1,7 @@
 // Copyright 2020 Project Lylat. All Rights Reserved.
 
 #include "LylatHUD.h"
+#include "LylatResourceLoader.h"
 #include "Engine/Canvas.h"
 #include "TextureResource.h"
 #include "CanvasItem.h"
@@ -13,17 +14,11 @@ float to_float(uint8_t x)
     return (float &)out + 256 - 257;
 }
 
-typedef struct texLoader
-{
-    ConstructorHelpers::FObjectFinderOptional<UTexture2D> Texture;
-    texLoader(const TCHAR* path) : Texture(path) { }
-} texLoader;
-
 ALylatHUD::ALylatHUD()
 {
-	Crosshair	= texLoader(TEXT("/Game/Textures/HUD/Crosshair.Crosshair")).Texture.Get();
-	BoostMeter	= texLoader(TEXT("/Game/Textures/HUD/BoostMeter.BoostMeter")).Texture.Get();
-	BoostLevel	= texLoader(TEXT("/Game/Textures/HUD/BoostLevel.BoostLevel")).Texture.Get();
+	Crosshair	= LylatGetResource<UTexture2D>(TEXT("/Game/Textures/HUD/Crosshair.Crosshair"));
+	BoostMeter	= LylatGetResource<UTexture2D>(TEXT("/Game/Textures/HUD/BoostMeter.BoostMeter"));
+	BoostLevel	= LylatGetResource<UTexture2D>(TEXT("/Game/Textures/HUD/BoostLevel.BoostLevel"));
 }
 
 void ALylatHUD::DrawHUD()

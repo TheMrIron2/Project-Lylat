@@ -1,21 +1,16 @@
 // Copyright 2020 Project Lylat. All Rights Reserved.
 
 #include "LylatLaserProjectile.h"
+#include "LylatResourceLoader.h"
 #include "GameFramework/ProjectileMovementComponent.h"
 #include "Components/SphereComponent.h"
 #include "UObject/ConstructorHelpers.h"
-
-typedef struct _meshLoader
-{
-    ConstructorHelpers::FObjectFinderOptional<UStaticMesh> Mesh;
-    _meshLoader(const TCHAR* path) : Mesh(path) { }
-} meshLoader;
 
 ALylatLaserProjectile::ALylatLaserProjectile() 
 {
 	Projectile = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Projectile"));
 	Projectile->BodyInstance.SetCollisionProfileName("Projectile");
-	Projectile->SetStaticMesh(meshLoader(TEXT("/Game/Models/Laser/Meshes/Laser.Laser")).Mesh.Get());
+	Projectile->SetStaticMesh(LylatGetResource<UStaticMesh>(TEXT("/Game/Models/Laser/Meshes/Laser.Laser")));
 	Projectile->OnComponentHit.AddDynamic(this, &ALylatLaserProjectile::OnHit);
 	Projectile->SetWalkableSlopeOverride(FWalkableSlopeOverride(WalkableSlope_Unwalkable, 0.f));
 	Projectile->CanCharacterStepUpOn = ECB_No;
