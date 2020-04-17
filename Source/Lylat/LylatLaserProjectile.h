@@ -23,8 +23,6 @@ public:
 	UFUNCTION()
 	void OnHit(UPrimitiveComponent* hitComp, AActor* otherActor, UPrimitiveComponent* otherComp, FVector normalImpulse, const FHitResult& hit);
 
-	virtual void Tick(float delta) override;
-
 	FORCEINLINE class UStaticMeshComponent* GetProjectile() const { return Projectile; }
 	FORCEINLINE class UProjectileMovementComponent* GetProjectileMovement() const { return ProjectileMovement; }
 };

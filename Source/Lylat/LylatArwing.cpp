@@ -41,7 +41,7 @@ ALylatArwing::ALylatArwing()
     LaserAmount         = 1;
     LaserDamage         = 5.f;
     LaserDelayInSeconds = 0.1f;
-    LaserOffset         = FVector(20.f, 0.f, 0.f);
+    LaserOffset         = FVector(300.f, 0.f, 0.f);
     LaserRange          = 500.f;
 
     BoostSound = LylatGetResource<USoundBase>(TEXT("/Game/Effects/Boost.Boost"));
@@ -123,8 +123,11 @@ void ALylatArwing::OnRestart()
 
 void ALylatArwing::OnLaserFire()
 {
+    FVector offset = GetActorLocation();
+    offset += LaserOffset;
+    GetWorld()->SpawnActor(ALylatLaserProjectile::StaticClass(), &offset); 
+
     if (LaserFireSound != NULL) UGameplayStatics::PlaySoundAtLocation(this, LaserFireSound, GetActorLocation());
-    GetWorld()->SpawnActor(ALylatLaserProjectile::StaticClass(), &LaserOffset); 
 }
     
 void ALylatArwing::OnBoost()

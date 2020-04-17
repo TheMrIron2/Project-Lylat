@@ -17,24 +17,18 @@ ALylatLaserProjectile::ALylatLaserProjectile()
 
 	RootComponent = Projectile;
 
-	/*ProjectileMovement = CreateDefaultSubobject<UProjectileMovementComponent>(TEXT("ProjectileComp"));
+	ProjectileMovement = CreateDefaultSubobject<UProjectileMovementComponent>(TEXT("ProjectileComp"));
 	ProjectileMovement->UpdatedComponent = Projectile;
 	ProjectileMovement->InitialSpeed = 300.f;
 	ProjectileMovement->MaxSpeed = 300.f;
 	ProjectileMovement->bRotationFollowsVelocity = true;
-	ProjectileMovement->bShouldBounce = false;*/
+	ProjectileMovement->bShouldBounce = false;
 
-	//InitialLifeSpan = 3.0f;
+	InitialLifeSpan = 3.0f;
 }
 
 void ALylatLaserProjectile::OnHit(UPrimitiveComponent* hitComp, AActor* otherActor, UPrimitiveComponent* otherComp, FVector normalImpulse, const FHitResult& hit)
 {
 	if (otherActor != NULL && otherActor != this && otherComp != NULL) otherComp->DestroyComponent();
 	Destroy();
-}
-
-void ALylatLaserProjectile::Tick(float delta)
-{
-    Super::Tick(delta);
-	SetActorLocation(FVector(GetActorLocation().X + 1.f, GetActorLocation().Y, GetActorLocation().Z));
 }
