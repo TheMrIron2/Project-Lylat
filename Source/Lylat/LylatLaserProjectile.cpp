@@ -8,9 +8,12 @@
 
 ALylatLaserProjectile::ALylatLaserProjectile() 
 {
-	Projectile = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Projectile"));
+	Projectile = CreateDefaultSubobject<USphereComponent>(TEXT("SphereComp"));
+	Projectile->InitSphereRadius(5.0f);
+	
 	Projectile->BodyInstance.SetCollisionProfileName("Projectile");
-	Projectile->SetStaticMesh(LylatGetResource<UStaticMesh>(TEXT("/Game/Models/Laser/Meshes/Laser.Laser")));
+	//Projectile->SetStaticMesh(LylatGetResource<UStaticMesh>(TEXT("/Game/Models/Laser/Meshes/Laser.Laser")));
+
 	Projectile->OnComponentHit.AddDynamic(this, &ALylatLaserProjectile::OnHit);
 	Projectile->SetWalkableSlopeOverride(FWalkableSlopeOverride(WalkableSlope_Unwalkable, 0.f));
 	Projectile->CanCharacterStepUpOn = ECB_No;

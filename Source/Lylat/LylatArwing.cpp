@@ -28,6 +28,11 @@ ALylatArwing::ALylatArwing()
     Camera->SetupAttachment(SpringArm, USpringArmComponent::SocketName);
     Camera->bUsePawnControlRotation = false;
 
+    LaserOffset = CreateDefaultSubobject<USceneComponent>(TEXT("Laser Offset"));
+	LaserOffset->SetupAttachment(CharacterMesh);
+	LaserOffset->SetRelativeLocation(FVector(30.f, 0.f, 10.f));
+	LaserOffset->SetRelativeRotation(FRotator(0.0f, 90.0f, 0.0f));	
+
     Particles = CreateDefaultSubobject<UParticleSystemComponent>(TEXT("Particles"));
     Particles->SetupAttachment(RootComponent);
 
@@ -41,7 +46,6 @@ ALylatArwing::ALylatArwing()
     LaserAmount         = 1;
     LaserDamage         = 5.f;
     LaserDelayInSeconds = 0.1f;
-    LaserOffset         = FVector(300.f, 0.f, 0.f);
     LaserRange          = 500.f;
 
     BoostSound = LylatGetResource<USoundBase>(TEXT("/Game/Effects/Boost.Boost"));
@@ -123,9 +127,13 @@ void ALylatArwing::OnRestart()
 
 void ALylatArwing::OnLaserFire()
 {
-    FVector offset = GetActorLocation();
-    offset += LaserOffset;
-    GetWorld()->SpawnActor(ALylatLaserProjectile::StaticClass(), &offset); 
+    const FRotator SpawnRotation = GetControlRotation();
+	const FVector SpawnLocation = ((LaserOffset != nullptr) ? LaserOffset->GetComponentLocation() : GetActorLocation());
+
+	FActorSpawnParameters ActorSpawnParams;
+	ActorSpawnParams.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AdjustIfPossibleButAlwaysSpawn;
+
+	GetWorld()->SpawnActor<ALylatLaserProjectile>(ALylatLaserProjectile::StaticClass(), SpawnLocation, SpawnRotation, ActorSpawnParams);
 
     if (LaserFireSound != NULL) UGameplayStatics::PlaySoundAtLocation(this, LaserFireSound, GetActorLocation());
 }

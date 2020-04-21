@@ -23,6 +23,9 @@ class ALylatArwing : public APawn
     UPROPERTY(VisibleDefaultsOnly, Category = Particles, meta = (AllowPrivateAccess = "true"))
     class UParticleSystemComponent* Particles;
 
+    UPROPERTY(VisibleDefaultsOnly, Category = Mesh, meta = (AllowPrivateAccess = "true"))
+    class USceneComponent* LaserOffset;
+
 public:
     ALylatArwing();
 
@@ -64,9 +67,6 @@ public:
 
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Gameplay)
     float LaserDelayInSeconds;
-
-    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Gameplay)
-    FVector LaserOffset;
 
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Gameplay)
     float LaserRange;
@@ -111,4 +111,5 @@ public:
     FORCEINLINE class USpringArmComponent* GetSpringArm() const { return SpringArm; }
     FORCEINLINE class UCameraComponent* GetCamera() const { return Camera; }
     FORCEINLINE class USkeletalMeshComponent* GetCharacterMesh() const { return CharacterMesh; }
+    FORCEINLINE class USceneComponent* GetLaserOffset() const { return LaserOffset; }
 };

@@ -12,7 +12,7 @@ class ALylatLaserProjectile : public AActor
 	GENERATED_BODY()
 
 	UPROPERTY(VisibleDefaultsOnly, Category = Projectile, meta = (AllowPrivateAccess = "true"))
-	class UStaticMeshComponent* Projectile;
+	class USphereComponent* Projectile;
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Projectile, meta = (AllowPrivateAccess = "true"))
 	class UProjectileMovementComponent* ProjectileMovement;
@@ -23,7 +23,7 @@ public:
 	UFUNCTION()
 	void OnHit(UPrimitiveComponent* hitComp, AActor* otherActor, UPrimitiveComponent* otherComp, FVector normalImpulse, const FHitResult& hit);
 
-	FORCEINLINE class UStaticMeshComponent* GetProjectile() const { return Projectile; }
+	FORCEINLINE class USphereComponent* GetProjectile() const { return Projectile; }
 	FORCEINLINE class UProjectileMovementComponent* GetProjectileMovement() const { return ProjectileMovement; }
 };
 
