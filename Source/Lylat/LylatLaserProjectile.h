@@ -7,7 +7,7 @@
 #include "LylatLaserProjectile.generated.h"
 
 UCLASS(config=Game)
-class ALylatLaserProjectile : public AActor
+class LYLAT_API ALylatLaserProjectile : public AActor
 {
 	GENERATED_BODY()
 
@@ -26,4 +26,3 @@ public:
 	FORCEINLINE class USphereComponent* GetProjectile() const { return Projectile; }
 	FORCEINLINE class UProjectileMovementComponent* GetProjectileMovement() const { return ProjectileMovement; }
 };
-

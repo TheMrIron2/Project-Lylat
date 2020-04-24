@@ -7,7 +7,7 @@
 #include "LylatArwing.generated.h"
 
 UCLASS(config=Game)
-class ALylatArwing : public APawn
+class LYLAT_API ALylatArwing : public APawn
 {
     GENERATED_BODY()
 

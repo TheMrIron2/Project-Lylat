@@ -6,9 +6,6 @@
 #include "GameFramework/GameModeBase.h"
 #include "LylatGameModeBase.generated.h"
 
-/**
- * Default Game Mode for Lylat.
- */
 UCLASS()
 class LYLAT_API ALylatGameModeBase : public AGameModeBase
 {

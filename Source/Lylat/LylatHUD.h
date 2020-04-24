@@ -7,7 +7,7 @@
 #include "LylatHUD.generated.h"
 
 UCLASS()
-class ALylatHUD : public AHUD
+class LYLAT_API ALylatHUD : public AHUD
 {
 	GENERATED_BODY()
 
