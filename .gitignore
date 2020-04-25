@@ -6,8 +6,9 @@ DerivedDataCache
 Intermediate
 Saved
 
-# Files
+# IDE files or directories
 Lylat.code-workspace
+Lylat.xcworkspace
 
 # File types
 *.bat
