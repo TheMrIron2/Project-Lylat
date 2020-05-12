@@ -1,5 +1,4 @@
-# Folders
-.vscode
+# Unreal Editor folders
 Binaries
 Content/Developers
 DerivedDataCache
@@ -7,6 +6,8 @@ Intermediate
 Saved
 
 # IDE files or directories
+.vs
+.vscode
 Lylat.code-workspace
 Lylat.xcworkspace
 

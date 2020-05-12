@@ -10,7 +10,4 @@ UCLASS()
 class LYLAT_API ALylatGameModeBase : public AGameModeBase
 {
 	GENERATED_BODY()
-
-public:
-	ALylatGameModeBase();
 };
