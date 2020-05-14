@@ -16,6 +16,10 @@ public:
     
     void Construct(const FArguments& inArgs);
 
+    FReply OnStart() const;
+    FReply OnSettings() const;
+    FReply OnQuit() const;
+
     TWeakObjectPtr<class ALylatMenuHUD> OwningHUD;
 
     virtual bool SupportsKeyboardFocus() const override { return true; }

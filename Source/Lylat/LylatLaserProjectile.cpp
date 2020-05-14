@@ -8,11 +8,10 @@
 
 ALylatLaserProjectile::ALylatLaserProjectile() 
 {
-	Projectile = CreateDefaultSubobject<USphereComponent>(TEXT("SphereComp"));
-	Projectile->InitSphereRadius(5.0f);
+	Projectile = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Projectile"));
 	
 	Projectile->BodyInstance.SetCollisionProfileName("Projectile");
-	//Projectile->SetStaticMesh(LylatGetResource<UStaticMesh>(TEXT("/Game/Models/Laser/Meshes/Laser.Laser")));
+	Projectile->SetStaticMesh(LylatGetResource<UStaticMesh>(TEXT("/Game/Models/Laser/Meshes/Laser.Laser")));
 
 	Projectile->OnComponentHit.AddDynamic(this, &ALylatLaserProjectile::OnHit);
 	Projectile->SetWalkableSlopeOverride(FWalkableSlopeOverride(WalkableSlope_Unwalkable, 0.f));
@@ -20,18 +19,21 @@ ALylatLaserProjectile::ALylatLaserProjectile()
 
 	RootComponent = Projectile;
 
-	ProjectileMovement = CreateDefaultSubobject<UProjectileMovementComponent>(TEXT("ProjectileComp"));
-	ProjectileMovement->UpdatedComponent = Projectile;
-	ProjectileMovement->InitialSpeed = 300.f;
-	ProjectileMovement->MaxSpeed = 300.f;
-	ProjectileMovement->bRotationFollowsVelocity = true;
-	ProjectileMovement->bShouldBounce = false;
-
-	InitialLifeSpan = 3.0f;
+	PrimaryActorTick.bCanEverTick = true;
+	PrimaryActorTick.bTickEvenWhenPaused = false;
+	PrimaryActorTick.TickGroup = TG_DuringPhysics;
 }
 
 void ALylatLaserProjectile::OnHit(UPrimitiveComponent* hitComp, AActor* otherActor, UPrimitiveComponent* otherComp, FVector normalImpulse, const FHitResult& hit)
 {
 	if (otherActor != NULL && otherActor != this && otherComp != NULL) otherComp->DestroyComponent();
 	Destroy();
+}
+
+void ALylatLaserProjectile::Tick(float delta)
+{
+	FVector position = GetActorLocation();
+	position.X += 100.f;
+
+	SetActorLocation(position);
 }

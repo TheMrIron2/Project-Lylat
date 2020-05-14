@@ -12,8 +12,13 @@ class LYLAT_API ALylatGameHUD : public AHUD
 	GENERATED_BODY()
 
 protected:
-	TSharedPtr<class SLylatGameWidget> MenuWidget;
-	TSharedPtr<class SWidget> MenuWidgetContainer;
-
+	TSharedPtr<class SLylatGameWidget> HUDWidget;
+	TSharedPtr<class SLylatPauseWidget> PauseWidget;
+	TSharedPtr<class SWidget> WidgetContainer;
+	
 	virtual void BeginPlay() override;
+
+public:
+	void ShowHUD();
+	void ShowPause();
 };

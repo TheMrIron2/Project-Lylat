@@ -1,6 +1,7 @@
 // Copyright 2020 Project Lylat. All Rights Reserved.
 
 #include "LylatArwing.h"
+#include "LylatGameHUD.h"
 #include "LylatResourceLoader.h"
 #include "LylatLaserProjectile.h"
 #include "Animation/AnimInstance.h"
@@ -30,7 +31,7 @@ ALylatArwing::ALylatArwing()
 
     LaserOffset = CreateDefaultSubobject<USceneComponent>(TEXT("Laser Offset"));
 	LaserOffset->SetupAttachment(CharacterMesh);
-	LaserOffset->SetRelativeLocation(FVector(30.f, 0.f, 10.f));
+	LaserOffset->SetRelativeLocation(FVector(250.f, 0.f, 10.f));
 	LaserOffset->SetRelativeRotation(FRotator(0.0f, 90.0f, 0.0f));	
 
     Particles = CreateDefaultSubobject<UParticleSystemComponent>(TEXT("Particles"));
@@ -55,9 +56,9 @@ ALylatArwing::ALylatArwing()
 
 void ALylatArwing::SetupPlayerInputComponent(class UInputComponent* component)
 {
-    check(component);
+    Super::SetupPlayerInputComponent(component);
 
-    component->BindAction("Restart", IE_Pressed, this, &ALylatArwing::OnRestart);
+    check(component);
 
     component->BindAction("Fire", IE_Pressed, this, &ALylatArwing::OnLaserFire);
 
@@ -78,6 +79,8 @@ void ALylatArwing::SetupPlayerInputComponent(class UInputComponent* component)
     
     component->BindAction("MoveRight", IE_Pressed, this, &ALylatArwing::OnMoveRight);
     component->BindAction("MoveRight", IE_Released, this, &ALylatArwing::OnMoveRightRelease);
+
+    component->BindAction("Pause", IE_Pressed, this, &ALylatArwing::OnPause);
 }
 
 void ALylatArwing::Tick(float delta)
@@ -120,11 +123,6 @@ void ALylatArwing::NotifyHit(class UPrimitiveComponent* current, class AActor* o
 	SetActorRotation(FQuat::Slerp(CurrentRotation.Quaternion(), hitNormal.ToOrientationQuat(), 0.025f));
 }
 
-void ALylatArwing::OnRestart()
-{
-    GetWorld()->ServerTravel(FString("/Game/Maps/Map1.Map1"), true, true);
-}
-
 void ALylatArwing::OnLaserFire()
 {
     const FRotator SpawnRotation = GetControlRotation();
@@ -165,3 +163,10 @@ void ALylatArwing::OnMoveLeftRelease() { left = false; }
 
 void ALylatArwing::OnMoveRight() { right = true; }
 void ALylatArwing::OnMoveRightRelease() { right = false; }
+
+void ALylatArwing::OnPause()
+{
+    GetWorld()->GetFirstPlayerController()->Pause();
+    ALylatGameHUD* hud = GetWorld()->GetFirstPlayerController()->GetHUD<ALylatGameHUD>();
+    hud->ShowPause();
+}

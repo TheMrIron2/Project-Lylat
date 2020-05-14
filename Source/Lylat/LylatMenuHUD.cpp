@@ -2,8 +2,8 @@
 
 #include "LylatMenuHUD.h"
 #include "LylatMenuWidget.h"
-#include "Widgets/SWeakWidget.h"
 #include "Engine/Engine.h"
+#include "Widgets/SWeakWidget.h"
 
 void ALylatMenuHUD::BeginPlay()
 {
@@ -13,4 +13,9 @@ void ALylatMenuHUD::BeginPlay()
 
 	MenuWidget = SNew(SLylatMenuWidget).OwningHUD(this);
 	GEngine->GameViewport->AddViewportWidgetContent(SAssignNew(MenuWidgetContainer, SWeakWidget).PossiblyNullContent(MenuWidget.ToSharedRef()));
+
+	if (!PlayerOwner) return;
+
+	PlayerOwner->bShowMouseCursor = true;
+	PlayerOwner->SetInputMode(FInputModeUIOnly());
 }

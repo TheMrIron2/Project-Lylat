@@ -81,8 +81,6 @@ private:
     bool left;
 
 protected:
-    void OnRestart();
-
     void OnLaserFire();
     
     void OnBoost();
@@ -102,6 +100,8 @@ protected:
 
     void OnMoveRight();
     void OnMoveRightRelease();
+
+    void OnPause();
 
     virtual void SetupPlayerInputComponent(class UInputComponent* component) override;
     virtual void Tick(float delta) override;

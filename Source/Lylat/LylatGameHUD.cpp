@@ -2,6 +2,7 @@
 
 #include "LylatGameHUD.h"
 #include "LylatGameWidget.h"
+#include "LylatPauseWidget.h"
 #include "Widgets/SWeakWidget.h"
 #include "Engine/Engine.h"
 
@@ -9,8 +10,27 @@ void ALylatGameHUD::BeginPlay()
 {
 	Super::BeginPlay();
 
+	ShowHUD();
+}
+
+void ALylatGameHUD::ShowHUD()
+{
 	if (!GEngine || !GEngine->GameViewport) return;
 
-	MenuWidget = SNew(SLylatGameWidget).OwningHUD(this);
-	GEngine->GameViewport->AddViewportWidgetContent(SAssignNew(MenuWidgetContainer, SWeakWidget).PossiblyNullContent(MenuWidget.ToSharedRef()));
+	HUDWidget = SNew(SLylatGameWidget).OwningHUD(this);
+	GEngine->GameViewport->AddViewportWidgetContent(SAssignNew(WidgetContainer, SWeakWidget).PossiblyNullContent(HUDWidget.ToSharedRef()));
+
+	PlayerOwner->bShowMouseCursor = false;
+	PlayerOwner->SetInputMode(FInputModeGameOnly());
+}
+
+void ALylatGameHUD::ShowPause()
+{
+	if (!GEngine || !GEngine->GameViewport) return;
+	
+	PauseWidget = SNew(SLylatPauseWidget).OwningHUD(this);
+	GEngine->GameViewport->AddViewportWidgetContent(SAssignNew(WidgetContainer, SWeakWidget).PossiblyNullContent(PauseWidget.ToSharedRef()));
+
+	PlayerOwner->bShowMouseCursor = true;
+	PlayerOwner->SetInputMode(FInputModeUIOnly());
 }
