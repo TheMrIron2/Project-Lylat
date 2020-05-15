@@ -17,6 +17,8 @@ void ALylatGameHUD::ShowHUD()
 {
 	if (!GEngine || !GEngine->GameViewport) return;
 
+	GEngine->GameViewport->RemoveAllViewportWidgets();
+
 	HUDWidget = SNew(SLylatGameWidget).OwningHUD(this);
 	GEngine->GameViewport->AddViewportWidgetContent(SAssignNew(WidgetContainer, SWeakWidget).PossiblyNullContent(HUDWidget.ToSharedRef()));
 
@@ -28,6 +30,8 @@ void ALylatGameHUD::ShowPause()
 {
 	if (!GEngine || !GEngine->GameViewport) return;
 	
+	GEngine->GameViewport->RemoveAllViewportWidgets();
+
 	PauseWidget = SNew(SLylatPauseWidget).OwningHUD(this);
 	GEngine->GameViewport->AddViewportWidgetContent(SAssignNew(WidgetContainer, SWeakWidget).PossiblyNullContent(PauseWidget.ToSharedRef()));
 

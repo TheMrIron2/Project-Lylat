@@ -13,6 +13,8 @@
 #include "Particles/ParticleSystemComponent.h"
 #include "UObject/ConstructorHelpers.h"
 
+#include <chrono>
+
 ALylatArwing::ALylatArwing()
 {
     CharacterMesh = CreateDefaultSubobject<USkeletalMeshComponent>(TEXT("Arwing"));
@@ -166,7 +168,9 @@ void ALylatArwing::OnMoveRightRelease() { right = false; }
 
 void ALylatArwing::OnPause()
 {
-    GetWorld()->GetFirstPlayerController()->Pause();
     ALylatGameHUD* hud = GetWorld()->GetFirstPlayerController()->GetHUD<ALylatGameHUD>();
-    hud->ShowPause();
+
+    GetWorld()->GetFirstPlayerController()->Pause();
+    if (GetWorld()->GetFirstPlayerController()->IsPaused()) hud->ShowHUD();
+    else hud->ShowPause();   
 }
