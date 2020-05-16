@@ -7,7 +7,7 @@
 
 class LYLAT_API SLylatPauseWidget : public SCompoundWidget
 {
-public:
+protected:
     SLATE_BEGIN_ARGS(SLylatPauseWidget) { }
 
     SLATE_ARGUMENT(TWeakObjectPtr<class ALylatGameHUD>, OwningHUD)
@@ -15,6 +15,8 @@ public:
     SLATE_END_ARGS()
     
     void Construct(const FArguments& inArgs);
+
+    FReply OnResume() const;
 
     TWeakObjectPtr<class ALylatGameHUD> OwningHUD;
 

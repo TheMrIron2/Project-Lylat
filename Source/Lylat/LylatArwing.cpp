@@ -148,6 +148,8 @@ void ALylatArwing::OnBoostRelease() { boost = false; }
 
 void ALylatArwing::OnBreak()
 {
+    if (boost == true) return;
+
     _break = true;
     if (BreakSound != NULL) UGameplayStatics::PlaySoundAtLocation(this, BreakSound, GetActorLocation());
 }
@@ -171,6 +173,5 @@ void ALylatArwing::OnPause()
     ALylatGameHUD* hud = GetWorld()->GetFirstPlayerController()->GetHUD<ALylatGameHUD>();
 
     GetWorld()->GetFirstPlayerController()->Pause();
-    if (GetWorld()->GetFirstPlayerController()->IsPaused()) hud->ShowHUD();
-    else hud->ShowPause();   
+    hud->ShowPause();   
 }

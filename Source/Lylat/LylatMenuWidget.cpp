@@ -1,7 +1,7 @@
 // Copyright 2020 Project Lylat. All Rights Reserved.
 
-#include "LylatMenuHUD.h"
 #include "LylatMenuWidget.h"
+#include "LylatMenuHUD.h"
 
 #define LOCTEXT_NAMESPACE "MenuLocalText"
 
@@ -83,7 +83,7 @@ void SLylatMenuWidget::Construct(const FArguments& inArgs)
 				.VAlign(VAlign_Center)
 			]
 
-			// Start Button
+			// Quit Button
 			+ SVerticalBox::Slot()
 			.Padding(buttonPadding)
 			[

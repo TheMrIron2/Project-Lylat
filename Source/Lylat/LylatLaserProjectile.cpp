@@ -22,6 +22,8 @@ ALylatLaserProjectile::ALylatLaserProjectile()
 	PrimaryActorTick.bCanEverTick = true;
 	PrimaryActorTick.bTickEvenWhenPaused = false;
 	PrimaryActorTick.TickGroup = TG_DuringPhysics;
+
+	InitialLifeSpan = 3.f;
 }
 
 void ALylatLaserProjectile::OnHit(UPrimitiveComponent* hitComp, AActor* otherActor, UPrimitiveComponent* otherComp, FVector normalImpulse, const FHitResult& hit)
