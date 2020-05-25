@@ -72,7 +72,7 @@ public:
     float LaserRange;
 
 private:
-    // this is incredibly crude, but whatever, I'm sorry
+    FRotator rotation;
     bool boost;
     bool _break;
     bool up;

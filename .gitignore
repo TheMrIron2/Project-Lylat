@@ -12,8 +12,10 @@ Lylat.code-workspace
 Lylat.xcworkspace
 
 # File types
+.DS_Store
 *.bat
 *.log
 *.sdf
 *.sln
 *.suo
+

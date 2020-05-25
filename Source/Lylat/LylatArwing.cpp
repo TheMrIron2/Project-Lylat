@@ -13,8 +13,6 @@
 #include "Particles/ParticleSystemComponent.h"
 #include "UObject/ConstructorHelpers.h"
 
-#include <chrono>
-
 ALylatArwing::ALylatArwing()
 {
     CharacterMesh = CreateDefaultSubobject<USkeletalMeshComponent>(TEXT("Arwing"));
@@ -26,6 +24,7 @@ ALylatArwing::ALylatArwing()
     SpringArm->TargetArmLength = 800.f;
     SpringArm->SocketOffset = FVector(0.f, 70.f, 100.f);
     SpringArm->bEnableCameraLag = true;
+    SpringArm->bInheritRoll = false;
 
     Camera = CreateDefaultSubobject<UCameraComponent>(TEXT("Camera"));
     Camera->SetupAttachment(SpringArm, USpringArmComponent::SocketName);
@@ -54,6 +53,8 @@ ALylatArwing::ALylatArwing()
     BoostSound = LylatGetResource<USoundBase>(TEXT("/Game/Effects/Boost.Boost"));
     BreakSound = LylatGetResource<USoundBase>(TEXT("/Game/Effects/Break.Break"));
     LaserFireSound = LylatGetResource<USoundBase>(TEXT("/Game/Effects/LaserOnce.LaserOnce"));
+    
+    rotation = GetActorRotation();
 }
 
 void ALylatArwing::SetupPlayerInputComponent(class UInputComponent* component)
@@ -91,30 +92,44 @@ void ALylatArwing::Tick(float delta)
 
     float x = 0, y = 0, z = 0;
 
-    if (up) z = 6.f;
-    else if (down) z = -6.f;
+    if (up) z = 10.f;
+    else if (down) z = -10.f;
 
-    if (left) y = -6.f;
-    else if (right) y = 6.f;
+    if (left)
+    {
+        y = -15.f;
+        if (!(rotation.Roll <= -40.f)) rotation.Roll -= 3.f;
+    }
+    else if (right)
+    {
+        y = 15.f;
+        if (!(rotation.Roll >= 40.f)) rotation.Roll += 3.f;
+    }
+    else
+    {
+        if (rotation.Roll > 0.f) rotation.Roll -= 3.f;
+        else if (rotation.Roll < 0.f) rotation.Roll += 3.f;
+    }
 
     if (boost)
     {
         x = BoostAcceleration;
-        if (SpringArm->TargetArmLength != 1000.f) SpringArm->TargetArmLength = SpringArm->TargetArmLength = SpringArm->TargetArmLength + 5;
+        if (SpringArm->TargetArmLength != 1000.f) SpringArm->TargetArmLength += 5.f;
     }
     else if (_break)
     {
         x = BreakAcceleration;
-        if (SpringArm->TargetArmLength != 600.f) SpringArm->TargetArmLength = SpringArm->TargetArmLength = SpringArm->TargetArmLength - 5;
+        if (SpringArm->TargetArmLength != 600.f) SpringArm->TargetArmLength -= 5.f;
     }
     else
     {
         x = BaseAcceleration;
-        if (SpringArm->TargetArmLength != 800.f && SpringArm->TargetArmLength < 800.f) SpringArm->TargetArmLength = SpringArm->TargetArmLength = SpringArm->TargetArmLength + 5;
-        else if (SpringArm->TargetArmLength != 800.f && SpringArm->TargetArmLength > 800.f) SpringArm->TargetArmLength = SpringArm->TargetArmLength = SpringArm->TargetArmLength - 5;
+        if (SpringArm->TargetArmLength != 800.f && SpringArm->TargetArmLength < 800.f) SpringArm->TargetArmLength += 5.f;
+        else if (SpringArm->TargetArmLength != 800.f && SpringArm->TargetArmLength > 800.f) SpringArm->TargetArmLength -= 5.f;
     }
 
     SetActorLocation(FVector(GetActorLocation().X + x, GetActorLocation().Y + y, GetActorLocation().Z + z));
+    SetActorRotation(rotation);
 }
 
 void ALylatArwing::NotifyHit(class UPrimitiveComponent* current, class AActor* other, class UPrimitiveComponent* otherComp, bool bSelfMoved, FVector hitLocation, FVector hitNormal, FVector normalImpulse, const FHitResult& hit)

@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 public class LylatEditorTarget : TargetRules
 {
-	public LylatEditorTarget( TargetInfo Target) : base(Target)
+	public LylatEditorTarget(TargetInfo Target) : base(Target)
 	{
 		Type = TargetType.Editor;
 		DefaultBuildSettings = BuildSettingsVersion.V2;

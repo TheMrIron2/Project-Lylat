@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 public class LylatTarget : TargetRules
 {
-	public LylatTarget( TargetInfo Target) : base(Target)
+	public LylatTarget(TargetInfo Target) : base(Target)
 	{
 		Type = TargetType.Game;
 		DefaultBuildSettings = BuildSettingsVersion.V2;
