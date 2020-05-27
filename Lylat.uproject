@@ -1,8 +1,8 @@
 {
 	"FileVersion": 3,
-	"EngineAssociation": "4.25",
+	"EngineAssociation": "{0004D420-08D8-01E9-36EB-9B943294FF13}",
 	"Category": "",
-	"Description": "",
+	"Description": "Star Fox-like On Rails and 360° Shooter.",
 	"Modules": [
 		{
 			"Name": "Lylat",

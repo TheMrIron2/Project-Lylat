@@ -19,3 +19,17 @@ Lylat.xcworkspace
 *.sln
 *.suo
 
+# Generated project files (Linux)
+.kdev4
+CMakeLists.txt
+Lylat.kdev4
+Lylat.pro
+Lylat.workspace
+LylatCodeCompletionFolders.txt
+LylatCodeLitePreProcessor.txt
+LylatConfig.pri
+LylatDefines.pri
+LylatHeader.pri
+LylatIncludes.pri
+LylatSource.pri
+Makefile
