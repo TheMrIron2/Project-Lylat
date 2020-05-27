@@ -1,12 +1,25 @@
-# Project Lylat
-On-rails 3D space shooter for PC in the style of Star Fox. <br>
+# Project: Lylat
+**Project: Lylat** is an On-Rails and 360° 3D space shooter for PCs in the style of Star Fox. <br>
 
-Project Lylat is made with **[Unreal](https://www.unrealengine.com/)**, written in C++.
+Project: Lylat is made with **[Unreal](https://www.unrealengine.com/)**, written in C++.
 
 The short term goal is to create a playable proof of concept with all working logic and a demo. (eg. Star Wolf battle) <br>
 The long term goal is subject to discussion as we progress.
 
 If you want to get in touch, get more information or if you'd just like to hang out with the developers, join us on **[Discord](https://discord.gg/XaewHrj)**.
+
+## Getting involved
+Getting involved is fairly easy, all you need is experience with Unreal. <br>
+Project: Lylat uses the latest stable version of Unreal 4 (currently 4.25).
+
+Make a fork and clone it:
+```sh
+git clone https://github.com/ < name of the user / organization to which you forked Project: Lylat to > /Project-Lylat Lylat
+```
+
+Now, open the `Lylat.uproject` in Unreal. <br>
+Make your changes, push them into your fork and make a pull request. <br>
+We'll try to respond as soon as possible.
 
 ## Gameplay Details
 - Pressing the `Fire` (`Left Mouse` by default) button shoots 1 green laser beam.
