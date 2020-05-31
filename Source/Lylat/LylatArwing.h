@@ -39,10 +39,7 @@ public:
     float BreakAcceleration;
 
     UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = Controls)
-    float VerticalLimit;
-
-    UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = Controls)
-    float HorizontalLimit;
+    float Tilt;
 
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Content)
     USoundBase* BoostSound;
@@ -58,18 +55,6 @@ public:
 
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Gameplay)
     int BoostMeterLevel;
-
-    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Gameplay)
-    int LaserAmount;
-
-    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Gameplay)
-    float LaserDamage;
-
-    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Gameplay)
-    float LaserDelayInSeconds;
-
-    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Gameplay)
-    float LaserRange;
 
 private:
     FRotator rotation;

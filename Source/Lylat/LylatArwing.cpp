@@ -42,13 +42,7 @@ ALylatArwing::ALylatArwing()
     BoostAcceleration   = 100.f;
     BreakAcceleration   = 5.f;
 
-    VerticalLimit       = 30.f;
-    HorizontalLimit     = 30.f;
-
-    LaserAmount         = 1;
-    LaserDamage         = 5.f;
-    LaserDelayInSeconds = 0.1f;
-    LaserRange          = 500.f;
+    Tilt = 25.f;
 
     BoostSound = LylatGetResource<USoundBase>(TEXT("/Game/Effects/Boost.Boost"));
     BreakSound = LylatGetResource<USoundBase>(TEXT("/Game/Effects/Break.Break"));
@@ -98,12 +92,12 @@ void ALylatArwing::Tick(float delta)
     if (left)
     {
         y = -15.f;
-        if (!(rotation.Roll <= -40.f)) rotation.Roll -= 3.f;
+        if (!(rotation.Roll <= -Tilt)) rotation.Roll -= 3.f;
     }
     else if (right)
     {
         y = 15.f;
-        if (!(rotation.Roll >= 40.f)) rotation.Roll += 3.f;
+        if (!(rotation.Roll >= Tilt)) rotation.Roll += 3.f;
     }
     else
     {
