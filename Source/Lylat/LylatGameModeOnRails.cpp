@@ -3,6 +3,7 @@
 #include "LylatGameModeOnRails.h"
 #include "LylatArwing.h"
 #include "LylatGameHUD.h"
+
 #include "UObject/ConstructorHelpers.h"
 
 ALylatGameModeOnRails::ALylatGameModeOnRails()

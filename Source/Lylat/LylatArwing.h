@@ -6,7 +6,7 @@
 #include "GameFramework/Pawn.h"
 #include "LylatArwing.generated.h"
 
-UCLASS(config=Game)
+UCLASS()
 class LYLAT_API ALylatArwing : public APawn
 {
     GENERATED_BODY()
@@ -88,11 +88,11 @@ protected:
 
     void OnPause();
 
+public:
     virtual void SetupPlayerInputComponent(class UInputComponent* component) override;
     virtual void Tick(float delta) override;
     virtual void NotifyHit(class UPrimitiveComponent* current, class AActor* other, class UPrimitiveComponent* otherComp, bool bSelfMoved, FVector hitLocation, FVector hitNormal, FVector normalImpulse, const FHitResult& hit) override;
 
-public:
     FORCEINLINE class USpringArmComponent* GetSpringArm() const { return SpringArm; }
     FORCEINLINE class UCameraComponent* GetCamera() const { return Camera; }
     FORCEINLINE class USkeletalMeshComponent* GetCharacterMesh() const { return CharacterMesh; }

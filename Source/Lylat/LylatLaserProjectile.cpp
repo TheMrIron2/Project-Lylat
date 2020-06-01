@@ -2,6 +2,7 @@
 
 #include "LylatLaserProjectile.h"
 #include "LylatResourceLoader.h"
+
 #include "GameFramework/ProjectileMovementComponent.h"
 #include "Components/SphereComponent.h"
 #include "UObject/ConstructorHelpers.h"
@@ -35,7 +36,7 @@ void ALylatLaserProjectile::OnHit(UPrimitiveComponent* hitComp, AActor* otherAct
 void ALylatLaserProjectile::Tick(float delta)
 {
 	FVector position = GetActorLocation();
-	position.X += 100.f;
+	position.X += 250.f;
 
 	SetActorLocation(position);
 }

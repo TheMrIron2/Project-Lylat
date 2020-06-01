@@ -2,8 +2,9 @@
 
 #include "LylatArwing.h"
 #include "LylatGameHUD.h"
-#include "LylatResourceLoader.h"
 #include "LylatLaserProjectile.h"
+#include "LylatResourceLoader.h"
+
 #include "Animation/AnimInstance.h"
 #include "Camera/CameraComponent.h"
 #include "Components/InputComponent.h"
@@ -11,12 +12,20 @@
 #include "GameFramework/SpringArmComponent.h"
 #include "Kismet/GameplayStatics.h"
 #include "Particles/ParticleSystemComponent.h"
-#include "UObject/ConstructorHelpers.h"
 
 ALylatArwing::ALylatArwing()
 {
+    SetActorEnableCollision(true);
+
     CharacterMesh = CreateDefaultSubobject<USkeletalMeshComponent>(TEXT("Arwing"));
     CharacterMesh->SetSkeletalMesh(LylatGetResource<USkeletalMesh>(TEXT("/Game/Models/Arwing/Meshes/Arwing.Arwing")));
+
+    CharacterMesh->SetCollisionProfileName(TEXT("Awring"));
+    CharacterMesh->SetCollisionEnabled(ECollisionEnabled::Type::QueryAndPhysics);
+    CharacterMesh->SetCollisionObjectType(ECollisionChannel::ECC_Pawn);
+	CharacterMesh->SetCollisionResponseToChannel(ECollisionChannel::ECC_GameTraceChannel1, ECollisionResponse::ECR_Overlap);
+	CharacterMesh->SetCollisionResponseToChannel(ECollisionChannel::ECC_WorldStatic, ECollisionResponse::ECR_Block);
+
     RootComponent = CharacterMesh;
 
     SpringArm = CreateDefaultSubobject<USpringArmComponent>(TEXT("Spring Arm"));
@@ -39,16 +48,17 @@ ALylatArwing::ALylatArwing()
     Particles->SetupAttachment(RootComponent);
 
     BaseAcceleration    = 25.f;
-    BoostAcceleration   = 100.f;
+    BoostAcceleration   = 90.f;
     BreakAcceleration   = 5.f;
-
-    Tilt = 25.f;
+    Tilt                = 25.f;
 
     BoostSound = LylatGetResource<USoundBase>(TEXT("/Game/Effects/Boost.Boost"));
     BreakSound = LylatGetResource<USoundBase>(TEXT("/Game/Effects/Break.Break"));
     LaserFireSound = LylatGetResource<USoundBase>(TEXT("/Game/Effects/LaserOnce.LaserOnce"));
     
     rotation = GetActorRotation();
+
+    PrimaryActorTick.bCanEverTick = true;
 }
 
 void ALylatArwing::SetupPlayerInputComponent(class UInputComponent* component)

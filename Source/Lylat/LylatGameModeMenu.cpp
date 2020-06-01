@@ -2,7 +2,6 @@
 
 #include "LylatGameModeMenu.h"
 #include "LylatMenuHUD.h"
-#include "UObject/ConstructorHelpers.h"
 
 ALylatGameModeMenu::ALylatGameModeMenu()
 {
