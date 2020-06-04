@@ -4,6 +4,7 @@
 #include "LylatMenuWidget.h"
 
 #include "Engine/Engine.h"
+#include "Engine/World.h"
 #include "Widgets/SWeakWidget.h"
 
 void ALylatMenuHUD::BeginPlay()
@@ -19,4 +20,14 @@ void ALylatMenuHUD::BeginPlay()
 
 	PlayerOwner->bShowMouseCursor = true;
 	PlayerOwner->SetInputMode(FInputModeUIOnly());
+}
+
+void ALylatMenuHUD::SwitchToMap(const FString& url)
+{
+	PlayerOwner->GetWorld()->ServerTravel(url, true, false);
+}
+
+void ALylatMenuHUD::QuitGame()
+{
+	PlayerOwner->ConsoleCommand("quit");
 }

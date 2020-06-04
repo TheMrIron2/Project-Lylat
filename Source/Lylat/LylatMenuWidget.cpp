@@ -104,6 +104,7 @@ void SLylatMenuWidget::Construct(const FArguments& inArgs)
 
 FReply SLylatMenuWidget::OnStart() const
 {
+	OwningHUD->SwitchToMap("/Maps/Map1.Map1");
 	return FReply::Handled();
 }
 
@@ -114,7 +115,7 @@ FReply SLylatMenuWidget::OnSettings() const
 
 FReply SLylatMenuWidget::OnQuit() const
 {
-	OwningHUD->PlayerOwner->ConsoleCommand("quit");
+	OwningHUD->QuitGame();
 	return FReply::Handled();
 }
 
