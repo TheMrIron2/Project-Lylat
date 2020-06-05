@@ -16,18 +16,10 @@ void ALylatMenuHUD::BeginPlay()
 	MenuWidget = SNew(SLylatMenuWidget).OwningHUD(this);
 	GEngine->GameViewport->AddViewportWidgetContent(SAssignNew(MenuWidgetContainer, SWeakWidget).PossiblyNullContent(MenuWidget.ToSharedRef()));
 
+	MenuWidget->SetVisibility(EVisibility::Visible);
+
 	if (!PlayerOwner) return;
 
 	PlayerOwner->bShowMouseCursor = true;
 	PlayerOwner->SetInputMode(FInputModeUIOnly());
-}
-
-void ALylatMenuHUD::SwitchToMap(const FString& url)
-{
-	PlayerOwner->GetWorld()->ServerTravel(url, true, false);
-}
-
-void ALylatMenuHUD::QuitGame()
-{
-	PlayerOwner->ConsoleCommand("quit");
 }

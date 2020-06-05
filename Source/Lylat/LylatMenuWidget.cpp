@@ -3,10 +3,18 @@
 #include "LylatMenuWidget.h"
 #include "LylatMenuHUD.h"
 
+#include "GameFramework/PlayerController.h"
+#include "Kismet/GameplayStatics.h"
+
+BEGIN_SLATE_FUNCTION_BUILD_OPTIMIZATION
+
 #define LOCTEXT_NAMESPACE "MenuLocalText"
 
 void SLylatMenuWidget::Construct(const FArguments& inArgs)
 {
+	bCanSupportFocus = true;
+	OwningHUD = inArgs._OwningHUD;
+
 	const FMargin contentPadding = FMargin(20.f, 10.f);
 	const FMargin buttonPadding = FMargin(10.f);
 
@@ -104,19 +112,27 @@ void SLylatMenuWidget::Construct(const FArguments& inArgs)
 
 FReply SLylatMenuWidget::OnStart() const
 {
-	OwningHUD->SwitchToMap("/Maps/Map1.Map1");
+	if (!OwningHUD.IsValid()) return FReply::Handled();
+
+	UGameplayStatics::OpenLevel(OwningHUD->PlayerOwner, "Map1");
 	return FReply::Handled();
 }
 
 FReply SLylatMenuWidget::OnSettings() const
 {
+	if (!OwningHUD.IsValid()) return FReply::Handled();
+
 	return FReply::Handled();
 }
 
 FReply SLylatMenuWidget::OnQuit() const
 {
-	OwningHUD->QuitGame();
+	if (!OwningHUD.IsValid()) return FReply::Handled();
+
+	OwningHUD->PlayerOwner->ConsoleCommand("quit");
 	return FReply::Handled();
 }
 
 #undef LOCTEXT_NAMESPACE
+
+END_SLATE_FUNCTION_BUILD_OPTIMIZATION

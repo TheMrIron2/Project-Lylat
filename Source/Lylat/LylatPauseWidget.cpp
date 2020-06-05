@@ -3,10 +3,15 @@
 #include "LylatPauseWidget.h"
 #include "LylatGameHUD.h"
 
+BEGIN_SLATE_FUNCTION_BUILD_OPTIMIZATION
+
 #define LOCTEXT_NAMESPACE "PauseMenuText"
 
 void SLylatPauseWidget::Construct(const FArguments& inArgs)
 {
+	bCanSupportFocus = true;
+	OwningHUD = inArgs._OwningHUD;
+	
 	const FMargin contentPadding = FMargin(20.f, 10.f);
 	const FMargin buttonPadding = FMargin(10.f);
 
@@ -65,9 +70,13 @@ void SLylatPauseWidget::Construct(const FArguments& inArgs)
 
 FReply SLylatPauseWidget::OnResume() const
 {
-	//OwningHUD->ShowHUD();
-	//OwningHUD->PlayerOwner->Pause();
+	if (!OwningHUD.IsValid()) return FReply::Handled();
+
+	OwningHUD->ShowHUD();
+	OwningHUD->PlayerOwner->Pause();
 	return FReply::Handled();
 }
 
 #undef LOCTEXT_NAMESPACE
+
+END_SLATE_FUNCTION_BUILD_OPTIMIZATION

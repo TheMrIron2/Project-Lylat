@@ -4,8 +4,9 @@
 #include "LylatGameWidget.h"
 #include "LylatPauseWidget.h"
 
-#include "Widgets/SWeakWidget.h"
 #include "Engine/Engine.h"
+#include "GameFramework/PlayerController.h"
+#include "Widgets/SWeakWidget.h"
 
 void ALylatGameHUD::BeginPlay()
 {
@@ -18,9 +19,9 @@ void ALylatGameHUD::ShowHUD()
 {
 	if (!GEngine || !GEngine->GameViewport) return;
 
-	GEngine->GameViewport->RemoveAllViewportWidgets();
+	if (!HUDWidget.IsValid()) HUDWidget = SNew(SLylatGameWidget).OwningHUD(this);
 
-	HUDWidget = SNew(SLylatGameWidget).OwningHUD(this);
+	if (WidgetContainer.IsValid()) GEngine->GameViewport->RemoveViewportWidgetContent(WidgetContainer.ToSharedRef());
 	GEngine->GameViewport->AddViewportWidgetContent(SAssignNew(WidgetContainer, SWeakWidget).PossiblyNullContent(HUDWidget.ToSharedRef()));
 
 	PlayerOwner->bShowMouseCursor = false;
@@ -31,9 +32,9 @@ void ALylatGameHUD::ShowPause()
 {
 	if (!GEngine || !GEngine->GameViewport) return;
 	
-	GEngine->GameViewport->RemoveAllViewportWidgets();
+	if (!PauseWidget.IsValid()) PauseWidget = SNew(SLylatPauseWidget).OwningHUD(this);
 
-	PauseWidget = SNew(SLylatPauseWidget).OwningHUD(this);
+	if (WidgetContainer.IsValid()) GEngine->GameViewport->RemoveViewportWidgetContent(WidgetContainer.ToSharedRef());	
 	GEngine->GameViewport->AddViewportWidgetContent(SAssignNew(WidgetContainer, SWeakWidget).PossiblyNullContent(PauseWidget.ToSharedRef()));
 
 	PlayerOwner->bShowMouseCursor = true;

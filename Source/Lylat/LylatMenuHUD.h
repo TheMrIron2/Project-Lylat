@@ -16,8 +16,4 @@ protected:
 	TSharedPtr<class SWidget> MenuWidgetContainer;
 
 	virtual void BeginPlay() override;
-
-public:
-	void SwitchToMap(const FString& url);
-	void QuitGame();
 };
