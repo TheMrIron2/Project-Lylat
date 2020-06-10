@@ -1,4 +1,4 @@
-// Copyright 2020 Project Lylat. All Rights Reserved.
+// Copyright 2020 Team Project Lylat. All Rights Reserved.
 
 #include "LylatPauseWidget.h"
 #include "LylatGameHUD.h"

@@ -1,11 +1,10 @@
-// Copyright 2020 Project Lylat. All Rights Reserved.
+// Copyright 2020 Team Project Lylat. All Rights Reserved.
 
 #include "LylatLaserProjectile.h"
 #include "LylatResourceLoader.h"
 
+#include "Components/StaticMeshComponent.h"
 #include "GameFramework/ProjectileMovementComponent.h"
-#include "Components/SphereComponent.h"
-#include "UObject/ConstructorHelpers.h"
 
 ALylatLaserProjectile::ALylatLaserProjectile() 
 {

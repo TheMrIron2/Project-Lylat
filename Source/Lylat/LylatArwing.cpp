@@ -1,4 +1,4 @@
-// Copyright 2020 Project Lylat. All Rights Reserved.
+// Copyright 2020 Team Project Lylat. All Rights Reserved.
 
 #include "LylatArwing.h"
 #include "LylatGameHUD.h"
@@ -8,10 +8,14 @@
 #include "Animation/AnimInstance.h"
 #include "Camera/CameraComponent.h"
 #include "Components/InputComponent.h"
+#include "Components/SkeletalMeshComponent.h"
+#include "Components/StaticMeshComponent.h"
+#include "Engine/CollisionProfile.h"
 #include "GameFramework/PlayerController.h"
 #include "GameFramework/SpringArmComponent.h"
 #include "Kismet/GameplayStatics.h"
 #include "Particles/ParticleSystemComponent.h"
+#include "Sound/SoundBase.h"
 
 ALylatArwing::ALylatArwing()
 {
@@ -20,11 +24,11 @@ ALylatArwing::ALylatArwing()
     CharacterMesh = CreateDefaultSubobject<USkeletalMeshComponent>(TEXT("Arwing"));
     CharacterMesh->SetSkeletalMesh(LylatGetResource<USkeletalMesh>(TEXT("/Game/Models/Arwing/Meshes/Arwing.Arwing")));
 
-    CharacterMesh->SetCollisionProfileName(TEXT("Awring"));
+    CharacterMesh->SetCollisionProfileName(TEXT("Arwing"));
     CharacterMesh->SetCollisionEnabled(ECollisionEnabled::Type::QueryAndPhysics);
     CharacterMesh->SetCollisionObjectType(ECollisionChannel::ECC_Pawn);
-	CharacterMesh->SetCollisionResponseToChannel(ECollisionChannel::ECC_GameTraceChannel1, ECollisionResponse::ECR_Overlap);
-	CharacterMesh->SetCollisionResponseToChannel(ECollisionChannel::ECC_WorldStatic, ECollisionResponse::ECR_Block);
+    CharacterMesh->SetCollisionResponseToChannel(ECollisionChannel::ECC_GameTraceChannel1, ECollisionResponse::ECR_Overlap);
+    CharacterMesh->SetCollisionResponseToChannel(ECollisionChannel::ECC_WorldStatic, ECollisionResponse::ECR_Block);
 
     RootComponent = CharacterMesh;
 
@@ -40,9 +44,9 @@ ALylatArwing::ALylatArwing()
     Camera->bUsePawnControlRotation = false;
 
     LaserOffset = CreateDefaultSubobject<USceneComponent>(TEXT("Laser Offset"));
-	LaserOffset->SetupAttachment(CharacterMesh);
-	LaserOffset->SetRelativeLocation(FVector(250.f, 0.f, 10.f));
-	LaserOffset->SetRelativeRotation(FRotator(0.0f, 90.0f, 0.0f));	
+    LaserOffset->SetupAttachment(CharacterMesh);
+    LaserOffset->SetRelativeLocation(FVector(250.f, 0.f, 10.f));
+    LaserOffset->SetRelativeRotation(FRotator(0.0f, 90.0f, 0.0f));
 
     Particles = CreateDefaultSubobject<UParticleSystemComponent>(TEXT("Particles"));
     Particles->SetupAttachment(RootComponent);
@@ -52,10 +56,12 @@ ALylatArwing::ALylatArwing()
     BreakAcceleration   = 5.f;
     Tilt                = 25.f;
 
-    BoostSound = LylatGetResource<USoundBase>(TEXT("/Game/Effects/Boost.Boost"));
-    BreakSound = LylatGetResource<USoundBase>(TEXT("/Game/Effects/Break.Break"));
-    LaserFireSound = LylatGetResource<USoundBase>(TEXT("/Game/Effects/LaserOnce.LaserOnce"));
+    BoostSound      = LylatGetResource<USoundBase>(TEXT("/Game/Effects/Boost.Boost"));
+    BreakSound      = LylatGetResource<USoundBase>(TEXT("/Game/Effects/Break.Break"));
+    LaserFireSound  = LylatGetResource<USoundBase>(TEXT("/Game/Effects/LaserOnce.LaserOnce"));
     
+    LaserFireRate = 0.5f;
+
     rotation = GetActorRotation();
 
     PrimaryActorTick.bCanEverTick = true;
@@ -136,25 +142,22 @@ void ALylatArwing::Tick(float delta)
     SetActorRotation(rotation);
 }
 
-void ALylatArwing::NotifyHit(class UPrimitiveComponent* current, class AActor* other, class UPrimitiveComponent* otherComp, bool bSelfMoved, FVector hitLocation, FVector hitNormal, FVector normalImpulse, const FHitResult& hit)
-{
-    Super::NotifyHit(current, other, otherComp, bSelfMoved, hitLocation, hitNormal, normalImpulse, hit);
-
-    FRotator CurrentRotation = GetActorRotation();
-	SetActorRotation(FQuat::Slerp(CurrentRotation.Quaternion(), hitNormal.ToOrientationQuat(), 0.025f));
-}
-
 void ALylatArwing::OnLaserFire()
 {
+    if  (!canShoot) return;
+
     const FRotator SpawnRotation = GetControlRotation();
-	const FVector SpawnLocation = ((LaserOffset != nullptr) ? LaserOffset->GetComponentLocation() : GetActorLocation());
+    const FVector SpawnLocation = ((LaserOffset != nullptr) ? LaserOffset->GetComponentLocation() : GetActorLocation());
 
-	FActorSpawnParameters ActorSpawnParams;
-	ActorSpawnParams.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AdjustIfPossibleButAlwaysSpawn;
+    FActorSpawnParameters ActorSpawnParams;
+    ActorSpawnParams.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AdjustIfPossibleButAlwaysSpawn;
 
-	GetWorld()->SpawnActor<ALylatLaserProjectile>(ALylatLaserProjectile::StaticClass(), SpawnLocation, SpawnRotation, ActorSpawnParams);
+    GetWorld()->SpawnActor<ALylatLaserProjectile>(ALylatLaserProjectile::StaticClass(), SpawnLocation, SpawnRotation, ActorSpawnParams);
 
     if (LaserFireSound != NULL) UGameplayStatics::PlaySoundAtLocation(this, LaserFireSound, GetActorLocation());
+
+    GetWorld()->GetTimerManager().SetTimer(timer, this, &ALylatArwing::OnTimerDone, LaserFireRate);
+    canShoot = false;
 }
     
 void ALylatArwing::OnBoost()
@@ -192,5 +195,7 @@ void ALylatArwing::OnPause()
     ALylatGameHUD* hud = GetWorld()->GetFirstPlayerController()->GetHUD<ALylatGameHUD>();
 
     GetWorld()->GetFirstPlayerController()->Pause();
-    hud->ShowPause();   
+    hud->ShowPause();
 }
+
+void ALylatArwing::OnTimerDone() { canShoot = true; }

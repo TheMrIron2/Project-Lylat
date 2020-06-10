@@ -1,4 +1,4 @@
-// Copyright 2020 Project Lylat. All Rights Reserved.
+// Copyright 2020 Team Project Lylat. All Rights Reserved.
 
 #pragma once
 
@@ -54,16 +54,22 @@ public:
     UStaticMesh* LaserModel;
 
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Gameplay)
+    float LaserFireRate;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Gameplay)
     int BoostMeterLevel;
 
 private:
     FRotator rotation;
+    FTimerHandle timer;
+
     bool boost;
     bool _break;
     bool up;
     bool down;
     bool right;
     bool left;
+    bool canShoot = true;
 
 protected:
     void OnLaserFire();
@@ -88,10 +94,11 @@ protected:
 
     void OnPause();
 
+    void OnTimerDone();
+
 public:
     virtual void SetupPlayerInputComponent(class UInputComponent* component) override;
     virtual void Tick(float delta) override;
-    virtual void NotifyHit(class UPrimitiveComponent* current, class AActor* other, class UPrimitiveComponent* otherComp, bool bSelfMoved, FVector hitLocation, FVector hitNormal, FVector normalImpulse, const FHitResult& hit) override;
 
     FORCEINLINE class USpringArmComponent* GetSpringArm() const { return SpringArm; }
     FORCEINLINE class UCameraComponent* GetCamera() const { return Camera; }
