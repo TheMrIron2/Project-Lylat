@@ -3,14 +3,14 @@
 #include "LylatEnemy.h"
 #include "LylatResourceLoader.h"
 
+#include "Components/StaticMeshComponent.h"
+
 ALylatEnemy::ALylatEnemy()
 {
-	SetActorEnableCollision(true);
+	CharacterMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Enemy"));
+    CharacterMesh->SetStaticMesh(LylatGetResource<UStaticMesh>(TEXT("/Game/Models/Arwing/Meshes/ArwingStaticMesh.ArwingStaticMesh")));
 
-	CharacterMesh = CreateDefaultSubobject<USkeletalMeshComponent>(TEXT("Enemy"));
-    CharacterMesh->SetSkeletalMesh(LylatGetResource<USkeletalMesh>(TEXT("/Game/Models/Arwing/Meshes/Arwing.Arwing")));
-
-	CharacterMesh->SetCollisionProfileName(TEXT("Enemies"));
+	CharacterMesh->SetCollisionProfileName(TEXT("Arwing"));
 	CharacterMesh->SetCollisionEnabled(ECollisionEnabled::Type::QueryAndPhysics);
     CharacterMesh->SetCollisionObjectType(ECollisionChannel::ECC_Pawn);
 	CharacterMesh->SetCollisionResponseToChannel(ECollisionChannel::ECC_GameTraceChannel1, ECollisionResponse::ECR_Overlap);
@@ -24,6 +24,7 @@ ALylatEnemy::ALylatEnemy()
 	LaserOffset->SetRelativeRotation(FRotator(0.0f, 90.0f, 0.0f));	
 
 	PrimaryActorTick.bCanEverTick = true;
+	SetActorEnableCollision(true);
 }
 
 void ALylatEnemy::Tick(float DeltaTime)

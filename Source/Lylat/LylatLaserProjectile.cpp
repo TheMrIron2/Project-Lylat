@@ -24,6 +24,7 @@ ALylatLaserProjectile::ALylatLaserProjectile()
 	PrimaryActorTick.TickGroup = TG_DuringPhysics;
 
 	InitialLifeSpan = 3.f;
+	SetActorEnableCollision(true);
 }
 
 void ALylatLaserProjectile::OnHit(UPrimitiveComponent* hitComp, AActor* otherActor, UPrimitiveComponent* otherComp, FVector normalImpulse, const FHitResult& hit)

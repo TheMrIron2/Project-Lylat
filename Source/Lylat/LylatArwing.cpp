@@ -19,8 +19,6 @@
 
 ALylatArwing::ALylatArwing()
 {
-    SetActorEnableCollision(true);
-
     CharacterMesh = CreateDefaultSubobject<USkeletalMeshComponent>(TEXT("Arwing"));
     CharacterMesh->SetSkeletalMesh(LylatGetResource<USkeletalMesh>(TEXT("/Game/Models/Arwing/Meshes/Arwing.Arwing")));
 
@@ -65,6 +63,7 @@ ALylatArwing::ALylatArwing()
     rotation = GetActorRotation();
 
     PrimaryActorTick.bCanEverTick = true;
+    SetActorEnableCollision(true);
 }
 
 void ALylatArwing::SetupPlayerInputComponent(class UInputComponent* component)
@@ -144,7 +143,7 @@ void ALylatArwing::Tick(float delta)
 
 void ALylatArwing::OnLaserFire()
 {
-    if  (!canShoot) return;
+    if (!canShoot) return;
 
     const FRotator SpawnRotation = GetControlRotation();
     const FVector SpawnLocation = ((LaserOffset != nullptr) ? LaserOffset->GetComponentLocation() : GetActorLocation());
