@@ -1,24 +1,36 @@
 # Project: Lylat
-**Project: Lylat** is an On-Rails and 360° 3D space shooter for PCs in the style of Star Fox. <br>
+**Project: Lylat** is an On-Rails and 360° 3D space shooter for PCs in the style of Star Fox.  
 
 Project: Lylat is made with **[Unreal](https://www.unrealengine.com/)**, written in C++.
 
-The short term goal is to create a playable proof of concept with all working logic and a demo. (eg. Star Wolf battle) <br>
+The short term goal is to create a playable proof of concept with all working logic and a demo (eg. Star Wolf battle).  
 The long term goal is subject to discussion as we progress.
 
 If you want to get in touch, get more information or if you'd just like to hang out with the developers, join us on **[Discord](https://discord.gg/XaewHrj)**.
 
 ## Getting involved
-Getting involved is fairly easy, all you need is experience with Unreal. <br>
+Getting involved is fairly easy, all you need is experience with Unreal.  
 Project: Lylat uses the latest stable version of Unreal 4 (currently 4.25).
 
 Make a fork and clone it:
-```sh
+```
 git clone https://github.com/ < name of the user / organization to which you forked Project: Lylat to > /Project-Lylat Lylat
 ```
 
-Now, open the `Lylat.uproject` in Unreal. <br>
-Make your changes, push them into your fork and make a pull request. <br>
+Secondly, you need Discord's Game SDK.  
+
+1. Download the [Game SDK](https://discord.com/developers/docs/game-sdk/sdk-starter-guide#step-1-get-the-thing).
+1. Copy all sources and headers from the `cpp` directory of the downloaded Game SDK ZIP into `Source/Lylat/Discord`.  
+1. Copy the following files from `lib/< your architecture >` from the Game SDK archive into `Binaries/< your platform >`, according to this table:
+
+| Operating System | Files to copy                                          |
+|------------------|--------------------------------------------------------|
+| Windows          | `discord_game_sdk.dll` and `discord_game_sdk.dll.lib`  |
+| macOS            | `discord_game_sdk.dylib` and `discord_game_sdk.bundle` |
+| Linux            | `discord_game_sdk.so`                                  |
+
+Now, open the `Lylat.uproject` in Unreal.  
+Make your changes, push them into your fork and make a pull request.  
 We'll try to respond as soon as possible.
 
 ## Gameplay Details
@@ -57,6 +69,6 @@ We'll try to respond as soon as possible.
 - **[MotoLegacy](https://github.com/MotoLegacy)** - Planning and Programming
 
 ## Disclaimer
-This is a non-commercial, free project with no intention of infringement on any Nintendo IPs or otherwise. <br>
-Models and the Star Fox name are recognised properties of [Nintendo](https://www.nintendo.com/). <br>
+This is a non-commercial, free project with no intention of infringement on any Nintendo IPs or otherwise.  
+Models and the Star Fox name are recognised properties of [Nintendo](https://www.nintendo.com/).  
 You can find this notice in our license too.

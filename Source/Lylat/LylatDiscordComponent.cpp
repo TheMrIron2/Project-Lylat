@@ -20,23 +20,42 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-#pragma once
+#include "LylatDiscordComponent.h"
 
-#include "SlateBasics.h"
-#include "SlateExtras.h"
+#include <chrono>
 
-class LYLAT_API SLylatGameWidget : public SCompoundWidget
+#define CLIENT_ID 725178546296979486
+
+ULylatDiscordComponent::ULylatDiscordComponent()
 {
-public:
-    SLATE_BEGIN_ARGS(SLylatGameWidget) { }
+	PrimaryComponentTick.bCanEverTick = true;
+}
 
-    SLATE_ARGUMENT(TWeakObjectPtr<class ALylatGameHUD>, OwningHUD)
+void ULylatDiscordComponent::BeginPlay()
+{
+	Super::BeginPlay();
 
-    SLATE_END_ARGS()
-    
-    void Construct(const FArguments& inArgs);
+	discord::Result result = discord::Core::Create(CLIENT_ID, DiscordCreateFlags_Default, &core);
+	// TODO: check result
 
-    TWeakObjectPtr<class ALylatGameHUD> OwningHUD;
+	discord::Activity activity{};
+	activity.SetState("Map 1 [On-Rails]"); // TODO: Get map and game mode
+	activity.GetAssets().SetLargeImage("lylat-logo"); // TODO: Set small image to logo and use large image for map screenshot
 
-    virtual bool SupportsKeyboardFocus() const override { return true; }
-};
+	activity.GetTimestamps().SetStart(std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now().time_since_epoch()).count());
+
+	// TODO: enhance usage of the Game SDK
+
+	core->ActivityManager().UpdateActivity(activity, [](discord::Result result)
+	{
+		// TODO: check result
+	});
+}
+
+void ULylatDiscordComponent::TickComponent(float delta, ELevelTick type, FActorComponentTickFunction* func)
+{
+	Super::TickComponent(delta, type, func);
+
+	discord::Result result = core->RunCallbacks();
+	// TODO: check result
+}

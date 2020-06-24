@@ -1,9 +1,12 @@
-# Build folders
+# Build folders and files
 Binaries
 Content/Developers
 DerivedDataCache
 Intermediate
 Saved
+Build/WindowsNoEditor
+Build/MacNoEditor
+Build/LinuxNoEditor
 
 # Other file types
 .DS_Store
@@ -31,3 +34,7 @@ Makefile
 *.sdf
 *.sln
 *.suo
+
+# Discord Game SDK sources and binaries
+Source/Lylat/Discord/*.cpp
+Source/Lylat/Discord/*.h

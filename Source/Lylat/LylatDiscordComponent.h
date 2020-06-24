@@ -22,21 +22,25 @@
 
 #pragma once
 
-#include "SlateBasics.h"
-#include "SlateExtras.h"
+#include "CoreMinimal.h"
+#include "Components/ActorComponent.h"
+#include "Discord/discord.h"
+#include "LylatDiscordComponent.generated.h"
 
-class LYLAT_API SLylatGameWidget : public SCompoundWidget
+UCLASS()
+class LYLAT_API ULylatDiscordComponent : public UActorComponent
 {
-public:
-    SLATE_BEGIN_ARGS(SLylatGameWidget) { }
+	GENERATED_BODY()
 
-    SLATE_ARGUMENT(TWeakObjectPtr<class ALylatGameHUD>, OwningHUD)
+public:	
+	ULylatDiscordComponent();
 
-    SLATE_END_ARGS()
-    
-    void Construct(const FArguments& inArgs);
+private:
+	discord::Core* core;
 
-    TWeakObjectPtr<class ALylatGameHUD> OwningHUD;
+protected:
+	virtual void BeginPlay() override;
 
-    virtual bool SupportsKeyboardFocus() const override { return true; }
+public:	
+	virtual void TickComponent(float delta, ELevelTick type, FActorComponentTickFunction* func) override;
 };
