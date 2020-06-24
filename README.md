@@ -10,7 +10,7 @@ If you want to get in touch, get more information or if you'd just like to hang 
 
 ## Getting involved
 Getting involved is fairly easy, all you need is experience with Unreal.  
-Project: Lylat uses the latest stable version of Unreal 4 (currently 4.25).
+Project: Lylat uses the latest stable version of Unreal 4 (currently 4.25.1).
 
 Make a fork and clone it:
 ```
