@@ -21,7 +21,7 @@ Secondly, you need Discord's Game SDK.
 
 1. Download the [Game SDK](https://discord.com/developers/docs/game-sdk/sdk-starter-guide#step-1-get-the-thing).
 1. Copy all sources and headers from the `cpp` directory of the downloaded Game SDK ZIP into `Source/Lylat/Discord`.  
-1. Copy the following files from `lib/< your architecture >` from the Game SDK archive into `Binaries/< your platform >`, according to this table:
+1. Copy the following files from `lib/< your architecture >` from the Game SDK archive into `Source/Lylat/Discord`, according to this table:
 
 | Operating System | Files to copy                                          |
 |------------------|--------------------------------------------------------|

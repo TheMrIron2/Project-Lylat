@@ -54,14 +54,16 @@ ALylatArwing::ALylatArwing()
 
     SpringArm = CreateDefaultSubobject<USpringArmComponent>(TEXT("Spring Arm"));
     SpringArm->SetupAttachment(RootComponent);
-    SpringArm->TargetArmLength = 800.f;
-    SpringArm->SocketOffset = FVector(0.f, 70.f, 100.f);
+    SpringArm->TargetArmLength  = 800.f;
+    SpringArm->SocketOffset     = FVector(0.f, 70.f, 100.f);
     SpringArm->bEnableCameraLag = true;
-    SpringArm->bInheritRoll = false;
+    SpringArm->bInheritRoll     = false;
+    SpringArm->bInheritPitch    = false;
 
     Camera = CreateDefaultSubobject<UCameraComponent>(TEXT("Camera"));
     Camera->SetupAttachment(SpringArm, USpringArmComponent::SocketName);
     Camera->bUsePawnControlRotation = false;
+    
 
     LaserOffset = CreateDefaultSubobject<USceneComponent>(TEXT("Laser Offset"));
     LaserOffset->SetupAttachment(CharacterMesh);
@@ -125,8 +127,21 @@ void ALylatArwing::Tick(float delta)
 
     float x = 0, y = 0, z = 0;
 
-    if (up) z = 10.f;
-    else if (down) z = -10.f;
+    if (up)
+    {
+        z = 10.f;
+        if (!(rotation.Pitch >= Tilt)) rotation.Pitch += 3.f;
+    }
+    else if (down)
+    {
+        z = -10.f;
+        if (!(rotation.Pitch <= -Tilt)) rotation.Pitch -= 3.f;
+    }
+    else
+    {
+        if (rotation.Pitch > 0.f) rotation.Pitch        -= 3.f;
+        else if (rotation.Pitch < 0.f) rotation.Pitch   += 3.f;
+    }
 
     if (left)
     {
@@ -140,7 +155,7 @@ void ALylatArwing::Tick(float delta)
     }
     else
     {
-        if (rotation.Roll > 0.f) rotation.Roll -= 3.f;
+        if (rotation.Roll > 0.f) rotation.Roll      -= 3.f;
         else if (rotation.Roll < 0.f) rotation.Roll += 3.f;
     }
 

@@ -37,4 +37,8 @@ Makefile
 
 # Discord Game SDK sources and binaries
 Source/Lylat/Discord/*.cpp
+Source/Lylat/Discord/*.dll
+Source/Lylat/Discord/*.dylib
 Source/Lylat/Discord/*.h
+Source/Lylat/Discord/*.lib
+Source/Lylat/Discord/*.so

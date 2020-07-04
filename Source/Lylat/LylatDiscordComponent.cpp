@@ -26,6 +26,11 @@
 
 #define CLIENT_ID 725178546296979486
 
+using namespace discord;
+using namespace std;
+using namespace std::chrono;
+
+
 ULylatDiscordComponent::ULylatDiscordComponent()
 {
 	PrimaryComponentTick.bCanEverTick = true;
@@ -35,27 +40,44 @@ void ULylatDiscordComponent::BeginPlay()
 {
 	Super::BeginPlay();
 
-	discord::Result result = discord::Core::Create(CLIENT_ID, DiscordCreateFlags_Default, &core);
-	// TODO: check result
+	Result result = Core::Create(CLIENT_ID, DiscordCreateFlags_NoRequireDiscord, &this->core);
+	if (result != Result::Ok)
+	{
+		UE_LOG(LogExec, Error, TEXT("Discord failed to connect, code \"%d\"."), static_cast<int>(result));
+		return;
+	}
 
-	discord::Activity activity{};
-	activity.SetState("Map 1 [On-Rails]"); // TODO: Get map and game mode
-	activity.GetAssets().SetLargeImage("lylat-logo"); // TODO: Set small image to logo and use large image for map screenshot
+	Activity activity{};
 
-	activity.GetTimestamps().SetStart(std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now().time_since_epoch()).count());
+	FString state = GetWorld()->GetName();
+	
+	activity.SetState(TCHAR_TO_ANSI(*state));			// TODO: Get game mode as well
+	activity.GetAssets().SetLargeImage("lylat-logo");	// TODO: Set small image to logo and use large image for map screenshot
+	activity.GetTimestamps().SetStart(duration_cast<milliseconds>(system_clock::now().time_since_epoch()).count());
 
 	// TODO: enhance usage of the Game SDK
 
-	core->ActivityManager().UpdateActivity(activity, [](discord::Result result)
+	this->core->ActivityManager().UpdateActivity(activity, [](Result result)
 	{
-		// TODO: check result
+		if (result != Result::Ok) UE_LOG(LogExec, Error, TEXT("Discord failed to update the activity, code \"%d\"."), static_cast<int>(result));
 	});
 }
 
 void ULylatDiscordComponent::TickComponent(float delta, ELevelTick type, FActorComponentTickFunction* func)
 {
 	Super::TickComponent(delta, type, func);
+	if (this->core == nullptr) return;
 
-	discord::Result result = core->RunCallbacks();
-	// TODO: check result
+	Result result = this->core->RunCallbacks();
+	if (result != Result::Ok) UE_LOG(LogExec, Error, TEXT("Discord failed to connect, code \"%d\"."), static_cast<int>(result));
+}
+
+void ULylatDiscordComponent::EndPlay(const EEndPlayReason::Type reason)
+{
+	Super::EndPlay(reason);
+
+	this->core->ActivityManager().ClearActivity([](Result result)
+	{
+		if (result != Result::Ok) UE_LOG(LogExec, Warning, TEXT("Discord failed to clear the activity, code \"%d\"."), static_cast<int>(result));
+	});
 }

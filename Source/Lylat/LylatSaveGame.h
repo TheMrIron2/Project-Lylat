@@ -23,25 +23,14 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "Components/SceneComponent.h"
-#include "Discord/discord.h"
-#include "LylatDiscordComponent.generated.h"
+#include "GameFramework/SaveGame.h"
+#include "LylatSaveGame.generated.h"
 
 UCLASS()
-class LYLAT_API ULylatDiscordComponent : public USceneComponent
+class LYLAT_API ULylatSaveGame : public USaveGame
 {
 	GENERATED_BODY()
 
-public:	
-	ULylatDiscordComponent();
-
-private:
-	discord::Core* core;
-
-protected:
-	virtual void BeginPlay() override;
-	virtual void EndPlay(const EEndPlayReason::Type reason) override;
-
-public:	
-	virtual void TickComponent(float delta, ELevelTick type, FActorComponentTickFunction* func) override;
+public:
+	ULylatSaveGame();
 };

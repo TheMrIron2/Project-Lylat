@@ -23,12 +23,12 @@
 #include "LylatEnemy.h"
 #include "LylatResourceLoader.h"
 
-#include "Components/StaticMeshComponent.h"
+#include "Components/SkeletalMeshComponent.h"
 
 ALylatEnemy::ALylatEnemy()
 {
-	CharacterMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Enemy"));
-    CharacterMesh->SetStaticMesh(LylatGetResource<UStaticMesh>(TEXT("/Game/Models/Arwing/Meshes/ArwingStaticMesh.ArwingStaticMesh")));
+	CharacterMesh = CreateDefaultSubobject<USkeletalMeshComponent>(TEXT("Enemy"));
+    CharacterMesh->SetSkeletalMesh(LylatGetResource<USkeletalMesh>(TEXT("/Game/Models/Arwing/Meshes/Arwing.Arwing")));
 
 	CharacterMesh->SetCollisionProfileName(TEXT("Arwing"));
 	CharacterMesh->SetCollisionEnabled(ECollisionEnabled::Type::QueryAndPhysics);

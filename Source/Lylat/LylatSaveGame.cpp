@@ -20,28 +20,9 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-#pragma once
+#include "LylatSaveGame.h"
 
-#include "CoreMinimal.h"
-#include "Components/SceneComponent.h"
-#include "Discord/discord.h"
-#include "LylatDiscordComponent.generated.h"
-
-UCLASS()
-class LYLAT_API ULylatDiscordComponent : public USceneComponent
+ULylatSaveGame::ULylatSaveGame()
 {
-	GENERATED_BODY()
 
-public:	
-	ULylatDiscordComponent();
-
-private:
-	discord::Core* core;
-
-protected:
-	virtual void BeginPlay() override;
-	virtual void EndPlay(const EEndPlayReason::Type reason) override;
-
-public:	
-	virtual void TickComponent(float delta, ELevelTick type, FActorComponentTickFunction* func) override;
-};
+}

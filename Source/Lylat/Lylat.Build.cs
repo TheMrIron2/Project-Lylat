@@ -26,8 +26,6 @@ using UnrealBuildTool;
 
 public class Lylat : ModuleRules
 {
-	public string ProjectRoot { get { return Path.GetFullPath(ModuleDirectory + "../../../"); }}
-
 	public Lylat(ReadOnlyTargetRules Target) : base(Target)
 	{
 		PCHUsage = PCHUsageMode.UseExplicitOrSharedPCHs;
@@ -35,27 +33,27 @@ public class Lylat : ModuleRules
 		PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine", "InputCore" });
 		PrivateDependencyModuleNames.AddRange(new string[] { "Slate", "SlateCore" });
 
-		string platform = "";
-		string suffix = ".";
-
+		string dllsuffix = ".";
+		string libsuffix = ".";
 		if (Target.Platform == UnrealTargetPlatform.Win64)
 		{
-			platform = "Win64";
-			suffix += "dll.lib";
+			dllsuffix += "dll";
+			libsuffix += "dll.lib";
 		}
 		else if (Target.Platform == UnrealTargetPlatform.Mac)
 		{
-			platform = "Mac";
-			suffix += "dylib";
+			dllsuffix += "dylib";
+			libsuffix += "dylib";
 		}
 		else if (Target.Platform == UnrealTargetPlatform.Linux)
 		{
-			platform = "Linux";
-			suffix += "so";
+			dllsuffix += "so";
+			libsuffix += "so";
 		}
 		else throw new Exception("Unsupported platform");
 
-		PublicIncludePaths.Add(ProjectRoot + "Source/Lylat/Discord");
-		PublicAdditionalLibraries.Add(ProjectRoot + "Binaries/" + platform + "/discord_game_sdk" + suffix);
+		PublicIncludePaths.Add("$(ModuleDir)/Discord");
+		PublicAdditionalLibraries.Add("$(ModuleDir)/Discord/discord_game_sdk" + libsuffix);
+		RuntimeDependencies.Add("$(TargetOutputDir)/discord_game_sdk" + dllsuffix, "$(ModuleDir)/Discord/discord_game_sdk" + dllsuffix);
 	}
 }
