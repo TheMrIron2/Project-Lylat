@@ -26,23 +26,21 @@
 
 #pragma once
 
-#include "CoreMinimal.h"
-#include "GameFramework/HUD.h"
-#include "LylatGameHUD.generated.h"
+#include "SlateBasics.h"
+#include "SlateExtras.h"
 
-UCLASS()
-class LYLAT_API ALylatGameHUD : public AHUD
+class LYLAT_API SLylatSettingsWidget : public SCompoundWidget
 {
-	GENERATED_BODY()
-
-protected:
-	TSharedPtr<class SLylatGameWidget> HUDWidget;
-	TSharedPtr<class SLylatPauseWidget> PauseWidget;
-	TSharedPtr<class SWidget> WidgetContainer;
-	
-	virtual void BeginPlay() override;
-
 public:
-	void ShowHUD();
-	void ShowPause();
+    SLATE_BEGIN_ARGS(SLylatSettingsWidget) { }
+    SLATE_ARGUMENT(TWeakObjectPtr<class ALylatMenuHUD>, OwningHUD)
+    SLATE_END_ARGS()
+
+    void Construct(const FArguments& inArgs);
+
+    FReply OnReturnToMenu() const;
+
+    TWeakObjectPtr<class ALylatMenuHUD> OwningHUD;
+
+    virtual bool SupportsKeyboardFocus() const override { return true; }
 };

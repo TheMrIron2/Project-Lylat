@@ -5,13 +5,17 @@
 // in the Software without restriction, including without limitation the rights
 // to use, copy, modify, merge, publish or distribute. This does not allow commercial distribution.
 //
-// This license does not cover any content made by Nintendo or any other commercial entity.
-// Under this category fall the Arwing and the Wolfen model along with their respective assets, as well as the Star Fox trademark.
-// Any commercial content has been used without permission.
+// This license does not cover any content made by any commercial entity.
+//
+// Under the category "content used without permission" falls any content regarding the "Star Fox" trademark.
+// Star Fox is a registered trademark of Nintendo Co., Ltd.
+// 
+// Under the category "content used according to licensing" fall the Discord Game SDK and the Ultralight SDK.
+// Discord is a registered trademark of Discord, Inc.
 //
 // The above copyright notice and this permission notice shall be included in all
 // copies or substantial portions of the Software.
-//
+// 
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 // IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 // FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -30,11 +34,12 @@ ALylatEnemy::ALylatEnemy()
 	CharacterMesh = CreateDefaultSubobject<USkeletalMeshComponent>(TEXT("Enemy"));
     CharacterMesh->SetSkeletalMesh(LylatGetResource<USkeletalMesh>(TEXT("/Game/Models/Arwing/Meshes/Arwing.Arwing")));
 
-	CharacterMesh->SetCollisionProfileName(TEXT("Arwing"));
+	CharacterMesh->SetCollisionProfileName(TEXT("Enemy"));
 	CharacterMesh->SetCollisionEnabled(ECollisionEnabled::Type::QueryAndPhysics);
-    CharacterMesh->SetCollisionObjectType(ECollisionChannel::ECC_Pawn);
+	CharacterMesh->SetCollisionObjectType(ECollisionChannel::ECC_Pawn);
 	CharacterMesh->SetCollisionResponseToChannel(ECollisionChannel::ECC_GameTraceChannel1, ECollisionResponse::ECR_Overlap);
 	CharacterMesh->SetCollisionResponseToChannel(ECollisionChannel::ECC_WorldStatic, ECollisionResponse::ECR_Block);
+	CharacterMesh->SetCollisionResponseToChannel(ECollisionChannel::ECC_Pawn, ECollisionResponse::ECR_Block);
 
     RootComponent = CharacterMesh;
 

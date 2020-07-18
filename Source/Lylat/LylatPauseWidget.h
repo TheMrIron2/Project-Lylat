@@ -5,13 +5,17 @@
 // in the Software without restriction, including without limitation the rights
 // to use, copy, modify, merge, publish or distribute. This does not allow commercial distribution.
 //
-// This license does not cover any content made by Nintendo or any other commercial entity.
-// Under this category fall the Arwing and the Wolfen model along with their respective assets, as well as the Star Fox trademark.
-// Any commercial content has been used without permission.
+// This license does not cover any content made by any commercial entity.
+//
+// Under the category "content used without permission" falls any content regarding the "Star Fox" trademark.
+// Star Fox is a registered trademark of Nintendo Co., Ltd.
+// 
+// Under the category "content used according to licensing" fall the Discord Game SDK and the Ultralight SDK.
+// Discord is a registered trademark of Discord, Inc.
 //
 // The above copyright notice and this permission notice shall be included in all
 // copies or substantial portions of the Software.
-//
+// 
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 // IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 // FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -29,14 +33,13 @@ class LYLAT_API SLylatPauseWidget : public SCompoundWidget
 {
 protected:
     SLATE_BEGIN_ARGS(SLylatPauseWidget) { }
-
     SLATE_ARGUMENT(TWeakObjectPtr<class ALylatGameHUD>, OwningHUD)
-
     SLATE_END_ARGS()
     
     void Construct(const FArguments& inArgs);
 
     FReply OnResume() const;
+    FReply OnQuit() const;
 
     TWeakObjectPtr<class ALylatGameHUD> OwningHUD;
 

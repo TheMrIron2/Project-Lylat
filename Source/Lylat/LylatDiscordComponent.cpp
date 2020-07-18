@@ -5,13 +5,17 @@
 // in the Software without restriction, including without limitation the rights
 // to use, copy, modify, merge, publish or distribute. This does not allow commercial distribution.
 //
-// This license does not cover any content made by Nintendo or any other commercial entity.
-// Under this category fall the Arwing and the Wolfen model along with their respective assets, as well as the Star Fox trademark.
-// Any commercial content has been used without permission.
+// This license does not cover any content made by any commercial entity.
+//
+// Under the category "content used without permission" falls any content regarding the "Star Fox" trademark.
+// Star Fox is a registered trademark of Nintendo Co., Ltd.
+// 
+// Under the category "content used according to licensing" fall the Discord Game SDK and the Ultralight SDK.
+// Discord is a registered trademark of Discord, Inc.
 //
 // The above copyright notice and this permission notice shall be included in all
 // copies or substantial portions of the Software.
-//
+// 
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 // IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 // FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -22,14 +26,18 @@
 
 #include "LylatDiscordComponent.h"
 
+THIRD_PARTY_INCLUDES_START
 #include <chrono>
+THIRD_PARTY_INCLUDES_END
 
 #define CLIENT_ID 725178546296979486
+
+DECLARE_LOG_CATEGORY_EXTERN(Discord, Log, All);
+DEFINE_LOG_CATEGORY(Discord);
 
 using namespace discord;
 using namespace std;
 using namespace std::chrono;
-
 
 ULylatDiscordComponent::ULylatDiscordComponent()
 {
@@ -43,14 +51,14 @@ void ULylatDiscordComponent::BeginPlay()
 	Result result = Core::Create(CLIENT_ID, DiscordCreateFlags_NoRequireDiscord, &this->core);
 	if (result != Result::Ok)
 	{
-		UE_LOG(LogExec, Error, TEXT("Discord failed to connect, code \"%d\"."), static_cast<int>(result));
+		UE_LOG(Discord, Error, TEXT("Discord failed to connect, code \"%d\"."), static_cast<int>(result));
 		return;
 	}
 
 	Activity activity{};
 
 	FString state = GetWorld()->GetName();
-	
+
 	activity.SetState(TCHAR_TO_ANSI(*state));			// TODO: Get game mode as well
 	activity.GetAssets().SetLargeImage("lylat-logo");	// TODO: Set small image to logo and use large image for map screenshot
 	activity.GetTimestamps().SetStart(duration_cast<milliseconds>(system_clock::now().time_since_epoch()).count());
@@ -58,9 +66,9 @@ void ULylatDiscordComponent::BeginPlay()
 	// TODO: enhance usage of the Game SDK
 
 	this->core->ActivityManager().UpdateActivity(activity, [](Result result)
-	{
-		if (result != Result::Ok) UE_LOG(LogExec, Error, TEXT("Discord failed to update the activity, code \"%d\"."), static_cast<int>(result));
-	});
+		{
+			if (result != Result::Ok) UE_LOG(Discord, Error, TEXT("Discord failed to update the activity, code \"%d\"."), static_cast<int>(result));
+		});
 }
 
 void ULylatDiscordComponent::TickComponent(float delta, ELevelTick type, FActorComponentTickFunction* func)
@@ -69,7 +77,7 @@ void ULylatDiscordComponent::TickComponent(float delta, ELevelTick type, FActorC
 	if (this->core == nullptr) return;
 
 	Result result = this->core->RunCallbacks();
-	if (result != Result::Ok) UE_LOG(LogExec, Error, TEXT("Discord failed to connect, code \"%d\"."), static_cast<int>(result));
+	if (result != Result::Ok) UE_LOG(Discord, Error, TEXT("Discord failed to connect, code \"%d\"."), static_cast<int>(result));
 }
 
 void ULylatDiscordComponent::EndPlay(const EEndPlayReason::Type reason)
@@ -77,7 +85,7 @@ void ULylatDiscordComponent::EndPlay(const EEndPlayReason::Type reason)
 	Super::EndPlay(reason);
 
 	this->core->ActivityManager().ClearActivity([](Result result)
-	{
-		if (result != Result::Ok) UE_LOG(LogExec, Warning, TEXT("Discord failed to clear the activity, code \"%d\"."), static_cast<int>(result));
+		{
+			if (result != Result::Ok) UE_LOG(Discord, Warning, TEXT("Discord failed to clear the activity, code \"%d\"."), static_cast<int>(result));
 	});
 }

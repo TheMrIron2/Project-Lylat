@@ -5,13 +5,17 @@
 // in the Software without restriction, including without limitation the rights
 // to use, copy, modify, merge, publish or distribute. This does not allow commercial distribution.
 //
-// This license does not cover any content made by Nintendo or any other commercial entity.
-// Under this category fall the Arwing and the Wolfen model along with their respective assets, as well as the Star Fox trademark.
-// Any commercial content has been used without permission.
+// This license does not cover any content made by any commercial entity.
+//
+// Under the category "content used without permission" falls any content regarding the "Star Fox" trademark.
+// Star Fox is a registered trademark of Nintendo Co., Ltd.
+// 
+// Under the category "content used according to licensing" fall the Discord Game SDK and the Ultralight SDK.
+// Discord is a registered trademark of Discord, Inc.
 //
 // The above copyright notice and this permission notice shall be included in all
 // copies or substantial portions of the Software.
-//
+// 
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 // IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 // FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -42,6 +46,9 @@ ALylatArwing::ALylatArwing()
 {
     CharacterMesh = CreateDefaultSubobject<USkeletalMeshComponent>(TEXT("Arwing"));
     CharacterMesh->SetSkeletalMesh(LylatGetResource<USkeletalMesh>(TEXT("/Game/Models/Arwing/Meshes/Arwing.Arwing")));
+
+    /*CharacterMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Arwing"));
+    CharacterMesh->SetStaticMesh(LylatGetResource<UStaticMesh>(TEXT("/Game/Models/Arwing/Meshes/ArwingStaticMesh.ArwingStaticMesh")));*/
 
     CharacterMesh->SetCollisionProfileName(TEXT("Arwing"));
     CharacterMesh->SetCollisionEnabled(ECollisionEnabled::Type::QueryAndPhysics);
@@ -179,6 +186,17 @@ void ALylatArwing::Tick(float delta)
     SetActorLocation(FVector(GetActorLocation().X + x, GetActorLocation().Y + y, GetActorLocation().Z + z));
     SetActorRotation(rotation);
 }
+
+void ALylatArwing::NotifyHit(class UPrimitiveComponent* current, class AActor* other, class UPrimitiveComponent* other_comp, bool self_moved, FVector location, FVector hit_normal, FVector normal_impulse, const FHitResult& hit)
+{
+    Super::NotifyHit(current, other, other_comp, self_moved, location, hit_normal, normal_impulse, hit);
+
+    FRotator CurrentRotation = GetActorRotation();
+    SetActorRotation(FQuat::Slerp(CurrentRotation.Quaternion(), hit_normal.ToOrientationQuat(), 0.025f));
+    SetActorLocation(location);
+    this->OnPause();
+}
+
 
 void ALylatArwing::OnLaserFire()
 {

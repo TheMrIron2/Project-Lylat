@@ -24,37 +24,45 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-#include "LylatPauseWidget.h"
-#include "LylatGameHUD.h"
+#include "LylatSettingsWidget.h"
+#include "LylatMenuHUD.h"
 
 #include "GameFramework/PlayerController.h"
 #include "Kismet/GameplayStatics.h"
 
 BEGIN_SLATE_FUNCTION_BUILD_OPTIMIZATION
 
-#define LOCTEXT_NAMESPACE "PauseMenuText"
+#define LOCTEXT_NAMESPACE "SettingsLocalText"
 
-void SLylatPauseWidget::Construct(const FArguments& inArgs)
+void SLylatSettingsWidget::Construct(const FArguments& inArgs)
 {
-	bCanSupportFocus = true;
-	OwningHUD = inArgs._OwningHUD;
-	
+	bCanSupportFocus	= true;
+	OwningHUD			= inArgs._OwningHUD;
+
 	const FMargin contentPadding	= FMargin(20.f, 10.f);
 	const FMargin buttonPadding		= FMargin(10.f);
 
-	const FText pauseTitleText		= LOCTEXT("PauseTitle", "Paused");
-	const FText resumeButtonText	= LOCTEXT("ResumeButton", "Resume");
-	const FText quitButtonText		= LOCTEXT("QuitToMenuButton", "Quit to menu");
+	const FText titleText			= LOCTEXT("SettingsTitle", "Settings");
+	const FText returnButtonText	= LOCTEXT("ReturnToMenu", "Return to menu");
 
-	FSlateFontInfo pauseTextStyle	= FCoreStyle::Get().GetFontStyle("EmbossedText");
-	pauseTextStyle.Size = 80.f;
+	FSlateFontInfo titleTextStyle = FCoreStyle::Get().GetFontStyle("EmbossedText");
+	titleTextStyle.Size = 90.f;
 
-	FSlateFontInfo buttonTextStyle	= FCoreStyle::Get().GetFontStyle("EmbossedText");
+	FSlateFontInfo buttonTextStyle = FCoreStyle::Get().GetFontStyle("EmbossedText");
 	buttonTextStyle.Size = 40.f;
 
 	ChildSlot
 	[
 		SNew(SOverlay)
+
+		// Backdrop
+		+ SOverlay::Slot()
+		.HAlign(HAlign_Fill)
+		.VAlign(VAlign_Fill)
+		[
+			SNew(SImage)
+			.ColorAndOpacity(FColor::FromHex("000000")) // 23272A
+		]
 
 		// Widgets
 		+ SOverlay::Slot()
@@ -64,40 +72,24 @@ void SLylatPauseWidget::Construct(const FArguments& inArgs)
 		[
 			SNew(SVerticalBox)
 
-			// Paused caption
+			// Settings title
 			+ SVerticalBox::Slot()
 			[
 				SNew(STextBlock)
-				.Text(pauseTitleText)
-				.Font(pauseTextStyle)
+				.Text(titleText)
+				.Font(titleTextStyle)
 				.Justification(ETextJustify::Left)
 			]
 
-			// Resume Button
+			// Return to menu Button
 			+ SVerticalBox::Slot()
 			.Padding(buttonPadding)
 			[
 				SNew(SButton)
-				.OnClicked(this, &SLylatPauseWidget::OnResume)
+				.OnClicked(this, &SLylatSettingsWidget::OnReturnToMenu)
 				[
 					SNew(STextBlock)
-					.Text(resumeButtonText)
-					.Font(buttonTextStyle)
-					.Justification(ETextJustify::Center)
-				]
-				.HAlign(HAlign_Center)
-				.VAlign(VAlign_Center)
-			]
-
-			// Quit to Menu Button
-			+ SVerticalBox::Slot()
-			.Padding(buttonPadding)
-			[
-				SNew(SButton)
-				.OnClicked(this, &SLylatPauseWidget::OnQuit)
-				[
-					SNew(STextBlock)
-					.Text(quitButtonText)
+					.Text(returnButtonText)
 					.Font(buttonTextStyle)
 					.Justification(ETextJustify::Center)
 				]
@@ -108,20 +100,13 @@ void SLylatPauseWidget::Construct(const FArguments& inArgs)
 	];
 }
 
-FReply SLylatPauseWidget::OnResume() const
+
+FReply SLylatSettingsWidget::OnReturnToMenu() const
 {
 	if (!OwningHUD.IsValid()) return FReply::Handled();
 
-	OwningHUD->ShowHUD();
-	OwningHUD->PlayerOwner->Pause();
-	return FReply::Handled();
-}
+	OwningHUD->ShowMenu();
 
-FReply SLylatPauseWidget::OnQuit() const
-{
-	if (!OwningHUD.IsValid()) return FReply::Handled();
-
-	UGameplayStatics::OpenLevel(OwningHUD->PlayerOwner, "Initial");
 	return FReply::Handled();
 }
 

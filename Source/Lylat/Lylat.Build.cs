@@ -5,13 +5,17 @@
 // in the Software without restriction, including without limitation the rights
 // to use, copy, modify, merge, publish or distribute. This does not allow commercial distribution.
 //
-// This license does not cover any content made by Nintendo or any other commercial entity.
-// Under this category fall the Arwing and the Wolfen model along with their respective assets, as well as the Star Fox trademark.
-// Any commercial content has been used without permission.
+// This license does not cover any content made by any commercial entity.
+//
+// Under the category "content used without permission" falls any content regarding the "Star Fox" trademark.
+// Star Fox is a registered trademark of Nintendo Co., Ltd.
+// 
+// Under the category "content used according to licensing" fall the Discord Game SDK and the Ultralight SDK.
+// Discord is a registered trademark of Discord, Inc.
 //
 // The above copyright notice and this permission notice shall be included in all
 // copies or substantial portions of the Software.
-//
+// 
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 // IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 // FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -30,30 +34,53 @@ public class Lylat : ModuleRules
 	{
 		PCHUsage = PCHUsageMode.UseExplicitOrSharedPCHs;
 
-		PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine", "InputCore" });
-		PrivateDependencyModuleNames.AddRange(new string[] { "Slate", "SlateCore" });
+		PublicDependencyModuleNames.AddRange(new string[]
+		{
+			"Core",
+			"CoreUObject",
+			"Engine",
+			"InputCore"
+		});
 
-		string dllsuffix = ".";
-		string libsuffix = ".";
+		PrivateDependencyModuleNames.AddRange(new string[]
+		{
+			"Slate",
+			"SlateCore"
+		});
+
+		string dllSuffix = ".", libSuffix = ".";
 		if (Target.Platform == UnrealTargetPlatform.Win64)
 		{
-			dllsuffix += "dll";
-			libsuffix += "dll.lib";
+			dllSuffix			+= "dll";
+			libSuffix			+= "dll.lib";
 		}
 		else if (Target.Platform == UnrealTargetPlatform.Mac)
 		{
-			dllsuffix += "dylib";
-			libsuffix += "dylib";
+			dllSuffix			+= "dylib";
+			libSuffix			+= "dylib";
 		}
 		else if (Target.Platform == UnrealTargetPlatform.Linux)
 		{
-			dllsuffix += "so";
-			libsuffix += "so";
+			dllSuffix			+= "so";
+			libSuffix			+= "so";
 		}
-		else throw new Exception("Unsupported platform");
+		else throw new Exception("Unsupported platform.");
 
-		PublicIncludePaths.Add("$(ModuleDir)/Discord");
-		PublicAdditionalLibraries.Add("$(ModuleDir)/Discord/discord_game_sdk" + libsuffix);
-		RuntimeDependencies.Add("$(TargetOutputDir)/discord_game_sdk" + dllsuffix, "$(ModuleDir)/Discord/discord_game_sdk" + dllsuffix);
+		PublicIncludePaths.AddRange(new string[]
+		{
+			Path.Combine(ModuleDirectory, "Discord")
+		});
+
+		PublicAdditionalLibraries.AddRange(new string[]
+		{
+			Path.Combine(ModuleDirectory, "Discord", "discord_game_sdk" + libSuffix)
+		});
+
+		PublicDelayLoadDLLs.AddRange(new string[]
+		{
+			Path.Combine(ModuleDirectory, "Discord", "discord_game_sdk" + dllSuffix)
+		});
+
+		RuntimeDependencies.Add("$(TargetOutputDir)/discord_game_sdk" + dllSuffix, Path.Combine(ModuleDirectory, "Discord", "discord_game_sdk" + dllSuffix));
 	}
 }
