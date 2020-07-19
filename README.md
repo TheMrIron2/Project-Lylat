@@ -1,7 +1,7 @@
 # Project: Lylat
-**Project: Lylat** is an On-Rails and 360° 3D space shooter for PCs in the style of Star Fox.  
+**Project: Lylat** is an On-Rails and 360° 3D space shooter in the style of Star Fox.  
 
-Project: Lylat is made with **[Unreal](https://www.unrealengine.com/)**, written in C++.
+Project: Lylat is made with **[Unreal](https://www.unrealengine.com/)** and written purely in C++.
 
 The short term goal is to create a playable proof of concept with all working logic and a demo (eg. Star Wolf battle).  
 The long term goal is subject to discussion as we progress.
@@ -17,17 +17,16 @@ First and foremost, make a fork and clone it:
 git clone https://github.com/ < name of the user / organization to which you forked Project: Lylat to > /Project-Lylat Lylat
 ```
 
-Secondly, you need Discord's Game SDK.  
-
+Secondly, you need Discord's Game SDK.
 1. Download the [Game SDK](https://discord.com/developers/docs/game-sdk/sdk-starter-guide#step-1-get-the-thing).
-1. Copy all sources and headers from the `cpp` directory of the downloaded Game SDK ZIP into `Source/Lylat/Discord`.  
+1. Copy all sources and headers from the `cpp` directory of the downloaded Game SDK ZIP into `Source/Lylat/Discord`.
 1. Copy the following files from `lib/< your architecture >` from the Game SDK archive into `Source/Lylat/Discord`, according to this table:
 
 | Operating System | Files to copy                                              |
 |------------------|------------------------------------------------------------|
-| Windows          | `discord_game_sdk.dll` and `discord_game_sdk.dll.lib`  |
-| macOS            | `discord_game_sdk.dylib` and `discord_game_sdk.bundle` |
-| Linux            | `discord_game_sdk.so`                                     |
+| Windows          | `discord_game_sdk.dll` and `discord_game_sdk.dll.lib`      |
+| macOS            | `discord_game_sdk.dylib` and `discord_game_sdk.bundle`     |
+| Linux            | `discord_game_sdk.so`                                      |
 
 Now, open the `Lylat.uproject` in Unreal.  
 Make your changes, push them into your fork and make a pull request.  

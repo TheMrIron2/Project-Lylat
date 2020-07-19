@@ -27,6 +27,7 @@
 #include "LylatSettingsWidget.h"
 #include "LylatMenuHUD.h"
 
+#include "GameFramework/GameUserSettings.h"
 #include "GameFramework/PlayerController.h"
 #include "Kismet/GameplayStatics.h"
 
@@ -45,11 +46,11 @@ void SLylatSettingsWidget::Construct(const FArguments& inArgs)
 	const FText titleText			= LOCTEXT("SettingsTitle", "Settings");
 	const FText returnButtonText	= LOCTEXT("ReturnToMenu", "Return to menu");
 
-	FSlateFontInfo titleTextStyle = FCoreStyle::Get().GetFontStyle("EmbossedText");
-	titleTextStyle.Size = 90.f;
+	FSlateFontInfo titleTextStyle	= FCoreStyle::Get().GetFontStyle("EmbossedText");
+	titleTextStyle.Size				= 90.f;
 
-	FSlateFontInfo buttonTextStyle = FCoreStyle::Get().GetFontStyle("EmbossedText");
-	buttonTextStyle.Size = 40.f;
+	FSlateFontInfo buttonTextStyle	= FCoreStyle::Get().GetFontStyle("EmbossedText");
+	buttonTextStyle.Size			= 40.f;
 
 	ChildSlot
 	[
